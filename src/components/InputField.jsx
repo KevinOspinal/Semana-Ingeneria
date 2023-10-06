@@ -9,7 +9,7 @@ export default function InputField({ label, type, id, placeholder, disabled }) {
       >
         {label}
       </label>
-      <div className="col-7 mx-auto">
+      <div className="col-7 mx-auto rounded border-black">
         <input
           type={type}
           className="form-control border-black"

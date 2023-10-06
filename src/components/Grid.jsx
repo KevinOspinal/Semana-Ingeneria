@@ -3,7 +3,7 @@ import React from 'react'
 export default function Grid() {
   return (
     <div className="container mt-5">
-      <table className="table">
+      <table className="table border border-black">
         <thead>
           <tr>
             <th>Nombre</th>
