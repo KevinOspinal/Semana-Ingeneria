@@ -50,11 +50,6 @@ export default function Admin() {
               </li>
               <li className="nav-item">
                 <a className="nav-link text-dark" href="#">
-                  <span>Proyectos</span>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" href="#">
                   <span>Conferencias</span>
                 </a>
               </li>
