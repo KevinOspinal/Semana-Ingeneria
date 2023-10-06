@@ -2,7 +2,7 @@ import React from "react";
 
 export default function InputField({ label, type, id, placeholder, disabled }) {
   return (
-    <div className="container mb-3 d-flex align-items-center">
+    <div className="mb-3 d-flex align-items-center">
       <label
         htmlFor={id}
         className="col-2 d-flex justify-content-end align-items-center form-label me-2"
