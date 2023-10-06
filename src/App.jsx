@@ -1,5 +1,4 @@
 import './App.css'
-import Admin from './Pages/Admin'
 
 
 
