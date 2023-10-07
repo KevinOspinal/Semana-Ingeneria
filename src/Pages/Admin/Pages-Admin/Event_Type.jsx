@@ -17,8 +17,8 @@ export default function Event_Type() {
               <InputField
                 label="Tipo de evento"
                 type="text"
-                id="Tipo de evento"
-                placeholder=""
+                id="Tipo-Evento"
+                placeholder="Nombre del evento"
               />
             </div>
             <div className="col-2">
