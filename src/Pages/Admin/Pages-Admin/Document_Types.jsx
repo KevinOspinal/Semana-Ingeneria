@@ -6,7 +6,7 @@ import Grid from "../../../components/Grid";
 
 export default function Document_Types() {
   return (
-    <div className="container vh-100 d-flex justify-content-center align-items-center">
+    <div className="container d-flex justify-content-center align-items-center">
       <div className="row">
         <div className="mb-5 d-flex justify-content-center">
           <Title title="Tipo de Documento" />
