@@ -3,6 +3,7 @@ import Title from "../../../components/Title";
 import Buttons from "../../../components/Buttons";
 import Grid_Muestra from "../../../components/Grid_Muestra";
 import DropListField from "../../../components/DropListField";
+import InputField from "../../../components/InputField";
 
 export default function Programs() {
   return (
@@ -11,19 +12,26 @@ export default function Programs() {
         <div className="mb-5 d-flex justify-content-center">
           <Title title="PROGRAMAS" />
         </div>
-        <form action="/Proyect_User" method="POST">
+        <form action="/Programs" method="POST">
           <div className="row">
             <div className="col-10">
-              <DropListField label="Nombre" selectOption="Digita Tu Nombre" />
+              <InputField
+                label="Nombre"
+                type="text"
+                id="Nombre-Programa"
+                placeholder="Nombre del programa"
+              />
             </div>
-
+            <div className="col-2">
+              <Buttons title="Consultar" color="white" />
+            </div>
             <div className="col-10">
               <DropListField
                 label="Facultad"
-                selectOption="Seleciona Facultad "
+                id=""
+                selectOption="Seleciona facultad"
               />
             </div>
-
             <div className="row">
               <div className="col-12">
                 <Grid_Muestra />
@@ -31,7 +39,7 @@ export default function Programs() {
             </div>
             <div className="container-fluid mt-4 d-flex justify-content-center">
               <div className="col-4 d-flex justify-content-center">
-                <Buttons title="Guardar" color="white" />
+                <Buttons title="Guardar" color="white" type="submit" />
               </div>
             </div>
           </div>
