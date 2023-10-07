@@ -9,10 +9,11 @@ export default function Headquarters() {
   return (
     <div className='container vh-100 d-flex justify-content-center align-items-center'>
       <div className='row'>
-        <form method="POST" action="./Headquarters">
           <div className='mb-5 d-flex justify-content-center'>
             <Title title='SEDES' />
           </div>
+        <form method="POST" action="./Headquarters">
+
           <div className='row'>
             <div className='col-10'>
               <InputField label='Nombre' type='text' id='Nombre-sede' placeholder='Nombre de la sede' />

@@ -1,8 +1,8 @@
-.nav-item{
+.lista-items{
     border-bottom: 1px solid #c4bfbf; /* Establece el borde inferior */
     cursor:pointer;
 }
-.nav-link:hover{
+.nl:hover{
     box-shadow: 5px 10px 20px 1px rgb(140, 151, 252);
     transition: all 0.8s linear;
 }
