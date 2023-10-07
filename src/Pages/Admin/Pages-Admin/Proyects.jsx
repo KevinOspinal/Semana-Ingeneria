@@ -7,11 +7,6 @@ import DropListField from "../../../components/DropListField";
 
 export default function Proyects() {
   return (
-<<<<<<< HEAD
-    <div> </div>
-  )
-}
-=======
     <div className="container d-flex justify-content-center align-items-center">
       <div className="row">
         <div className="mb-5 d-flex justify-content-center">
@@ -61,4 +56,4 @@ export default function Proyects() {
     </div>
   );
 }
->>>>>>> main
+
