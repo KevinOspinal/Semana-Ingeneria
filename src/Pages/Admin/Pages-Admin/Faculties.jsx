@@ -7,6 +7,7 @@ import Grid_Muestra from "../../../components/Grid_Muestra";
 export default function Faculties() {
   return (
     <div className="container d-flex justify-content-center align-items-center">
+<<<<<<< HEAD
     <div className="row">
       <div className="mb-5 d-flex justify-content-center">
         <Title title="FACULTADES" />
@@ -32,12 +33,43 @@ export default function Faculties() {
           <div className="container-fluid mt-4 d-flex justify-content-center">
             <div className="col-4 d-flex justify-content-center">
               <Buttons title="Guardar" color="white" />
+=======
+      <div className="row">
+        <div className="mb-5 d-flex justify-content-center">
+          <Title title="FACULTADES" />
+        </div>
+        <form method="POST" action="./Document_Type">
+          <div className="row">
+            <div className="col-10">
+              <InputField
+                label="Nombre"
+                type="text"
+                id="Nombre-Tipo-Documento"
+                placeholder="Nombre de la facultad"
+              />
+            </div>
+            <div className="col-2">
+              <Buttons title="Consultar" color="white" />
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <Grid_Muestra />
+              </div>
+            </div>
+            <div className="container-fluid mt-4 d-flex justify-content-center">
+              <div className="col-4 d-flex justify-content-center">
+                <Buttons title="Guardar" color="white" />
+              </div>
+>>>>>>> main
             </div>
           </div>
         </form>
       </div>
     </div>
+<<<<<<< HEAD
   </div>
+=======
+>>>>>>> main
 
   )
 }

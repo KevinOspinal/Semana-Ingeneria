@@ -55,78 +55,78 @@ export default function Admin() {
       <nav id="sidebar" className='col-md-3 col-lg-2 d-md-block bg-light sidebar p-0'>
           <div className="position-sticky">
             <ul className="nav flex-column fs-5">
-              <li className="nav-item">
+              <li className="nav-item lista-items">
                 <a className="nav-link nav-admin active bg-white text-dark">
                   ADMINISTRADOR
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('Document_type')} >
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('Document_type')} >
                   <span>Tipo Documento</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('User_Type')}>
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('User_Type')}>
                   <span>Tipo Usuario</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('Proyect_Type')} >
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('Proyect_Type')} >
                   <span>Tipo de proyecto</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('Event_Types')}>
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('Event_Types')}>
                   <span>Tipo Evento</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('Headquarters')}>
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('Headquarters')}>
                   <span>Sedes</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('Programas')}>
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('Programas')}>
                   <span>Programas</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('Faculties')}>
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('Faculties')}>
                   <span>Facultades</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('Conferences')}>
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('Conferences')}>
                   <span>Conferencias</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('Proyects')}>
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('Proyects')}>
                   <span>Proyectos</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('Proyect_User')}>
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('Proyect_User')}>
                   <span>Usuarios por proyecto</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('Project_Role')}>
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('Project_Role')}>
                   <span>Rol por proyecto</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('User_Conferences')}>
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('User_Conferences')}>
                   <span>Usuarios por conferencia</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('User_Events')}>
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('User_Events')}>
                   <span>Usuarios por Evento</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-dark" onClick={() => showPagesContext('Other_Events')}>
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-dark" onClick={() => showPagesContext('Other_Events')}>
                   <span>Otros Eventos</span>
                 </a>
               </li>

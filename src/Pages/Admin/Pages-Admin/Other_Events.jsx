@@ -45,6 +45,12 @@ export default function Other_Events() {
           </div>
       </div>
       <form/>
+<<<<<<< HEAD
     </div>
   );
 }
+=======
+    </div>
+  );
+}
+>>>>>>> main

@@ -1,7 +1,34 @@
-import React from 'react'
+import React from "react";
+import Title from "../../../components/Title";
+import Buttons from "../../../components/Buttons";
+import Grid_Muestra from "../../../components/Grid_Muestra";
+import DropListField from "../../../components/DropListField";
 
 export default function Project_Role() {
   return (
-    <div>Project_Role</div>
-  )
+    <div className="container vh-100 d-flex justify-content-center align-items-center">
+      <div className="row">
+        <div className="mb-5 d-flex justify-content-center">
+          <Title title="ROL DEL PROYECTO" />
+        </div>
+        <form action="/Proyect_User" method="POST">
+          <div className="row">
+            <div className="col-10">
+              <DropListField label="Nombre" selectOption="Seleciona tu nombre" />
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <Grid_Muestra />
+              </div>
+            </div>
+            <div className="container-fluid mt-4 d-flex justify-content-center">
+              <div className="col-4 d-flex justify-content-center">
+                <Buttons title="Guardar" color="white" />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }

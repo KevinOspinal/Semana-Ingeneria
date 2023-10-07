@@ -1,0 +1,5 @@
+.hero-inferior-imagen {
+    /* Elimina restricciones de tamaño si las hay */
+    width: 100%; /* Puedes intentar esto para que la imagen ocupe el 100% del contenedor */
+    height: 43rem;
+  }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 
 export default function pages() {
@@ -5,3 +6,6 @@ export default function pages() {
     <div>pages</div>
   )
 }
+=======
+RFS
+>>>>>>> main
