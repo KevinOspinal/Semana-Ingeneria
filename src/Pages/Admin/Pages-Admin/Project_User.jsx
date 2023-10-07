@@ -26,7 +26,7 @@ export default function Project_User() {
           </div>
           <div className="row">
             <div className="col-12">
-              <Grid />
+              <Grid/>
             </div>
           </div>
           <div className="container-fluid mt-4 d-flex justify-content-center">
