@@ -12,27 +12,29 @@ export default function Document_Types() {
           <Title title="Tipo de Documento" />
         </div>
         <div className="row">
-          <div className="col-10">
-            <InputField
-              label="Nombre"
-              type="text"
-              id="Nombre-Tipo-Documento"
-              placeholder="Nombre del tipo de documento"
-            />
-          </div>
-          <div className="col-2">
-            <Buttons title="Consultar" color="white" />
-          </div>
-          <div className="row">
-            <div className="col-12">
-              <Grid_Muestra />
+          <form method="POST" action="./Document_Type">
+            <div className="col-10">
+              <InputField
+                label="Nombre"
+                type="text"
+                id="Nombre-Tipo-Documento"
+                placeholder="Nombre del tipo de documento"
+              />
             </div>
-          </div>
-          <div className="container-fluid mt-4 d-flex justify-content-center">
-            <div className="col-4 d-flex justify-content-center">
-              <Buttons title="Guardar" color="white" />
+            <div className="col-2">
+              <Buttons title="Consultar" color="white" />
             </div>
-          </div>
+            <div className="row">
+              <div className="col-12">
+                <Grid_Muestra />
+              </div>
+            </div>
+            <div className="container-fluid mt-4 d-flex justify-content-center">
+              <div className="col-4 d-flex justify-content-center">
+                <Buttons title="Guardar" color="white" />
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
