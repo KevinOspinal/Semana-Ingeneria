@@ -14,14 +14,23 @@ export default function Project_User() {
         <form action="/Proyect_User" method="POST">
           <div className="row">
             <div className="col-10">
-              <DropListField label="Usuario" selectOption="Seleciona Usuario" />
+              <DropListField
+                label="Usuario"
+                id=""
+                selectOption="Seleciona usuario"
+              />
             </div>
             <div className="col-10">
-              <DropListField label="Proyecto" selectOption="Seleciona Proyecto" />
+              <DropListField
+                label="Proyecto"
+                id=""
+                selectOption="Seleciona proyecto"
+              />
             </div>
             <div className="col-10">
               <DropListField
                 label="Rol"
+                id=""
                 selectOption="Seleciona Rol en Proyecto"
               />
             </div>
@@ -32,7 +41,7 @@ export default function Project_User() {
             </div>
             <div className="container-fluid mt-4 d-flex justify-content-center">
               <div className="col-4 d-flex justify-content-center">
-                <Buttons title="Guardar" color="white" />
+                <Buttons title="Guardar" color="white" type="submit" />
               </div>
             </div>
           </div>

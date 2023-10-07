@@ -11,13 +11,13 @@ export default function Faculties() {
         <div className="mb-5 d-flex justify-content-center">
           <Title title="FACULTADES" />
         </div>
-        <form method="POST" action="./Document_Type">
+        <form method="POST" action="/Faculties">
           <div className="row">
             <div className="col-10">
               <InputField
                 label="Nombre"
                 type="text"
-                id="Nombre-Tipo-Documento"
+                id="Nombre-Facultad"
                 placeholder="Nombre de la facultad"
               />
             </div>
@@ -31,13 +31,12 @@ export default function Faculties() {
             </div>
             <div className="container-fluid mt-4 d-flex justify-content-center">
               <div className="col-4 d-flex justify-content-center">
-                <Buttons title="Guardar" color="white" />
+                <Buttons title="Guardar" color="white" type="submit" />
               </div>
             </div>
           </div>
         </form>
       </div>
     </div>
-
-  )
+  );
 }
