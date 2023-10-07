@@ -9,7 +9,7 @@ export default function Project_User() {
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
         <div className="mb-5 d-flex justify-content-center">
-          <Title title="Usuario por Proyecto" />
+          <Title title="USUARIO POR PROYECTO" />
         </div>
         <form action="/Proyect_User" method="POST">
           <div className="row">

@@ -11,8 +11,8 @@ export default function Document_Types() {
         <div className="mb-5 d-flex justify-content-center">
           <Title title="Tipo de Documento" />
         </div>
-        <div className="row">
-          <form method="POST" action="./Document_Type">
+        <form method="POST" action="./Document_Type">
+          <div className="row">
             <div className="col-10">
               <InputField
                 label="Nombre"
@@ -34,9 +34,9 @@ export default function Document_Types() {
                 <Buttons title="Guardar" color="white" />
               </div>
             </div>
-          </form>
-        </div>
-      </div>
+          </div>
+        </form>
+    </div>
     </div>
   );
 }
