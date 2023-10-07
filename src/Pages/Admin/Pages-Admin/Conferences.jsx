@@ -12,7 +12,7 @@ export default function Conferences() {
                 <div className="mb-5 d-flex justify-content-center">
                     <Title title="CONFERENCIAS" />
                 </div>
-                <form method="POST" action="./Conferencias">
+                <form method="POST" action="/Conferencias">
                     <div className="row">
                         <div className="col-10">
                             <InputField
@@ -23,7 +23,7 @@ export default function Conferences() {
                             />
                         </div>
                         <div className="col-2">
-                            <Buttons title="Consultar" color="white" />
+                            <Buttons title="Consultar" color="white"/>
                         </div>
                         <div className="col-10">
                             <DropListField label="Sede" selectOption="Seleciona una sede" />
@@ -67,12 +67,11 @@ export default function Conferences() {
                         </div>
                         <div className="container-fluid mt-4 d-flex justify-content-center">
                             <div className="col-4 d-flex justify-content-center">
-                                <Buttons title="Guardar" color="white" />
+                                <Buttons title="Guardar" color="white" type='submit' />
                             </div>
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
     );
