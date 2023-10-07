@@ -23,7 +23,6 @@ import User_Conferences from './Pages-Admin/User_Conferences';
 export default function Admin() {
 
     const [currentView, setCurrentView] = useState("");
-    const [open, setOpen] = useState(false);
 
     
     // Función para cambiar la vista del Context
