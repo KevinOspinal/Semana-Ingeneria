@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import './Admin.css'
 
 import Context from './Context'
 import Conferences from './Pages-Admin/Conferences';
@@ -22,6 +23,7 @@ import User_Conferences from './Pages-Admin/User_Conferences';
 export default function Admin() {
 
     const [currentView, setCurrentView] = useState("");
+    const [open, setOpen] = useState(false);
 
     
     // Función para cambiar la vista del Context
@@ -51,11 +53,11 @@ export default function Admin() {
   return (
     <div className="container-fluid">
       <div className="row">
-        <nav id="sidebar" className="col-sm-4 col-md-3 col-lg-2 d-md-block bg-light sidebar vh-100 p-0">
+      <nav id="sidebar" className='col-md-3 col-lg-2 d-md-block bg-light sidebar p-0'>
           <div className="position-sticky">
             <ul className="nav flex-column fs-5">
-              <li className="nav-item mb-2">
-                <a className="nav-link active bg-white text-dark">
+              <li className="nav-item">
+                <a className="nav-link nav-admin active bg-white text-dark">
                   ADMINISTRADOR
                 </a>
               </li>
