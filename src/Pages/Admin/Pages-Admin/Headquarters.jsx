@@ -3,7 +3,8 @@ import React from 'react'
 import Title from '../../../components/Title'
 import InputField from '../../../components/InputField'
 import Buttons from '../../../components/Buttons'
-import Grid from '../../../components/Grid'
+import Grid_Muestra from "../../../components/Grid_Muestra";
+
 export default function Headquarters() {
   return (
     <div className='container vh-100 d-flex justify-content-center align-items-center'>
@@ -27,21 +28,14 @@ export default function Headquarters() {
         </div>
         <div className='row'>
           <div className='col-12'>
-            <Grid />
+            <Grid_Muestra />
           </div>
         </div>
         <div className='container-fluid mt-4 d-flex justify-content-center'>
             <div className='col-4 d-flex justify-content-center'>
               <Buttons title='Guardar' color='white' />
             </div>
-            <div className='col-4 d-flex justify-content-center'>
-              <Buttons title='Editar' color='white' />
-            </div>
-            <div className='col-4 d-flex justify-content-center'>
-              <Buttons title='Eliminar' color='white' />
-            </div>
         </div>
-
       </div>
     </div>
   );
