@@ -1,5 +1,9 @@
-.main{
-    background-color: blueviolet;
-    color: white;
+/* Context.css */
+.context-container {
+  background-color: blue; /* Color de fondo azul */
+  color: white;
+  height: 50rem; /* 100% del alto del viewport */
+  display: flex; /* Alinea los elementos internos horizontalmente */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
 }
-
