@@ -1,7 +1,7 @@
 import React from "react";
 import Title from "../../../components/Title";
 import Buttons from "../../../components/Buttons";
-import Grid from "../../../components/Grid";
+import Grid_Muestra from "../../../components/Grid_Muestra";
 import DropListField from "../../../components/DropListField";
 
 export default function Project_User() {
@@ -26,18 +26,12 @@ export default function Project_User() {
           </div>
           <div className="row">
             <div className="col-12">
-              <Grid/>
+              <Grid_Muestra/>
             </div>
           </div>
           <div className="container-fluid mt-4 d-flex justify-content-center">
             <div className="col-4 d-flex justify-content-center">
               <Buttons title="Guardar" color="white" />
-            </div>
-            <div className="col-4 d-flex justify-content-center">
-              <Buttons title="Editar" color="white" />
-            </div>
-            <div className="col-4 d-flex justify-content-center">
-              <Buttons title="Eliminar" color="white" />
             </div>
           </div>
         </div>
