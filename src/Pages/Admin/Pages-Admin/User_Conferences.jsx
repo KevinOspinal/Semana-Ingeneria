@@ -15,18 +15,12 @@ export default function User_Conferences() {
           <div className="row">
             <div className="col-10">
               <DropListField label="Usuario" selectOption="Seleciona Usuario" />
-            </div>            
-            <div className="col-2">
-              <Buttons title="Buscar" color="white" />
-            </div>
+            </div>           
             <div className="col-10">
               <DropListField
                 label="Conferencia"
                 selectOption="Seleciona Conferencia "
               />
-            </div>
-            <div className="col-2">
-              <Buttons title="Buscar" color="white" />
             </div>
             <div className="row">
               <div className="col-12">

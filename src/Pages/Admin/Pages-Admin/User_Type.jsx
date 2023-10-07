@@ -13,7 +13,7 @@ export default function User_Type() {
         </div>
         <form method="POST" action="./Document_Type">
         <div className="row">
-            <div className="col-8">
+            <div className="col-10">
               <InputField
                 label="Descripción"
                 type="text"

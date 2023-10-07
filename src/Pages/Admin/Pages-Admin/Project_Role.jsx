@@ -14,10 +14,7 @@ export default function Project_Role() {
         <form action="/Proyect_User" method="POST">
           <div className="row">
             <div className="col-10">
-              <DropListField label="Nombre" text="Digita Tu Nombre" />
-            </div>
-            <div className="col-2">
-              <Buttons title="Consultar" color="white" />
+              <DropListField label="Nombre" selectOption="Seleciona tu nombre" />
             </div>
             <div className="row">
               <div className="col-12">

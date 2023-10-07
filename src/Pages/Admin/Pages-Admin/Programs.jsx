@@ -9,15 +9,12 @@ export default function Programs() {
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
         <div className="mb-5 d-flex justify-content-center">
-          <Title title="PROGRAMA" />
+          <Title title="PROGRAMAS" />
         </div>
         <form action="/Proyect_User" method="POST">
           <div className="row">
             <div className="col-10">
-              <DropListField label="Nombre" text="Digita Tu Nombre" />
-            </div>
-            <div className="col-2">
-              <Buttons title="Consultar" color="white" />
+              <DropListField label="Nombre" selectOption="Digita Tu Nombre" />
             </div>
 
             <div className="col-10">

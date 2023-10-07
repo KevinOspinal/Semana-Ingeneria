@@ -16,17 +16,11 @@ export default function User_Events() {
             <div className="col-10">
               <DropListField label="Usuario" selectOption="Seleciona Usuario" />
             </div>            
-            <div className="col-2">
-              <Buttons title="Buscar" color="white" />
-            </div>
             <div className="col-10">
               <DropListField
                 label="Evento"
                 selectOption="Seleciona Evento"
               />
-            </div>
-            <div className="col-2">
-              <Buttons title="Buscar" color="white" />
             </div>
             <div className="row">
               <div className="col-12">
