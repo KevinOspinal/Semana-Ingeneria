@@ -35,6 +35,23 @@ const getHeadquarters = (req, res) => {
     )
 }
 
+const getOnlyHeadquerters = (req, res) =>{
+    const NombreSede = req.params.nombre;
+    conexion.query(
+        'SELECT * FROM tb_sedes WHERE nombre_sede = ?',
+        [NombreSede],
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ message: 'Error al consultar la sede' });
+            } else {
+                console.log('Sede consultada con éxito');
+                res.json(result);
+            }
+        }
+    );
+}
+
 //CONSULTAS PARA PODER ELIMINAR LA SEDE
 const DeleteHeadquarters = (req, res) => {
     const idSede = req.params.id;
@@ -75,4 +92,4 @@ const updateHeadquarters = (req, res) => {
     );
 };
 
-module.exports = { createHeadquarters, getHeadquarters,DeleteHeadquarters ,updateHeadquarters };
+module.exports = { createHeadquarters, getHeadquarters,DeleteHeadquarters ,updateHeadquarters, getOnlyHeadquerters };
