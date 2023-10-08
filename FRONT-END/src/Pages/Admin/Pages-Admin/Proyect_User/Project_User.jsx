@@ -1,30 +1,37 @@
 import React from "react";
-import Title from "../../../components/Title";
-import Buttons from "../../../components/Buttons";
-import Grid_Muestra from "../../../components/Grid_Muestra";
-import DropListField from "../../../components/DropListField";
+import Title from "../../../../components/Title";
+import Buttons from "../../../../components/Buttons";
+import Grid_Muestra from "../../../../components/Grid_Muestra";
+import DropListField from "../../../../components/DropListField";
 
-export default function User_Events() {
+export default function Project_User() {
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
         <div className="mb-5 d-flex justify-content-center">
-          <Title title="USUARIO POR EVENTO" />
+          <Title title="USUARIO POR PROYECTO" />
         </div>
-        <form action="/User_Events" method="POST">
+        <form action="/Proyect_User" method="POST">
           <div className="row">
             <div className="col-10">
               <DropListField
                 label="Usuario"
                 id=""
-                selectOption="Seleciona Usuario"
+                selectOption="Seleciona usuario"
               />
             </div>
             <div className="col-10">
               <DropListField
-                label="Evento"
+                label="Proyecto"
                 id=""
-                selectOption="Seleciona evento"
+                selectOption="Seleciona proyecto"
+              />
+            </div>
+            <div className="col-10">
+              <DropListField
+                label="Rol"
+                id=""
+                selectOption="Seleciona Rol en Proyecto"
               />
             </div>
             <div className="row">

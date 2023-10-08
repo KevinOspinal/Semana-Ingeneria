@@ -35,7 +35,7 @@ const getHeadquarters = (req, res) => {
     )
 }
 
-const getOnlyHeadquerters = (req, res) =>{
+const getOnlyHeadquerters = (req, res) => {
     const NombreSede = req.params.nombre;
     conexion.query(
         'SELECT * FROM tb_sedes WHERE nombre_sede = ?',
@@ -74,7 +74,7 @@ const DeleteHeadquarters = (req, res) => {
 const updateHeadquarters = (req, res) => {
     const idSede = req.params.id;
     const { nombre, direccion, telefono } = req.body;
-    console.log(nombre,direccion,telefono)
+    console.log(nombre, direccion, telefono)
 
     // Realiza la actualización en la base de datos usando el ID y los nuevos datos
     conexion.query(
@@ -92,4 +92,4 @@ const updateHeadquarters = (req, res) => {
     );
 };
 
-module.exports = { createHeadquarters, getHeadquarters,DeleteHeadquarters ,updateHeadquarters, getOnlyHeadquerters };
+module.exports = { createHeadquarters, getHeadquarters, DeleteHeadquarters, updateHeadquarters, getOnlyHeadquerters };

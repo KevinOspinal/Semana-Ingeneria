@@ -2,33 +2,36 @@
 import React, { useState } from 'react'
 import Axios from 'axios'
 import Modal from 'react-modal'; // Importa react-modal
-import Title from '../../../components/Title'
-import InputField from '../../../components/InputField'
-import Buttons from '../../../components/Buttons'
-import Grid_Muestra from "../../../components/Grid_Muestra";
+import Title from '../../../../components/Title'
+import InputField from '../../../../components/InputField'
+import Buttons from '../../../../components/Buttons'
+import Grid_Muestra from "../../../../components/Grid_Muestra";
 
 
 
 export default function Headquarters() {
+
+  
   //ESTADO DONDE GUARDAMOS LA CONSULTA DE LAS SEDES
   const [HeadquartersList, setHeadquartersList] = useState([])
-
 
 
   const handleNombreChange = (e) => {
     const updatedEditingSede = { ...editingSede, nombre_sede: e.target.value };
     setEditingSede(updatedEditingSede);
   };
-  
+
   const handleDireccionChange = (e) => {
     const updatedEditingSede = { ...editingSede, direccion: e.target.value };
     setEditingSede(updatedEditingSede);
   };
-  
+
   const handleTelefonoChange = (e) => {
     const updatedEditingSede = { ...editingSede, telefono: e.target.value };
     setEditingSede(updatedEditingSede);
   };
+
+
 
   //ESTADOS PARA GUARDAR LA INFORMACION OBTENIDA DE LA VENTANA EDIT
   const [editingSede, setEditingSede] = useState({});
@@ -46,7 +49,6 @@ export default function Headquarters() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
   // Función para actualizar una sede
   const updateSede = () => {
     Axios.put(`http://localhost:3000/updateHeadquarters/${editingSede.id_sede}`, {
@@ -64,26 +66,29 @@ export default function Headquarters() {
       });
   };
 
-  console.log(editingSede)
 
 
-  //ESTADOS PARA CREAR EL USUARIO
-  const [nombre, setnombre] = useState('')
-  const [direccion, setdireccion] = useState('')
-  const [telefono, settelefono] = useState('')
 
   //FUNCION PARA CREAR LAS SEDES
+   const [nombre, setnombre] = useState('')
+   const [direccion, setdireccion] = useState('')
+   const [telefono, settelefono] = useState('')
+ 
   const createHeadquarters = () => {
     Axios.post('http://localhost:3000/createHeadquarters', {
       nombre: nombre,
       direccion: direccion,
       telefono: telefono
-    }).then(() => {
+    }).then((err,responde) => {
       alert('Sede registrada.')
       getHeadquarters();
-    })
+    }).catch((error) => {
+      console.error(error);
+    });
 
   }
+
+
 
   //FUNCION PARA MOSTRAR LAS SEDES EN LA GRID
   const getHeadquarters = () => {
@@ -92,13 +97,14 @@ export default function Headquarters() {
     })
   }
 
+
   //FUNCION PARA ELIMINAR UNA SEDE CON EL ID
   const handleDelete = (id) => {
     // Hacer una solicitud DELETE al servidor para eliminar la sede
     Axios.delete(`http://localhost:3000/deleteHeadquarters/${id}`)
       .then((response) => {
         alert("sede eliminada satisfactoriamente!!");
-        getHeadquarters(); 
+        getHeadquarters();
         console.log(response.data);
       })
       .catch((error) => {
@@ -107,15 +113,12 @@ export default function Headquarters() {
   };
 
   // funcion para traer un solo dato en el grid...
-  const getOnlyHeadquerters = (nombre) =>{
+  const getOnlyHeadquerters = (nombre) => {
     Axios.get(`http://localhost:3000/getOnlyHeadquarters/${nombre}`).then((respond) => {
-      let data = respond.data;
-      setHeadquartersList({...HeadquartersList,data})
-    })
+        setHeadquartersList(respond.data);
+        console.log('HeadquartersList actualizado:', HeadquartersList);
+      })
   }
-
-  console.log(HeadquartersList);
-
 
 
   return (
@@ -126,10 +129,10 @@ export default function Headquarters() {
         </div>
         <div className='row'>
           <div className='col-10'>
-            <InputField label='Nombre' type='text' id='Nombre-sede' placeholder='Nombre de la sede' onChange={(e) => { setnombre(e.target.value) }} />
+            <InputField label='Nombre' type='text' id='Nombre-sede' placeholder='Nombre de la sede' onChange={(e) => setnombre(e.target.value)}/>
           </div>
           <div className='col-2'>
-            <Buttons title='Consultar' color='white' onClick={nombre.length === 0 ? getHeadquarters : getOnlyHeadquerters} />
+            <Buttons title='Consultar' color='white'   onClick={() => (nombre.length === 0 ? getHeadquarters() : getOnlyHeadquerters(nombre))}/>
           </div>
           <div className='col-10'>
             <InputField label='Direccion' type='text' id='Direccion-sede' placeholder='Direccion de la sede' onChange={(e) => { setdireccion(e.target.value) }} />
@@ -163,7 +166,7 @@ export default function Headquarters() {
               type='text'
               id='Direccion-sede-edit'
               placeholder='Direccion de la sede'
-              value={editingSede.direccion  || ''}
+              value={editingSede.direccion || ''}
               onChange={handleDireccionChange}
             />
             <InputField
@@ -171,7 +174,7 @@ export default function Headquarters() {
               type='text'
               id='Telefono-sede-edit'
               placeholder='Telegono de la sede'
-              value={editingSede.telefono  || ''}
+              value={editingSede.telefono || ''}
               onChange={handleTelefonoChange}
             />
           </div>
