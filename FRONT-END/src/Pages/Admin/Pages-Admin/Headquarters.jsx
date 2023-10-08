@@ -56,6 +56,7 @@ export default function Headquarters() {
     })
       .then(() => {
         alert('Sede actualizada.');
+        getHeadquarters();
         //closeModal(); // Cierra el modal después de la actualización
       })
       .catch((error) => {
@@ -79,6 +80,7 @@ export default function Headquarters() {
       telefono: telefono
     }).then(() => {
       alert('Sede registrada.')
+      getHeadquarters();
     })
 
   }
@@ -95,6 +97,8 @@ export default function Headquarters() {
     // Hacer una solicitud DELETE al servidor para eliminar la sede
     Axios.delete(`http://localhost:3000/deleteHeadquarters/${id}`)
       .then((response) => {
+        alert("sede eliminada satisfactoriamente!!");
+        getHeadquarters(); 
         console.log(response.data);
       })
       .catch((error) => {
@@ -102,9 +106,15 @@ export default function Headquarters() {
       });
   };
 
-  const HandleTarget = (e) => {
-    e.target.value
+  // funcion para traer un solo dato en el grid...
+  const getOnlyHeadquerters = (nombre) =>{
+    Axios.get(`http://localhost:3000/getOnlyHeadquarters/${nombre}`).then((respond) => {
+      let data = respond.data;
+      setHeadquartersList({...HeadquartersList,data})
+    })
   }
+
+  console.log(HeadquartersList);
 
 
 
@@ -119,7 +129,7 @@ export default function Headquarters() {
             <InputField label='Nombre' type='text' id='Nombre-sede' placeholder='Nombre de la sede' onChange={(e) => { setnombre(e.target.value) }} />
           </div>
           <div className='col-2'>
-            <Buttons title='Consultar' color='white' onClick={getHeadquarters} />
+            <Buttons title='Consultar' color='white' onClick={nombre.length === 0 ? getHeadquarters : getOnlyHeadquerters} />
           </div>
           <div className='col-10'>
             <InputField label='Direccion' type='text' id='Direccion-sede' placeholder='Direccion de la sede' onChange={(e) => { setdireccion(e.target.value) }} />
