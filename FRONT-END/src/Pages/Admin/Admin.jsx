@@ -2,20 +2,20 @@ import React,{useState} from 'react'
 import './Admin.css'
 
 import Context from './Context'
-import Conferences from './Pages-Admin/Conferences';
-import Document_Types from './Pages-Admin/Document_Types';
-import Event_Type from './Pages-Admin/Event_Type'
-import Faculties from './Pages-Admin/Faculties'
-import Headquarters from './Pages-Admin/Headquarters'
-import Other_Events from './Pages-Admin/Other_Events'
-import Programs from './Pages-Admin/Programs'
-import Project_Role from './Pages-Admin/Project_Role'
-import Project_Type from './Pages-Admin/Project_Type'
-import Project_User from './Pages-Admin/Project_User'
-import User_Events from './Pages-Admin/User_Events'
-import User_Type from './Pages-Admin/User_Type'
-import Proyects from './Pages-Admin/Proyects';
-import User_Conferences from './Pages-Admin/User_Conferences';
+import Conferences from './Pages-Admin/Conferences/Conferences';
+import Document_Types from './Pages-Admin/Document_Type/Document_Types';
+import Event_Type from './Pages-Admin/Event_Type/Event_Type'
+import Faculties from './Pages-Admin/Falcuties/Faculties'
+import Headquarters from './Pages-Admin/Headquarters/Headquarters'
+import Other_Events from './Pages-Admin/Other_Events/Other_Events'
+import Programs from './Pages-Admin/Programs/Programs'
+import Project_Role from './Pages-Admin/Project_Role/Project_Role'
+import Project_Type from './Pages-Admin/Project_Type/Project_Type'
+import Project_User from './Pages-Admin/Proyect_User/Project_User'
+import User_Events from './Pages-Admin/User_Events/User_Events'
+import User_Type from './Pages-Admin/User_Type/User_Type'
+import Proyects from './Pages-Admin/Projects/Proyects';
+import User_Conferences from './Pages-Admin/User_Conferences/User_Conferences';
 
 
 
