@@ -1,8 +1,8 @@
 import React from "react";
-import Title from "../../../components/Title";
-import Buttons from "../../../components/Buttons";
-import Grid_Muestra from "../../../components/Grid_Muestra";
-import DropListField from "../../../components/DropListField";
+import Title from "../../../../components/Title";
+import Buttons from "../../../../components/Buttons";
+import Grid_Muestra from "../../../../components/Grid_Muestra";
+import DropListField from "../../../../components/DropListField";
 
 export default function User_Conferences() {
   return (
