@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function InputField({ label, type, id, placeholder, disabled }) {
+export default function InputField({ label, type, id, placeholder, disabled,value, onChange}) {
   return (
     <div className="mb-3 d-flex align-items-center">
       <label
@@ -14,8 +14,10 @@ export default function InputField({ label, type, id, placeholder, disabled }) {
           type={type}
           className="form-control border-black"
           disabled={disabled}
+          value={value}
           id={id}
           placeholder={placeholder}
+          onChange={onChange}
         />
       </div>
     </div>
