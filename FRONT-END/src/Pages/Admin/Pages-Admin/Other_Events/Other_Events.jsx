@@ -1,9 +1,9 @@
 import React from 'react'
-import Title from '../../../components/Title'
-import DropListField from '../../../components/DropListField'
-import InputField from '../../../components/InputField'
-import Buttons from '../../../components/Buttons'
-import Grid_Muestra from '../../../components/Grid_Muestra'
+import Title from '../../../../components/Title'
+import DropListField from '../../../../components/DropListField'
+import InputField from '../../../../components/InputField'
+import Buttons from '../../../../components/Buttons'
+import Grid_Muestra from '../../../../components/Grid_Muestra'
 export default function Other_Events() {
   return (
     <div className='container vh-100 d-flex justify-content-center align-items-center'>

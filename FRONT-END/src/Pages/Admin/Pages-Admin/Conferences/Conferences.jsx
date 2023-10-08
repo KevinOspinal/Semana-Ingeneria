@@ -1,9 +1,9 @@
 import React from "react";
-import InputField from "../../../components/InputField";
-import Title from "../../../components/Title";
-import Buttons from "../../../components/Buttons";
-import DropListField from "../../../components/DropListField";
-import Grid_Muestra from "../../../components/Grid_Muestra";
+import InputField from "../../../../components/InputField";
+import Title from "../../../../components/Title";
+import Buttons from "../../../../components/Buttons";
+import DropListField from "../../../../components/DropListField";
+import Grid_Muestra from "../../../../components/Grid_Muestra";
 
 export default function Conferences() {
     return (

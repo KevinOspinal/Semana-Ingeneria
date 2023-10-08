@@ -1,24 +1,24 @@
-import React from 'react'
-import InputField from "../../../components/InputField";
-import Title from "../../../components/Title";
-import Buttons from "../../../components/Buttons";
-import Grid_Muestra from "../../../components/Grid_Muestra";
+import React from "react";
+import InputField from "../../../../components/InputField";
+import Title from "../../../../components/Title";
+import Buttons from "../../../../components/Buttons";
+import Grid_Muestra from "../../../../components/Grid_Muestra";
 
-export default function Faculties() {
+export default function User_Type() {
   return (
-    <div className="container d-flex justify-content-center align-items-center">
+    <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
         <div className="mb-5 d-flex justify-content-center">
-          <Title title="FACULTADES" />
+          <Title title="TIPO DE USUARIO" />
         </div>
-        <form method="POST" action="/Faculties">
+        <form method="POST" action="/User_Type">
           <div className="row">
             <div className="col-10">
               <InputField
-                label="Nombre"
+                label="Descripción"
                 type="text"
-                id="Nombre-Facultad"
-                placeholder="Nombre de la facultad"
+                id="Tipo-Usuario"
+                placeholder="Tipo de usuario"
               />
             </div>
             <div className="col-2">
@@ -37,6 +37,6 @@ export default function Faculties() {
           </div>
         </form>
       </div>
-    </div>
-  );
+    </div>
+  );
 }

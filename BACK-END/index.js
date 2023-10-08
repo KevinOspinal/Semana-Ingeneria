@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express();
 const cors = require('cors')
-const { createHeadquarters, getHeadquarters,DeleteHeadquarters,updateHeadquarters } = require('./Controllers/Headquarters/Headquartes.controllers.js')
+const { createHeadquarters, getHeadquarters,DeleteHeadquarters,updateHeadquarters,getOnlyHeadquerters} = require('./Controllers/Headquarters/Headquartes.controllers.js')
 app.use(cors())
 app.use(express.json())
 
@@ -10,6 +10,9 @@ app.post('/createHeadquarters', createHeadquarters)
 
 //METODO PARA MOSTRAR UNA SEDE CARES ALEXIS NANDO CAMILO
 app.get('/getHeadquarters', getHeadquarters)
+
+//METODO PARA MOSTRAR UNA SOLA SEDE CARES ALEXIS NANDO CAMILO
+app.get('/getOnlyHeadquarters/:nombre', getOnlyHeadquerters)
 
 //METODO PARA ELIMINAR Y VALER MONDA
 app.delete('/deleteHeadquarters/:id', DeleteHeadquarters);
