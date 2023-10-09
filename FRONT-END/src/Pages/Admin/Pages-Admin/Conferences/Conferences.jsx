@@ -135,8 +135,6 @@ export default function Conferences() {
             });
     };
 
-    console.log(editingConferencias)
-
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">
             <div className="row">
