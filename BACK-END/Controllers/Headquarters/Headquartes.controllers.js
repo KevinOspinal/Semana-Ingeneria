@@ -35,6 +35,7 @@ const getHeadquarters = (req, res) => {
     )
 }
 
+//CONSULTAS PARA PODER MOSTRAR UNA SOLA SEDE
 const getOnlyHeadquerters = (req, res) => {
     const NombreSede = req.params.nombre;
     conexion.query(

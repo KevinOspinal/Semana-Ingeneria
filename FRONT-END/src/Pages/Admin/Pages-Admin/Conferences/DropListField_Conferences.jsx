@@ -9,7 +9,7 @@ export default function DropListField({ label, id, selectOption }) {
       <div className="col-7 mx-auto rounded border-black">
         <select className="form-select col-7" aria-label="Default select example">
           <option selected>{selectOption}</option>
-          <option value="1">One</option>
+          <option value= '1'>one</option>
         </select>
       </div>
 
