@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from 'axios'
 import InputField from "../../../../components/InputField";
 import Title from "../../../../components/Title";
@@ -8,20 +8,35 @@ import DropListField_Conferences from "./DropListField_Conferences";
 import Modal from "react-modal";
 
 export default function Conferences() {
+
     const [conferencesList, setConferencesList] = useState([]);
     const [editingConferencias, setEditingConferencias] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [nombre, setNombre] = useState("");
-    const [sede, setSede] = useState([]);
     const [cupo, setCupo] = useState(0);
     const [fecha, setFecha] = useState("");
     const [hora, setHora] = useState("");
     const [estado, setEstado] = useState("");
+    const [selectedSede, setSelectedSede] = useState(""); // Estado para almacenar el género seleccionado
+    const [optionsDrop, setOptionsDrop] = useState([]); // Estado para almacenar el género seleccionado
+
+    // ... estado y funciones existentes ...
+
+    useEffect(() => {
+        // Coloca aquí la llamada a getHeadquarters
+        getHeadquarters();
+    }, []); // El segundo argumento es un arreglo de dependencias vacío
+
+    // Resto del código del componente
+
+    const handleSedeChangeInput = (e) => {
+        setSelectedSede(e.target.value);
+    };
 
     const handleNombreChange = (e) => {
         const updatedEditingConferencia = {
             ...editingConferencias,
-            nombre: e.target.value,
+            descipcion: e.target.value,
         };
         setEditingConferencias(updatedEditingConferencia);
     };
@@ -29,7 +44,7 @@ export default function Conferences() {
     const handleSedeChange = (e) => {
         const updatedEditingConferencia = {
             ...editingConferencias,
-            sede: e.target.value,
+            id_sede: e.target.value,
         };
         setEditingConferencias(updatedEditingConferencia);
     };
@@ -61,7 +76,7 @@ export default function Conferences() {
     const handleEstadoChange = (e) => {
         const updatedEditingConferencia = {
             ...editingConferencias,
-            estado: e.target.value,
+            estado_conferencia: e.target.value,
         };
         setEditingConferencias(updatedEditingConferencia);
     };
@@ -78,7 +93,8 @@ export default function Conferences() {
     const createConferences = () => {
         Axios.post("http://localhost:3000/createConferences", {
             nombre: nombre,
-            sede: sede,
+            sede: selectedSede,
+            cupo: cupo,
             fecha: fecha,
             hora: hora,
             estado: estado
@@ -97,6 +113,12 @@ export default function Conferences() {
         });
     };
 
+    const getHeadquarters = () => {
+        Axios.get('http://localhost:3000/getHeadquarters').then((respond) => {
+            setOptionsDrop(respond.data)
+        })
+    }
+
     const getOnlyConferences = (nombre) => {
         Axios.get(`http://localhost:3000/getOnlyConferences/${nombre}`).then((respond) => {
             setConferencesList(respond.data);
@@ -109,11 +131,12 @@ export default function Conferences() {
         Axios.put(
             `http://localhost:3000/updateConferences/${editingConferencias.id_conferencia}`,
             {
-                nombre: editingConferencias.nombre,
-                id_sede: editingConferencias.id_sede,
+                nombre: editingConferencias.descipcion,
+                sede: editingConferencias.id_sede,
+                cupo: editingConferencias.cupo,
                 fecha: editingConferencias.fecha,
                 hora: editingConferencias.hora,
-                estado: editingConferencias.estado
+                estado: editingConferencias.estado_conferencia
             }).then(() => {
                 alert("Conferencia actializada.");
                 getConferences();
@@ -135,6 +158,10 @@ export default function Conferences() {
             });
     };
 
+    console.log(editingConferencias)
+    console.log(selectedSede)
+
+
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">
             <div className="row">
@@ -155,7 +182,7 @@ export default function Conferences() {
                         <Buttons title="Consultar" color="white" onClick={() => (nombre.length === 0 ? getConferences() : getOnlyConferences(nombre))} />
                     </div>
                     <div className="col-10">
-                        <DropListField_Conferences label='Sedes' onChange={(e) => setSede(e.target.value)} />
+                        <DropListField_Conferences selectSedes={selectedSede} handleChange={handleSedeChangeInput} options={optionsDrop} />
                     </div>
                     <div className="col-10">
                         <InputField
@@ -203,7 +230,7 @@ export default function Conferences() {
                         onRequestClose={closeModal}
                         contentLabel="Editar Conferencia"
                     >
-                        <h2>Editar Tipo de Usuario</h2>
+                        <h2>Editar Conferencia</h2>
                         <div className="col-10">
                             <InputField
                                 label="Nombre"
@@ -215,7 +242,16 @@ export default function Conferences() {
                             />
                         </div>
                         <div className="col-10">
-                            <DropListField_Conferences label='Sedes' onChange={(e) => setSede(e.target.value)} />
+                            <DropListField_Conferences value={editingConferencias.id_sede || ""} handleChange={handleSedeChangeInput} options={optionsDrop} onChange={handleSedeChange} />
+                        </div>
+                        <div className="col-10">
+                            <InputField
+                                label="Cupo"
+                                type="number"
+                                id="Cupo-Conferencia"
+                                value={editingConferencias.cupo || ""}
+                                onChange={handleCupoChange}
+                            />
                         </div>
                         <div className="col-10">
                             <InputField
@@ -241,7 +277,7 @@ export default function Conferences() {
                                 type="text"
                                 id="Estado-Conferencia"
                                 placeholder="Estado de la conferencia"
-                                value={editingConferencias.estado || ""}
+                                value={editingConferencias.estado_conferencia || ""}
                                 onChange={handleEstadoChange}
                             />
                         </div>
