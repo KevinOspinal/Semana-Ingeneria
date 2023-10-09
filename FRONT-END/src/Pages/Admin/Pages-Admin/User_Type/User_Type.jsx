@@ -12,6 +12,8 @@ export default function User_Type() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [descripcion, setDescripcion] = useState("");
 
+
+  //revisar el estado del cambio IMPORTANTE
   const handleDescripcionChange = (e) => {
     const updateEditingTipoUsuario = {
       ...editingTipoUsuario,
