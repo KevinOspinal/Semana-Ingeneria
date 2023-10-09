@@ -5,7 +5,7 @@ import Home from './Pages/Users/Home'
 function App() {
   return (
     <div>
-      <Home />
+      <Admin />
     </div>
   )
 }
