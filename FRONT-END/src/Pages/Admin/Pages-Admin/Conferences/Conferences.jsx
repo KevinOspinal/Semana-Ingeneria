@@ -158,8 +158,8 @@ export default function Conferences() {
             });
     };
 
-    console.log(editingConferencias)
-    console.log(selectedSede)
+    //console.log(editingConferencias)
+    //console.log(selectedSede)
 
 
     return (
