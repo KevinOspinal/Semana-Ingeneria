@@ -2,8 +2,9 @@ const express = require('express')
 const app = express();
 const cors = require('cors')
 const { createHeadquarters, getHeadquarters,DeleteHeadquarters,updateHeadquarters,getOnlyHeadquerters} = require('./Controllers/Headquarters/Headquartes.controllers.js')
-const { createUserType, getUserType, getOnlyUserType, deleteUserType, updateUserType } = require('./Controllers/User_Type/User_Type.controllers')
-const { createConferences, getConferences, getOnlyConferences, deleteConferences, updateConferences } = require('./Controllers/Conferences/Conferences.controllers')
+const { createUserType, getUserType, getOnlyUserType, deleteUserType, updateUserType } = require('./Controllers/User_Type/User_Type.controllers.js')
+const { createConferences, getConferences, getOnlyConferences, deleteConferences, updateConferences } = require('./Controllers/Conferences/Conferences.controllers.js')
+const { createOtherEvent, getOtherEvent, deleteOtherEvent, updateOtherEvent} = require('./Controllers/Other_Events/Other_Events_Controllers.js')
 app.use(cors())
 app.use(express.json())
 
@@ -17,18 +18,37 @@ app.get('/getOnlyHeadquarters/:nombre', getOnlyHeadquerters)
 app.delete('/deleteHeadquarters/:id', DeleteHeadquarters);
 //METODO PARA EDITAR LA MONDA DE LAS SEDES
 app.put('/updateHeadquarters/:id', updateHeadquarters);
-//
+//-----------------------------------------------------------------------------------------------------------------------
+//METODO PARA CREAR UN TIPO DE USUARIO
 app.post('/createUserType', createUserType)
+//METODO PARA MOSTRAR UN TIPO DE USUARIO
 app.get('/getUserType', getUserType)
+//METODO PARA MOSTRAR UN SOLO TIPO DE USUARIO
 app.get('/getOnlyUserType/:descripcion', getOnlyUserType)
+//METODO PARA ELIMINAR UN TIPO DE USUARIO
 app.delete('/deleteUserType/:id', deleteUserType);
+//METODO PARA EDITAR UN USUARIO
 app.put('/updateUserType/:id', updateUserType);
-//
+//-------------------------------------------------------------------------------------------------------------------------
+//METODO PARA CREAR UNA CONFERENCIA
 app.post('/createConferences', createConferences)
+//METODO PARA MOSTRAR UNA CONFERENCIA
 app.get('/getConferences', getConferences)
+//METODO PARA MOSTRAR UNA SOLA CONFERENCIA
 app.get('/getOnlyConferences/:nombre', getOnlyConferences)
+//METODO PARA ELIMINAR UNA CONFERENCIA
 app.delete('/deleteConferences/:id', deleteConferences);
+//METODO PARA EDITARR UNA CONFERENCIA
 app.put('/updateConferences/:id', updateConferences);
+//--------------------------------------------------------------------------------------------------------------------------
+//METODO PARA CREAR OTRO EVENTO
+app.post('/createOtherEvent', createOtherEvent);
+//METODO PARA MOSTRAR LOS OTROS EVENTOS
+app.get('/getOtherEvent', getOtherEvent);;
+//METODO PARA ELIMINAR OTRO EVENTO
+app.delete('/deleteOtherEvent/:id', deleteOtherEvent);
+//METODO PARA EDITAR LA MONDA DE LAS SEDES
+app.put('/updateOtherEvent/:id', updateOtherEvent);
 
 app.listen(3000, () => {
     console.log('El servidor esta escuchando en el puerto :', 'http://localhost:3000/')
