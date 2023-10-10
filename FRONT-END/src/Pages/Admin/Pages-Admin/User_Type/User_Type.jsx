@@ -89,7 +89,6 @@ export default function User_Type() {
       });
   };
 
-  console.log(editingTipoUsuario)
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
