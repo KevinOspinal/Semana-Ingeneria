@@ -8,30 +8,131 @@ import DropListField_Conferences from "./DropListField_Conferences";
 import Modal from "react-modal";
 
 export default function Conferences() {
-
+    //ESTE ESTADO ES EL GLOBAL PARA CONSULTAR TODAS LAS CONFENCIAS
     const [conferencesList, setConferencesList] = useState([]);
-    const [editingConferencias, setEditingConferencias] = useState({});
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [nombre, setNombre] = useState("");
-    const [cupo, setCupo] = useState(0);
-    const [fecha, setFecha] = useState("");
-    const [hora, setHora] = useState("");
-    const [estado, setEstado] = useState("");
-    const [selectedSede, setSelectedSede] = useState(""); // Estado para almacenar el género seleccionado
-    const [optionsDrop, setOptionsDrop] = useState([]); // Estado para almacenar el género seleccionado
 
-    // ... estado y funciones existentes ...
+
 
     useEffect(() => {
         // Coloca aquí la llamada a getHeadquarters
         getHeadquarters();
     }, []); // El segundo argumento es un arreglo de dependencias vacío
 
-    // Resto del código del componente
 
+
+    //FUNCION PARA CREAR LAS CONFERENCIAS QUE COPTURAMOS EN EL FORM
+
+    //ESTA FUNCION ES PARA CAPTURAR LO QUE HAYA EN LAS SEDES
     const handleSedeChangeInput = (e) => {
         setSelectedSede(e.target.value);
     };
+
+
+    const [nombre, setNombre] = useState("");
+    const [selectedSede, setSelectedSede] = useState("");
+    const [cupo, setCupo] = useState(0);
+    const [fecha, setFecha] = useState("");
+    const [hora, setHora] = useState("");
+    const [estado, setEstado] = useState("");
+
+    const createConferences = () => {
+        Axios.post("http://localhost:3000/createConferences", {
+            nombre: nombre,
+            sede: selectedSede,
+            cupo: cupo,
+            fecha: fecha,
+            hora: hora,
+            estado: estado
+        }).then((responde) => {
+            alert("Conferencia registrada.");
+            getConferences();
+        })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+
+
+
+    //FUNCION PARA CONSULTAR TODAS LAS CONFERENCIAS CREADAS Y TAMBIEN PARA UNA SOLA
+    const getConferences = () => {
+        Axios.get("http://localhost:3000/getConferences").then((respond) => {
+            setConferencesList(respond.data);
+        });
+    };
+
+    const getOnlyConferences = (nombre) => {
+        Axios.get(`http://localhost:3000/getOnlyConferences/${nombre}`).then((respond) => {
+            setConferencesList(respond.data);
+            console.log("conferencesList actualizada:", conferencesList);
+        }
+        );
+    };
+
+
+
+
+    //FUNCION PARA ACTUALIZAR LA CONFERENCIA
+    const updateConferences = () => {
+        console.log('id:', editingConferencias.id_conferencia);
+        console.log('Nombre:', editingConferencias.descipcion);
+        console.log('Sede:', editingConferencias.id_sede);
+        console.log('Cupo:', editingConferencias.cupo);
+        console.log('Fecha:', editingConferencias.fecha);
+        console.log('Hora:', editingConferencias.hora);
+        console.log('Estado:', editingConferencias.estado_conferencia);
+
+        Axios.put(
+            `http://localhost:3000/updateConferences/${editingConferencias.id_conferencia}`,
+            {
+                nombre: editingConferencias.descipcion,
+                sede: editingConferencias.id_sede,
+                cupo: editingConferencias.cupo,
+                fecha: editingConferencias.fecha,
+                hora: editingConferencias.hora,
+                estado: editingConferencias.estado_conferencia
+            }).then(() => {
+                alert("Conferencia actializada.");
+                getConferences();
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+
+
+    //FUNCION PARA ELIMINAR UNA CONFERENCIA
+    const handleDelete = (id) => {
+        Axios.delete(`http://localhost:3000/deleteConferences/${id}`)
+            .then((response) => {
+                alert("Conferencia eliminada satisfactoriamente!!");
+                getConferences();
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+
+
+    //ESTA FUNCION ES PARA CONSULTAR TODAS LAS SEDES CREADAS
+    const [optionsDrop, setOptionsDrop] = useState([]); // Estado para almacenar la SEDE seleccionado
+
+    const getHeadquarters = () => {
+        Axios.get('http://localhost:3000/getHeadquarters').then((respond) => {
+            setOptionsDrop(respond.data)
+        })
+    }
+
+
+
+
+    //Estas funciones onChame es para capturar los datos del MODAL EDITAR
+
+    const [editingConferencias, setEditingConferencias] = useState({});
 
     const handleNombreChange = (e) => {
         const updatedEditingConferencia = {
@@ -81,86 +182,22 @@ export default function Conferences() {
         setEditingConferencias(updatedEditingConferencia);
     };
 
-    const openModal = (nombre) => {
-        setEditingConferencias(nombre);
+
+
+
+
+    //ESTAAS FUNCIONES SON PARA ABRIR Y CERRAR LA VENTANA EMERGENTE(MODAL)
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = (conferencias) => {
+        setEditingConferencias(conferencias);
         setIsModalOpen(true);
     };
+
 
     const closeModal = () => {
         setIsModalOpen(false);
     };
-
-    const createConferences = () => {
-        Axios.post("http://localhost:3000/createConferences", {
-            nombre: nombre,
-            sede: selectedSede,
-            cupo: cupo,
-            fecha: fecha,
-            hora: hora,
-            estado: estado
-        }).then((responde) => {
-            alert("Conferencia registrada.");
-            getConferences();
-        })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-
-    const getConferences = () => {
-        Axios.get("http://localhost:3000/getConferences").then((respond) => {
-            setConferencesList(respond.data);
-        });
-    };
-
-    const getHeadquarters = () => {
-        Axios.get('http://localhost:3000/getHeadquarters').then((respond) => {
-            setOptionsDrop(respond.data)
-        })
-    }
-
-    const getOnlyConferences = (nombre) => {
-        Axios.get(`http://localhost:3000/getOnlyConferences/${nombre}`).then((respond) => {
-            setConferencesList(respond.data);
-            console.log("conferencesList actualizada:", conferencesList);
-        }
-        );
-    };
-
-    const updateConferences = () => {
-        Axios.put(
-            `http://localhost:3000/updateConferences/${editingConferencias.id_conferencia}`,
-            {
-                nombre: editingConferencias.descipcion,
-                sede: editingConferencias.id_sede,
-                cupo: editingConferencias.cupo,
-                fecha: editingConferencias.fecha,
-                hora: editingConferencias.hora,
-                estado: editingConferencias.estado_conferencia
-            }).then(() => {
-                alert("Conferencia actializada.");
-                getConferences();
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    };
-
-    const handleDelete = (id) => {
-        Axios.delete(`http://localhost:3000/deleteConferences/${id}`)
-            .then((response) => {
-                alert("Conferencia eliminada satisfactoriamente!!");
-                getConferences();
-                console.log(response.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    };
-
-    console.log(editingConferencias)
-    //console.log(selectedSede)
-
 
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">
@@ -221,7 +258,7 @@ export default function Conferences() {
                         />
                     </div>
                     <div className="row">
-                        <div className="col-10">
+                        <div className="col-12">
                             <Grid_Conferences List={conferencesList} handleDelete={handleDelete} handleEdit={openModal} />
                         </div>
                     </div>
@@ -242,7 +279,7 @@ export default function Conferences() {
                             />
                         </div>
                         <div className="col-10">
-                            <DropListField_Conferences value={editingConferencias.id_sede || ""} handleChange={handleSedeChangeInput} options={optionsDrop} onChange={handleSedeChange} />
+                            <DropListField_Conferences handleChange={handleSedeChange} options={optionsDrop} selectSedes={editingConferencias.id_sede} />
                         </div>
                         <div className="col-10">
                             <InputField

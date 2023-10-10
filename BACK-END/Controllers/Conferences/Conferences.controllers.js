@@ -8,7 +8,7 @@ const createConferences = (req, res) => {
   const hora = req.body.hora
   const estado = req.body.estado
 
-  conexion.query('INSERT INTO tb_conferencias (descipcion, id_sede, cupo, fecha, hora, estado_conferencia) VALUES (?,?,?,?,?,?)', [nombre, sede, cupo, fecha, hora, estado ],
+  conexion.query('INSERT INTO tb_conferencias (descipcion, id_sede, cupo, fecha, hora, estado_conferencia) VALUES (?,?,?,?,?,?)', [nombre, sede, cupo, fecha, hora, estado],
     (err, result) => {
       if (err) {
         console.log(err)
@@ -22,7 +22,7 @@ const createConferences = (req, res) => {
 }
 
 const getConferences = (req, res) => {
-  conexion.query('SELECT  c.descipcion, s.nombre_sede, c.cupo, c.fecha , c.hora, c.estado_conferencia FROM  tb_sedes s, tb_conferencias c WHERE  s.id_sede = c.id_sede',
+  conexion.query('SELECT c.id_conferencia ,c.descipcion, s.nombre_sede, c.cupo, c.fecha , c.hora, c.estado_conferencia FROM  tb_sedes s, tb_conferencias c WHERE  s.id_sede = c.id_sede',
     (err, result) => {
       if (err) {
         console.log(err)
@@ -70,13 +70,14 @@ const deleteConferences = (req, res) => {
 }
 
 const updateConferences = (req, res) => {
-  const nombreConferences = req.params.id;
-  const { nombre, sede, cupo, fecha, hora, estado  } = req.body;
+  const id_conferencia = req.params.id;
+
+  const { nombre, sede, cupo, fecha, hora, estado } = req.body;
   console.log(nombre, sede, cupo, fecha, hora, estado)
 
   conexion.query(
     'UPDATE tb_conferencias SET descipcion = ? , id_sede = ?, cupo = ? , fecha = ? , hora = ? , estado_conferencia = ? WHERE id_conferencia = ?',
-    [nombre, sede, cupo, fecha, hora, estado, nombreConferences],
+    [nombre, sede, cupo, fecha, hora, estado, id_conferencia],
     (err, result) => {
       if (err) {
         console.error(err);
