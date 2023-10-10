@@ -158,7 +158,7 @@ export default function Conferences() {
             });
     };
 
-    //console.log(editingConferencias)
+    console.log(editingConferencias)
     //console.log(selectedSede)
 
 
@@ -221,7 +221,7 @@ export default function Conferences() {
                         />
                     </div>
                     <div className="row">
-                        <div className="col-12">
+                        <div className="col-10">
                             <Grid_Conferences List={conferencesList} handleDelete={handleDelete} handleEdit={openModal} />
                         </div>
                     </div>
