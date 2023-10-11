@@ -1,7 +1,6 @@
 import React from "react";
 import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
-import Grid_Muestra from "../../../../components/Grid_Muestra";
 import DropListField from "../../../../components/DropListField";
 
 export default function User_Events() {
@@ -29,7 +28,7 @@ export default function User_Events() {
             </div>
             <div className="row">
               <div className="col-12">
-                <Grid_Muestra />
+                //grid
               </div>
             </div>
             <div className="container-fluid mt-4 d-flex justify-content-center">

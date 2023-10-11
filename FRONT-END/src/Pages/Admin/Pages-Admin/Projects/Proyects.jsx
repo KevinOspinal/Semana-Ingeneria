@@ -3,9 +3,8 @@ import Axios from 'axios'
 import InputField from "../../../../components/InputField";
 import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
-import Grid_Proyects from "./Grid_Proyects";
-import DropListField_Proyects from "./DropListField_Proyects";
 import Modal from "react-modal";
+import DropListField from "../../../../components/DropListField";
 
 export default function Proyects() {
 
@@ -64,7 +63,7 @@ export default function Proyects() {
           </div>
           <div className="row">
             <div className="col-12">
-              <Grid_Muestra />
+              //grid
             </div>
           </div>
           <div className="container-fluid mt-4 d-flex justify-content-center">

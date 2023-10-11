@@ -1,7 +1,6 @@
 import React from "react";
 import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
-import Grid_Muestra from "../../../../components/Grid_Muestra";
 import DropListField from "../../../../components/DropListField";
 
 export default function Project_User() {
@@ -36,7 +35,7 @@ export default function Project_User() {
             </div>
             <div className="row">
               <div className="col-12">
-                <Grid_Muestra />
+                //grid
               </div>
             </div>
             <div className="container-fluid mt-4 d-flex justify-content-center">
