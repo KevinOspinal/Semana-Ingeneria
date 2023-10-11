@@ -5,7 +5,7 @@ import Modal from 'react-modal'; // Importa react-modal
 import Title from '../../../../components/Title'
 import InputField from '../../../../components/InputField'
 import Buttons from '../../../../components/Buttons'
-import Grid_Muestra from "../../../../components/Grid_Muestra";
+import Grid_Muestra from "./Grid_Muestra";
 
 
 
