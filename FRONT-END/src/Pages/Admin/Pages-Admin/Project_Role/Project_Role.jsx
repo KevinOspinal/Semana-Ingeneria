@@ -79,10 +79,10 @@ export default function Project_Role() {
 
 
   const handleDelete = (id) => {
-    Axios.delete(`http://localhost:3000/deleteProject_Role${id}`)
+    Axios.delete(`http://localhost:3000/deleteProject_Role/${id}`)
       .then((response) => {
         alert("Tipo de usuario eliminado satisfactoriamente!!");
-        getUserType();
+        getProject_Role();
         console.log(response.data);
       })
       .catch((error) => {
@@ -92,13 +92,12 @@ export default function Project_Role() {
 
   // funcion para traer un solo dato en el grid...
   const getOnlyProject_Role = (descripcion) => {
-    Axios.get(`http://localhost:3000/getOnlyHeadquarters/${descripcion}`).then((respond) => {
+    Axios.get(`http://localhost:3000/getOnlyProject_Role/${descripcion}`).then((respond) => {
         setProject_RoleList(respond.data);
-        console.log('HeadquartersList actualizado:', Project_RoleList);
+      console.log('Project_RoleList actualizado');
       })
   }
 
-  console.log(Project_RoleList)
 
 
   return (
@@ -125,7 +124,7 @@ export default function Project_Role() {
           onRequestClose={closeModal}
           contentLabel='Editar Descripcion'
         >
-          <h2>Editar Sede</h2>
+          <h2>Editar Rol en Proyecto</h2>
           <div className='col-10'>
             <InputField
               label='Nombre'

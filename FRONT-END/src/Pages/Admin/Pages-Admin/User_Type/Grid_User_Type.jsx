@@ -10,7 +10,7 @@ export default function Grid_User_Type({ List, handleDelete, handleEdit }) {
         <table className="table">
           <thead className="thead-dark">
             <tr>
-              <th>Descripcion tipo</th>
+              <th>Descripcion tipo de usuario</th>
               <th>Acciones</th>
             </tr>
           </thead>

@@ -5,6 +5,7 @@ const { createHeadquarters, getHeadquarters,DeleteHeadquarters,updateHeadquarter
 const { createUserType, getUserType, getOnlyUserType, deleteUserType, updateUserType } = require('./Controllers/User_Type/User_Type.controllers.js')
 const { createConferences, getConferences, getOnlyConferences, deleteConferences, updateConferences } = require('./Controllers/Conferences/Conferences.controllers.js')
 const { createOtherEvent, getOtherEvent, deleteOtherEvent, updateOtherEvent} = require('./Controllers/Other_Events/Other_Events_Controllers.js')
+const { createProject_Role, getProject_Role, deleteProject_Role, updateProject_Role, getOnlyProject_Role } = require('./Controllers/Project_Role/Project.controller')
 app.use(cors())
 app.use(express.json())
 
@@ -49,6 +50,17 @@ app.get('/getOtherEvent', getOtherEvent);;
 app.delete('/deleteOtherEvent/:id', deleteOtherEvent);
 //METODO PARA EDITAR LA MONDA DE LAS SEDES
 app.put('/updateOtherEvent/:id', updateOtherEvent);
+//--------------------------------------------------------------------------------------------------------------------------
+//METODO PARA CREAR ROL PROYECTO
+app.post('/createProject_Role', createProject_Role);
+//METODO PARA MOSTRAR ROL PROYECTO
+app.get('/getProject_Role', getProject_Role);
+//METODO PARA MOSTRAR UN ROL PROYECTO
+app.get('/getOnlyProject_Role/:descripcion', getOnlyProject_Role)
+//METODO PARA ELIMINAR ROL PROYECTO
+app.delete('/deleteProject_Role/:id', deleteProject_Role);
+//METODO PARA EDITAR ROL PROYECTO
+app.put('/updateProject_Role/:id', updateProject_Role);
 
 app.listen(3000, () => {
     console.log('El servidor esta escuchando en el puerto :', 'http://localhost:3000/')

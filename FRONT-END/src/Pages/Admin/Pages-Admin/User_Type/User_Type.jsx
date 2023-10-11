@@ -56,7 +56,7 @@ export default function User_Type() {
     Axios.get(`http://localhost:3000/getOnlyUserType/${descripcion}`).then(
       (respond) => {
         setUserTypeList(respond.data);
-        console.log("UserTypeList actualizada:", UserTypeList);
+        console.log("UserTypeList actualizada:", userTypeList);
       }
     );
   };

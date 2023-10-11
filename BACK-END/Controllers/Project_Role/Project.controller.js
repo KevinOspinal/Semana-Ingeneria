@@ -1,4 +1,4 @@
-const conexion = require('../../db.js')
+const conexion = require('../../db')
 
 const createProject_Role = (req, res) => {
     const descripcion = req.body.descripcion
@@ -7,10 +7,10 @@ const createProject_Role = (req, res) => {
         (err, result) => {
             if (err) {
                 console.log(err)
-                res.status(500).json({ message: 'Error al agregar la descripcion' });
+                res.status(500).json({ message: 'Error al agregar Rol proyecto' });
             } else {
                 console.log('La descripcion se agregó con éxito');
-                res.status(200).json({ message: 'La descripcion se agregó con éxito' });
+                res.status(200).json({ message: 'Rol proyecto se agregó con éxito' });
             }
         }
     )
@@ -21,9 +21,9 @@ const getProject_Role = (req, res) => {
         (err, result) => {
             if (err) {
                 console.log(err);
-                res.status(500).json({ message: 'Error al imprimir la descripcion' });
+                res.status(500).json({ message: 'Error al imprimir Rol proyecto' });
             } else {
-                console.log('mostro la descripcion con éxito');
+                console.log('Rol proyecto imprimido con éxito');
                 res.json(result); // Enviar el resultado como un objeto JSON
             }
         }
@@ -38,9 +38,9 @@ const getOnlyProject_Role = (req, res) => {
         (err, result) => {
             if (err) {
                 console.error(err);
-                res.status(500).json({ message: 'Error al consultar la descripcion' });
+                res.status(500).json({ message: 'Error al consultar Rol proyecto' });
             } else {
-                console.log('Descripcion consultada con éxito');
+                console.log('Rol proyecto consultado con éxito');
                 res.json(result);
             }
         }
@@ -56,10 +56,10 @@ const deleteProject_Role = (req, res) => {
         (err, result) => {
             if (err) {
                 console.error(err);
-                res.status(500).json({ message: 'error al eliminar la descripcion' });
+                res.status(500).json({ message: 'error al eliminar el rol proyecto' });
             } else {
-                console.log('Descripcion eliminada con éxito');
-                res.json({ message: 'Descripcion eliminada con éxito' });
+                console.log('Rol proyecto eliminado con éxito');
+                res.json({ message: 'Rol proyecto eliminado con éxito' });
             }
         }
     );
@@ -67,14 +67,14 @@ const deleteProject_Role = (req, res) => {
 
 //CONSULTA PARA PODER ACTUALIZAR LA DESCRIPCION
 const updateProject_Role = (req, res) => {
-    const idrol_proyecto = req.params.id;
+    const idRolProyecto = req.params.id;
     const { descripcion } = req.body;
     console.log(descripcion)
 
     // Realiza la actualización en la base de datos usando el ID y los nuevos datos
     conexion.query(
         'UPDATE tb_roles_proyectos SET descripcion = ? WHERE id_rol_proyecto = ?',
-        [descripcion,idrol_proyecto],
+        [descripcion, idRolProyecto],
         (err, result) => {
             if (err) {
                 console.error(err);
