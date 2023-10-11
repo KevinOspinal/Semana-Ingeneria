@@ -2,7 +2,6 @@ import React from 'react'
 import InputField from "../../../../components/InputField";
 import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
-import Grid_Muestra from "../../../../components/Grid_Muestra";
 
 export default function Document_Types() {
   return (
@@ -26,7 +25,7 @@ export default function Document_Types() {
             </div>
             <div className="row">
               <div className="col-12">
-                <Grid_Muestra />
+                //grid
               </div>
             </div>
             <div className="container-fluid mt-4 d-flex justify-content-center">
