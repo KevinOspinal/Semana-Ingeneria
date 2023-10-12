@@ -15,20 +15,20 @@ export default function Project_Role() {
 
 
   const handleNombreChange = (e) => {
-    const updatedEditingroles_proyectos = { ...editingroles_proyectos, descripcion: e.target.value };
-    setEditingroles_proyectos(updatedEditingroles_proyectos);
+    const updatedEditingrol_proyecto = { ...editingrol_proyecto, descripcion: e.target.value };
+    setEditingrol_proyecto(updatedEditingrol_proyecto);
   };
 
 
   //ESTADOS PARA GUARDAR LA INFORMACION OBTENIDA DE LA VENTANA EDIT
-  const [editingroles_proyectos, setEditingroles_proyectos] = useState({});
+  const [editingrol_proyecto, setEditingrol_proyecto] = useState({});
 
   //ESTADO PARA VER SI LA VENTANA EMERGENTE ESTA ABIERTA O CERRADA
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // FUNCION PARA ABRIR LA VENTANA EMERGENTE de edición
-  const openModal = (roles_proyectos) => {
-    setEditingroles_proyectos(roles_proyectos);
+  const openModal = (rol_proyecto) => {
+    setEditingrol_proyecto(rol_proyecto);
     setIsModalOpen(true);
   };
 
@@ -38,8 +38,8 @@ export default function Project_Role() {
   };
   // Función para actualizar una sede
   const updateProject_Role = () => {
-    Axios.put(`http://localhost:3000/updateProject_Role/${editingroles_proyectos.id_rol_proyecto}`, {
-      descripcion: editingroles_proyectos.descripcion,
+    Axios.put(`http://localhost:3000/updateProject_Role/${editingrol_proyecto.id_rol_proyecto}`, {
+      descripcion: editingrol_proyecto.descripcion,
     })
       .then(() => {
         alert('Descripcion actualizada.');
@@ -78,31 +78,26 @@ export default function Project_Role() {
   }
 
 
-  //FUNCION PARA ELIMINAR UNA SEDE CON EL ID
-  const handleDelete = (descripcion) => {
-    // Hacer una solicitud DELETE al servidor para eliminar la sede
-    Axios.delete(`http://localhost:3000/deleteProject_Role/${descripcion}`)
+  const handleDelete = (id) => {
+    Axios.delete(`http://localhost:3000/deleteProject_Role/${id}`)
       .then((response) => {
-        alert("Descripcion eliminada satisfactoriamente!!");
+        alert("Tipo de usuario eliminado satisfactoriamente!!");
         getProject_Role();
         console.log(response.data);
-        console.log(id)
-
       })
       .catch((error) => {
-        console.error("Error al eliminar la descripcion:", error);
+        console.error(error);
       });
   };
 
   // funcion para traer un solo dato en el grid...
   const getOnlyProject_Role = (descripcion) => {
-    Axios.get(`http://localhost:3000/getOnlyHeadquarters/${descripcion}`).then((respond) => {
+    Axios.get(`http://localhost:3000/getOnlyProject_Role/${descripcion}`).then((respond) => {
         setProject_RoleList(respond.data);
-        console.log('HeadquartersList actualizado:', Project_RoleList);
+      console.log('Project_RoleList actualizado');
       })
   }
 
-  console.log(Project_RoleList)
 
 
   return (
@@ -129,14 +124,14 @@ export default function Project_Role() {
           onRequestClose={closeModal}
           contentLabel='Editar Descripcion'
         >
-          <h2>Editar Sede</h2>
+          <h2>Editar Rol en Proyecto</h2>
           <div className='col-10'>
             <InputField
               label='Nombre'
               type='text'
               id='Nombre-Descripcion-edit'
               placeholder='Nombre de la sede'
-              value={editingroles_proyectos.descripcion || ''}
+              value={editingrol_proyecto.descripcion || ''}
               onChange={handleNombreChange}
             />
           </div>

@@ -35,6 +35,7 @@ const getHeadquarters = (req, res) => {
     )
 }
 
+//CONSULTAS PARA PODER MOSTRAR UNA SOLA SEDE
 const getOnlyHeadquerters = (req, res) => {
     const NombreSede = req.params.nombre;
     conexion.query(
@@ -74,6 +75,7 @@ const DeleteHeadquarters = (req, res) => {
 const updateHeadquarters = (req, res) => {
     const idSede = req.params.id;
     const { nombre, direccion, telefono } = req.body;
+    
     console.log(nombre, direccion, telefono)
 
     // Realiza la actualización en la base de datos usando el ID y los nuevos datos

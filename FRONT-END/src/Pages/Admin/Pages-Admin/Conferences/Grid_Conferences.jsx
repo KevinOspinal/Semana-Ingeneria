@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Grid_Project_Role({ List, handleDelete, handleEdit }) {
+export default function Grid_Conferences({ List, handleDelete, handleEdit }) {
   return (
     <div className="container mt-5">
       <div
@@ -10,25 +10,35 @@ export default function Grid_Project_Role({ List, handleDelete, handleEdit }) {
         <table className="table">
           <thead className="thead-dark">
             <tr>
-              <th>Descripcion tipo de rol</th>
+              <th>Nombre</th>
+              <th>Sede</th>
+              <th>Cupo</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Estado</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {List
-              ? List.map((tipo_rol_proyecto) => (
-                <tr key={tipo_rol_proyecto.id_rol_proyecto}>
-                  <td>{tipo_rol_proyecto.descripcion}</td>
+              ? List.map((conferencias) => (
+                <tr key={conferencias.id_conferencia}>
+                  <td>{conferencias.descipcion}</td>
+                  <td>{conferencias.nombre_sede}</td>
+                  <td>{conferencias.cupo}</td>
+                  <td>{conferencias.fecha}</td>
+                  <td>{conferencias.hora}</td>
+                  <td>{conferencias.estado_conferencia}</td>
                   <td>
                     <button
                       className="btn btn-danger btn-sm mr-2"
-                      onClick={() => handleDelete(tipo_rol_proyecto.id_rol_proyecto)}
+                      onClick={() => handleDelete(conferencias.descipcion)}
                     >
                       Eliminar
                     </button>
                     <button
                       className="btn btn-primary btn-sm"
-                      onClick={() => handleEdit(tipo_rol_proyecto)}
+                      onClick={() => handleEdit(conferencias)}
                     >
                       Editar
                     </button>
