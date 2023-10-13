@@ -23,23 +23,28 @@ export default function Project_Role() {
 
 
 
-  //ESTADOS PARA GUARDAR LA INFORMACION OBTENIDA DE LA VENTANA EDIT
-  const [editingrol_proyecto, setEditingrol_proyecto] = useState({});
 
-  //ESTADO PARA VER SI LA VENTANA EMERGENTE ESTA ABIERTA O CERRADA
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // FUNCION PARA ABRIR LA VENTANA EMERGENTE de edición
+  // FUNCION PARA ABRIR Y CERRAR LA VENTANA EMERGENTE de edición
   const openModal = (rol_proyecto) => {
     setEditingrol_proyecto(rol_proyecto);
     setIsModalOpen(true);
   };
-
-  // FUNCION PARA CERRA LA VENTANA EMERGENTE DE edición
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+
+  //ESTADO PARA VER SI LA VENTANA EMERGENTE ESTA ABIERTA O CERRADA
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+
+
   // Función para actualizar una sede
+
+  //ESTADOS PARA GUARDAR LA INFORMACION OBTENIDA DE LA VENTANA EDIT
+  const [editingrol_proyecto, setEditingrol_proyecto] = useState({});
+
   const updateProject_Role = () => {
     Axios.put(`http://localhost:3000/updateProject_Role/${editingrol_proyecto.id_rol_proyecto}`, {
       descripcion: editingrol_proyecto.descripcion,
@@ -102,7 +107,13 @@ export default function Project_Role() {
       })
   }
 
-console.log(editingrol_proyecto)
+  const ListTitle = [{
+    id:1,
+    descripcion:'Descripcion tipo rol',
+    acciones: 'Acciones'
+   }
+]
+
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
@@ -119,7 +130,7 @@ console.log(editingrol_proyecto)
         </div>
         <div className='row'>
           <div className='col-12'>
-            <Grid_Project_Role List={Project_RoleList} handleDelete={handleDelete} handleEdit={openModal} />
+            <Grid_Project_Role List={Project_RoleList} ListTitle={ListTitle} handleDelete={handleDelete} handleEdit={openModal} />
           </div>
         </div>
         <Modal
