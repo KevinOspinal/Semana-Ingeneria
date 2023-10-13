@@ -70,10 +70,10 @@ export default function Headquarters() {
 
 
   //FUNCION PARA CREAR LAS SEDES
-   const [nombre, setnombre] = useState('')
-   const [direccion, setdireccion] = useState('')
-   const [telefono, settelefono] = useState('')
- 
+  const [nombre, setnombre] = useState('')
+  const [direccion, setdireccion] = useState('')
+  const [telefono, settelefono] = useState('')
+
   const createHeadquarters = () => {
     Axios.post('http://localhost:3000/createHeadquarters', {
       nombre: nombre,
