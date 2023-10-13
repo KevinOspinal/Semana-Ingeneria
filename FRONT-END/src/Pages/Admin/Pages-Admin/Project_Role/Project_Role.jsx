@@ -1,3 +1,4 @@
+/**ROL POR PROYECTO */
 import React, { useState } from 'react'
 import Axios from 'axios'
 import Modal from 'react-modal'; // Importa react-modal
@@ -7,9 +8,10 @@ import Buttons from '../../../../components/Buttons'
 import Grid_Project_Role from "../../../../Pages/Admin/Pages-Admin/Project_Role/Grid_Project_Role";
 
 
+
 export default function Project_Role() {
 
-  
+
   //ESTADO DONDE GUARDAMOS LA CONSULTA DE LAS SEDES
   const [ Project_RoleList, setProject_RoleList] = useState([])
 
@@ -18,6 +20,7 @@ export default function Project_Role() {
     const updatedEditingrol_proyecto = { ...editingrol_proyecto, descripcion: e.target.value };
     setEditingrol_proyecto(updatedEditingrol_proyecto);
   };
+
 
 
   //ESTADOS PARA GUARDAR LA INFORMACION OBTENIDA DE LA VENTANA EDIT
@@ -53,9 +56,9 @@ export default function Project_Role() {
 
 
 
-
   //FUNCION PARA CREAR LAS SEDES
   const [descripcion, setdescripcion] = useState('')
+  
   const createProject_Role = () => {
     Axios.post('http://localhost:3000/createProject_Role', {
       descripcion: descripcion,
@@ -77,8 +80,9 @@ export default function Project_Role() {
     })
   }
 
-
+  //FUNCION PARA ELIMINAR UNA SEDE CON EL ID
   const handleDelete = (id) => {
+    // Hacer una solicitud DELETE al servidor para eliminar la sede
     Axios.delete(`http://localhost:3000/deleteProject_Role/${id}`)
       .then((response) => {
         alert("Tipo de usuario eliminado satisfactoriamente!!");
@@ -94,12 +98,11 @@ export default function Project_Role() {
   const getOnlyProject_Role = (descripcion) => {
     Axios.get(`http://localhost:3000/getOnlyProject_Role/${descripcion}`).then((respond) => {
         setProject_RoleList(respond.data);
-      console.log('Project_RoleList actualizado');
+        console.log('Project_RoleList actualizado');
       })
   }
 
-
-
+console.log(editingrol_proyecto)
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
