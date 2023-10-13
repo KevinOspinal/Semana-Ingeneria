@@ -6,6 +6,7 @@ const { createUserType, getUserType, getOnlyUserType, deleteUserType, updateUser
 const { createConferences, getConferences, getOnlyConferences, deleteConferences, updateConferences } = require('./Controllers/Conferences/Conferences.controllers.js')
 const { createOtherEvent, getOtherEvent, deleteOtherEvent, updateOtherEvent} = require('./Controllers/Other_Events/Other_Events_Controllers.js')
 const { createProject_Role, getProject_Role, deleteProject_Role, updateProject_Role, getOnlyProject_Role } = require('./Controllers/Project_Role/Project.controller')
+const {getProyect_Type, createProject_Type,getOnlyProtect_Type,DeleteProyect_Type,updateProyect_Type} = require('./Controllers/Project_Type/Project_Type.controller.js')
 app.use(cors())
 app.use(express.json())
 
@@ -61,6 +62,28 @@ app.get('/getOnlyProject_Role/:descripcion', getOnlyProject_Role)
 app.delete('/deleteProject_Role/:id', deleteProject_Role);
 //METODO PARA EDITAR ROL PROYECTO
 app.put('/updateProject_Role/:id', updateProject_Role);
+//----------------------------------------------------------------------------------------------------------
+//METODO PARA CREAR  Project_Type
+app.post('/createProject_Type',createProject_Type);
+
+//METODO PARA MOSTRAR Project_Type
+app.get('/getProject_Type', getProyect_Type);
+
+//METODO PARA MOSTRAR UN Project_Type
+app.get('/getOnlyProject_Type/:descripcion', getOnlyProtect_Type)
+
+//METODO PARA ELIMINAR Project_Type
+app.delete('/deleteProject_Type/:id', DeleteProyect_Type);
+
+//METODO PARA EDITAR Project_Type
+app.put('/updateProject_Type/:id', updateProyect_Type);
+
+
+
+
+
+
+
 
 app.listen(3000, () => {
     console.log('El servidor esta escuchando en el puerto :', 'http://localhost:3000/')

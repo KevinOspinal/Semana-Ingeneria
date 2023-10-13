@@ -15,7 +15,7 @@ export default function Headquarters() {
   //ESTADO DONDE GUARDAMOS LA CONSULTA DE LAS SEDES
   const [HeadquartersList, setHeadquartersList] = useState([])
 
-
+  
   const handleNombreChange = (e) => {
     const updatedEditingSede = { ...editingSede, nombre_sede: e.target.value };
     setEditingSede(updatedEditingSede);
