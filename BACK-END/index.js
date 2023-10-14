@@ -7,6 +7,13 @@ const { createConferences, getConferences, getOnlyConferences, deleteConferences
 const { createOtherEvent, getOtherEvent, deleteOtherEvent, updateOtherEvent} = require('./Controllers/Other_Events/Other_Events_Controllers.js')
 const { createProject_Role, getProject_Role, deleteProject_Role, updateProject_Role, getOnlyProject_Role } = require('./Controllers/Project_Role/Project.controller')
 const {getProyect_Type, createProject_Type,getOnlyProtect_Type,DeleteProyect_Type,updateProyect_Type} = require('./Controllers/Project_Type/Project_Type.controller.js')
+
+
+
+
+
+
+
 const { createDocument_Type, getDocument_Type,getOnlyDocument_Type,deleteDocument_Type,updateDocument_Type} = require('./Controllers/Document_Type/Document_Type_Controllers.js')
 
 
