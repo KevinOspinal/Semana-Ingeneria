@@ -7,6 +7,8 @@ const { createConferences, getConferences, getOnlyConferences, deleteConferences
 const { createOtherEvent, getOtherEvent, deleteOtherEvent, updateOtherEvent} = require('./Controllers/Other_Events/Other_Events_Controllers.js')
 const { createProject_Role, getProject_Role, deleteProject_Role, updateProject_Role, getOnlyProject_Role } = require('./Controllers/Project_Role/Project.controller')
 const {getProyect_Type, createProject_Type,getOnlyProtect_Type,DeleteProyect_Type,updateProyect_Type} = require('./Controllers/Project_Type/Project_Type.controller.js')
+const {createFaculties, getFaculties,getOnlyFaculties,DeleteFaculties,updateFaculties} = require('./Controllers/Faculties/Faculties-controllers.js')
+
 app.use(cors())
 app.use(express.json())
 
@@ -77,6 +79,17 @@ app.delete('/deleteProject_Type/:id', DeleteProyect_Type);
 
 //METODO PARA EDITAR Project_Type
 app.put('/updateProject_Type/:id', updateProyect_Type);
+//--------------------------------------------------------------
+//METODO PARA CREAR ROL FACULTAD
+app.post('/createFaculties', createFaculties);
+//METODO PARA MOSTRAR ROL FACULTAD
+app.get('/getFaculties', getFaculties);
+//METODO PARA MOSTRAR UN ROL FACULTAD
+app.get('/getOnlyFaculties/:nombre_facultad', getOnlyFaculties)
+//METODO PARA ELIMINAR ROL FACULTAD
+app.delete('/deleteFaculties/:id', DeleteFaculties);
+//METODO PARA EDITAR ROL FACULTAD
+app.put('/updateFaculties/:id', updateFaculties);
 
 
 
