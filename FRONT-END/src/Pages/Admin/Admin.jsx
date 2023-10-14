@@ -3,7 +3,7 @@ import './Admin.css'
 
 import Context from './Context'
 import Conferences from './Pages-Admin/Conferences/Conferences';
-import Document_Types from './Pages-Admin/Document_Type/Document_Types';
+import Document_Types from './Pages-Admin/Document_Type/Document_Type';
 import Event_Type from './Pages-Admin/Event_Type/Event_Type'
 import Faculties from './Pages-Admin/Falcuties/Faculties'
 import Headquarters from './Pages-Admin/Headquarters/Headquarters'
