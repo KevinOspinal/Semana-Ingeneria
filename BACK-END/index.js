@@ -95,7 +95,7 @@ app.delete('/deleteFaculties/:id', DeleteFaculties);
 app.put('/updateFaculties/:id', updateFaculties);
 //-------------------------------------------------------------------
 //METODO PARA CREAR TIPO DOCUMENTO
-app.post('/createDocument_Type', createDocument_Type);
+app.post('/createDocument_Type', createDogitcument_Type);
 //METODO PARA MOSTRAR TIPO DOCUMENTO
 app.get('/getDocument_Type', getDocument_Type);
 //METODO PARA MOSTRAR UN TIPO DOCUMENTO
