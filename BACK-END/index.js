@@ -82,14 +82,8 @@ app.delete('/deleteProject_Type/:id', DeleteProyect_Type);
 
 //METODO PARA EDITAR Project_Type
 app.put('/updateProject_Type/:id', updateProyect_Type);
-//-------------------------------------------------------------------------
 
-
-
-
-
-
-//-------------------------------------------------------------------
+//-----------------------------------------------------
 //METODO PARA CREAR TIPO DOCUMENTO
 app.post('/createDocument_Type', createDocument_Type);
 //METODO PARA MOSTRAR TIPO DOCUMENTO
