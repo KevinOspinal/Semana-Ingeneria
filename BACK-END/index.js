@@ -94,7 +94,7 @@ app.delete('/deleteFaculties/:id', DeleteFaculties);
 //METODO PARA EDITAR ROL FACULTAD
 app.put('/updateFaculties/:id', updateFaculties);
 //-------------------------------------------------------------------
-//METODO PARA CREAR TIPO DOCUMENTO
+//METODO PARA CREAR TIPO DOCUMENTOgit 
 app.post('/createDocument_Type', createDocument_Type);
 //METODO PARA MOSTRAR TIPO DOCUMENTO
 app.get('/getDocument_Type', getDocument_Type);
