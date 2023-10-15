@@ -8,6 +8,9 @@ const { createOtherEvent, getOtherEvent, deleteOtherEvent, updateOtherEvent} = r
 const { createProject_Role, getProject_Role, deleteProject_Role, updateProject_Role, getOnlyProject_Role } = require('./Controllers/Project_Role/Project.controller')
 const {getProyect_Type, createProject_Type,getOnlyProtect_Type,DeleteProyect_Type,updateProyect_Type} = require('./Controllers/Project_Type/Project_Type.controller.js')
 const {createFaculties, getFaculties,getOnlyFaculties,DeleteFaculties,updateFaculties} = require('./Controllers/Faculties/Faculties-controllers.js')
+const { createDocument_Type, getDocument_Type,getOnlyDocument_Type,deleteDocument_Type,updateDocument_Type} = require('./Controllers/Document_Type/Document_Type_Controllers.js')
+
+
 
 app.use(cors())
 app.use(express.json())
@@ -79,17 +82,6 @@ app.delete('/deleteProject_Type/:id', DeleteProyect_Type);
 
 //METODO PARA EDITAR Project_Type
 app.put('/updateProject_Type/:id', updateProyect_Type);
-//--------------------------------------------------------------
-//METODO PARA CREAR ROL FACULTAD
-app.post('/createFaculties', createFaculties);
-//METODO PARA MOSTRAR ROL FACULTAD
-app.get('/getFaculties', getFaculties);
-//METODO PARA MOSTRAR UN ROL FACULTAD
-app.get('/getOnlyFaculties/:nombre_facultad', getOnlyFaculties)
-//METODO PARA ELIMINAR ROL FACULTAD
-app.delete('/deleteFaculties/:id', DeleteFaculties);
-//METODO PARA EDITAR ROL FACULTAD
-app.put('/updateFaculties/:id', updateFaculties);
 
 
 
@@ -97,6 +89,25 @@ app.put('/updateFaculties/:id', updateFaculties);
 
 
 
+
+
+
+
+
+
+
+
+
+//METODO PARA CREAR TIPO DOCUMENTO
+app.post('/createDocument_Type', createDocument_Type);
+//METODO PARA MOSTRAR TIPO DOCUMENTO
+app.get('/getDocument_Type', getDocument_Type);
+//METODO PARA MOSTRAR UN TIPO DOCUMENTO
+app.get('/getOnlyDocument_Type/:descripcion_Tipo', getOnlyDocument_Type)
+//METODO PARA ELIMINAR TIPO DOCUMENTO
+app.delete('/deleteDocument_Type/:id', deleteDocument_Type);
+//METODO PARA EDITAR TIPO DOCUMENTO
+app.put('/updateDocument_Type/:id', updateDocument_Type);
 
 app.listen(3000, () => {
     console.log('El servidor esta escuchando en el puerto :', 'http://localhost:3000/')
