@@ -16,7 +16,7 @@ export default function Project_Type() {
   const [ProyectTypeList, setProyectTypeList] = useState([])
 
 
-
+  //FUNCION PARA CREAR UN PROYECTO TYPE
   const [descripcion, setDescripcion] = useState("");
 
   const createConferences = () => {
@@ -73,12 +73,7 @@ export default function Project_Type() {
   //ESTADO PARA VER SI LA VENTANA EMERGENTE ESTA ABIERTA O CERRADA
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-
-  // Función para actualizar una sede
-
   //ESTADOS PARA GUARDAR LA INFORMACION OBTENIDA DE LA VENTANA EDIT
-
 
   const [editingProyecto_Type, setEditingProyecto_Type] = useState({});
 
@@ -101,12 +96,6 @@ export default function Project_Type() {
         console.error(error);
       });
   };
-
-
-
-console.log(ProyectTypeList)
-
-
 
   return (
     <div className='container vh-100 d-flex justify-content-center align-items-center'>
