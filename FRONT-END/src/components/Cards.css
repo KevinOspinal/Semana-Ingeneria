@@ -1,0 +1,12 @@
+.small-text{
+    font-size: 12px; /* Ajusta el tamaño de fuente según tus preferencias */
+  }
+
+.footer-container{
+    background-color: white;
+    position: relative;
+    border: 1px solid wheat !important;
+    border-radius: 10px;
+    bottom: 2rem;
+    width: 20rem !important;
+}
