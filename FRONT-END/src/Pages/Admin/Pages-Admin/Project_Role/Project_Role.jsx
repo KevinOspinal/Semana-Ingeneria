@@ -107,13 +107,6 @@ export default function Project_Role() {
       })
   }
 
-  const ListTitle = [{
-    id:1,
-    descripcion:'Descripcion tipo rol',
-    acciones: 'Acciones'
-   }
-]
-
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">

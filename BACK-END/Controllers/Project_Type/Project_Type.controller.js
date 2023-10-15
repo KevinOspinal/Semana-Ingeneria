@@ -29,8 +29,8 @@ const getProyect_Type = (req,res)=>{
 }
 
 const getOnlyProtect_Type = (req, res) => {
-    const NombreTipoProyecto = req.body.nombre;
-
+    const NombreTipoProyecto = req.params.descripcion;
+    console.log(NombreTipoProyecto)
     conexion.query('SELECT * FROM tb_tipos_proyectos WHERE descripcion = ?',[NombreTipoProyecto],
         (err, result) => {
             if (err) {
@@ -66,7 +66,6 @@ const DeleteProyect_Type = (req, res) => {
 const updateProyect_Type = (req, res) => {
     const idTipoProyecto = req.params.id;
     const { descripcion } = req.body;
-    
     // Realiza la actualización en la base de datos usando el ID y los nuevos datos
     conexion.query(
         'UPDATE tb_tipos_proyectos SET descripcion = ? WHERE id_tipo_proyecto = ?',
