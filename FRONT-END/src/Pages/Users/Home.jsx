@@ -7,11 +7,11 @@ export default function Home() {
   return (
     <div>
       <NavbarUser />
-      <section className='container-fluid mb-3'>
+      <div className='container-fluid mb-3 p-0'>
           <div className='hero align-items-stretch'>
-            <img className='img-fluid' src={Hero_Img} alt='Img del hero principal' />
+            <img className='img-fluid w-100' src={Hero_Img} alt='Img del hero principal' />
           </div>
-      </section>
+      </div>
       <section className='container-fluid'>
         <Cards />
       </section>

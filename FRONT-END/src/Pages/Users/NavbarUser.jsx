@@ -25,10 +25,10 @@ export default function NavbarUser() {
                     </ul>
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <a className="nav-link">Iniciar sesion</a>
+                            <a href='/' className="nav-link">Iniciar sesion</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link">Registrarme</a>
+                            <a  href='/' className="nav-link">Registrarme</a>
                         </li>
                     </ul>
                 </div>
