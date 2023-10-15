@@ -123,7 +123,7 @@ export default function Project_Role() {
         </div>
         <div className='row'>
           <div className='col-12'>
-            <Grid_Project_Role List={Project_RoleList} ListTitle={ListTitle} handleDelete={handleDelete} handleEdit={openModal} />
+            <Grid_Project_Role List={Project_RoleList} handleDelete={handleDelete} handleEdit={openModal} />
           </div>
         </div>
         <Modal
