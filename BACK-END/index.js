@@ -83,23 +83,9 @@ app.delete('/deleteProject_Type/:id', DeleteProyect_Type);
 //METODO PARA EDITAR Project_Type
 app.put('/updateProject_Type/:id', updateProyect_Type);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//-----------------------------------------------------
 //METODO PARA CREAR TIPO DOCUMENTO
-app.post('/createDocument_Type', createDogitcument_Type);
+app.post('/createDocument_Type', createDocument_Type);
 //METODO PARA MOSTRAR TIPO DOCUMENTO
 app.get('/getDocument_Type', getDocument_Type);
 //METODO PARA MOSTRAR UN TIPO DOCUMENTO
@@ -108,6 +94,9 @@ app.get('/getOnlyDocument_Type/:descripcion_Tipo', getOnlyDocument_Type)
 app.delete('/deleteDocument_Type/:id', deleteDocument_Type);
 //METODO PARA EDITAR TIPO DOCUMENTO
 app.put('/updateDocument_Type/:id', updateDocument_Type);
+
+
+
 
 app.listen(3000, () => {
     console.log('El servidor esta escuchando en el puerto :', 'http://localhost:3000/')
