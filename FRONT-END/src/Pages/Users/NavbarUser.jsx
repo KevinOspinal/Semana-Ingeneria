@@ -1,4 +1,5 @@
 import React from 'react'
+import Logo from '../../assets/img/Logo_Unicatólica.png'
 
 export default function NavbarUser() {
     return (
@@ -8,7 +9,9 @@ export default function NavbarUser() {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbar-toggler">
-                    <a className="navbar-brand"></a>
+                    <a className="navbar-brand">
+                        <img src={Logo} alt='logo unicatolica' style={{height:'38pt'}}/>
+                    </a>
                     <ul className="navbar-nav mx-auto">
                         <li className="nav-item">
                             <a className="nav-link mb-2" aria-current="page">About Me</a>
