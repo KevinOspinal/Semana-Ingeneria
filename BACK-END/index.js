@@ -86,16 +86,7 @@ app.put('/updateProject_Type/:id', updateProyect_Type);
 
 
 
-//METODO PARA CREAR ROL FACULTAD
-app.post('/createFaculties', createFaculties);
-//METODO PARA MOSTRAR ROL FACULTAD
-app.get('/getFaculties', getFaculties);
-//METODO PARA MOSTRAR UN ROL FACULTAD
-app.get('/getOnlyFaculties/:nombre_facultad', getOnlyFaculties)
-//METODO PARA ELIMINAR ROL FACULTAD
-app.delete('/deleteFaculties/:id', DeleteFaculties);
-//METODO PARA EDITAR ROL FACULTAD
-app.put('/updateFaculties/:id', updateFaculties);
+
 
 
 
@@ -108,7 +99,7 @@ app.put('/updateFaculties/:id', updateFaculties);
 
 
 //METODO PARA CREAR TIPO DOCUMENTO
-app.post('/createDocument_Type', createDocument_Type);
+app.post('/createDocument_Type', createDogitcument_Type);
 //METODO PARA MOSTRAR TIPO DOCUMENTO
 app.get('/getDocument_Type', getDocument_Type);
 //METODO PARA MOSTRAR UN TIPO DOCUMENTO
