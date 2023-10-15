@@ -7,15 +7,7 @@ const { createConferences, getConferences, getOnlyConferences, deleteConferences
 const { createOtherEvent, getOtherEvent, deleteOtherEvent, updateOtherEvent} = require('./Controllers/Other_Events/Other_Events_Controllers.js')
 const { createProject_Role, getProject_Role, deleteProject_Role, updateProject_Role, getOnlyProject_Role } = require('./Controllers/Project_Role/Project.controller')
 const {getProyect_Type, createProject_Type,getOnlyProtect_Type,DeleteProyect_Type,updateProyect_Type} = require('./Controllers/Project_Type/Project_Type.controller.js')
-
-
-
-
-
-
-
-const { createDocument_Type, getDocument_Type,getOnlyDocument_Type,deleteDocument_Type,updateDocument_Type} = require('./Controllers/Document_Type/Document_Type_Controllers.js')
-
+const {createFaculties, getFaculties,getOnlyFaculties,DeleteFaculties,updateFaculties} = require('./Controllers/Faculties/Faculties-controllers.js')
 
 app.use(cors())
 app.use(express.json())
@@ -87,20 +79,6 @@ app.delete('/deleteProject_Type/:id', DeleteProyect_Type);
 
 //METODO PARA EDITAR Project_Type
 app.put('/updateProject_Type/:id', updateProyect_Type);
-
-
-//METODO PARA CREAR  Document_TYpe
-app.post('/createDocument_Type',createDocument_Type);
-//METODO PARA MOSTRAR Document_TYpe
-app.get('/getDocument_Type', getDocument_Type);
-//METODO PARA MOSTRAR UN Document_TYpe
-app.get('/getOnlyDocument_Type/:descripcion', getOnlyDocument_Type);
-//METODO PARA ELIMINAR Document_TYpe
-app.delete('/deleteDocument_Type/:id',deleteDocument_Type);
-//METODO PARA EDITAR Document_TYpe
-app.put('/updateDocument_Type/:id', updateDocument_Type);
-
-
 
 
 

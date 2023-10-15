@@ -52,8 +52,8 @@ export default function Admin() {
   return (
     <div className="container-fluid">
       <div className="row">
-      <nav id="sidebar" className='col-md-3 col-lg-2 d-md-block bg-light sidebar p-0'>
-          <div className="position-sticky">
+      <nav id="sidebar" className='col-md-3 col-lg-2 d-md-block sidebar p-0'>
+          <div className="position-sticky bg-lista">
             <ul className="nav flex-column fs-5">
               <li className="nav-item lista-items">
                 <a className="nav-link nav-admin active bg-white text-dark">
