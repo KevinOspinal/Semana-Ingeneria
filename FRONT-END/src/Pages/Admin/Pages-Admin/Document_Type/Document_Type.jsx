@@ -7,6 +7,7 @@ import Axios from "axios";
 import Modal from "react-modal";
 
 export default function Document_Type() {
+
   const [document_typeList, setDocument_typeList] = useState([]);
   const [editingDocumentType, setEditingDocumentType] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -88,6 +89,7 @@ export default function Document_Type() {
       });
   };
 
+ console.log(editingDocumentType)
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
@@ -137,7 +139,7 @@ export default function Document_Type() {
               type="text"
               id="Tipo-Documento"
               placeholder="Tipo de Documento"
-              value={editingDocumentType.descripcion_tipo || ""}
+              value={editingDocumentType.descripcion || ""}
               onChange={handleDescripcionChange}
             />
           </div>
