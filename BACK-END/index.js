@@ -51,10 +51,10 @@ app.put('/updateConferences/:id', updateConferences);
 //METODO PARA CREAR OTRO EVENTO
 app.post('/createOtherEvent', createOtherEvent);
 //METODO PARA MOSTRAR LOS OTROS EVENTOS
-app.get('/getOtherEvent', getOtherEvent);;
+app.get('/getOtherEvent', getOtherEvent);
 //METODO PARA ELIMINAR OTRO EVENTO
 app.delete('/deleteOtherEvent/:id', deleteOtherEvent);
-//METODO PARA EDITAR LA MONDA DE LAS SEDES
+//METODO PARA EDITAR un evento
 app.put('/updateOtherEvent/:id', updateOtherEvent);
 //--------------------------------------------------------------------------------------------------------------------------
 //METODO PARA CREAR ROL PROYECTO
