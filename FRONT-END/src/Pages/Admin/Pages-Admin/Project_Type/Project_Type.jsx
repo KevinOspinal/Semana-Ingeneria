@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Title from '../../../../components/Title'
 import InputField from '../../../../components/InputField'
 import Buttons from '../../../../components/Buttons'
@@ -13,18 +13,18 @@ import Modal from 'react-modal'; // Importa react-modal
 export default function Project_Type() {
 
   //ESTADO DONDE GUARDAMOS LA CONSULTA DE LOS TIPOS PROYECTOS
-  const [ProyectTypeList, setProyectTypeList] = useState([])
+  const [ProjectTypeList, setProjectTypeList] = useState([])
 
 
-  //FUNCION PARA CREAR UN PROYECTO TYPE
+  //FUNCION PARA CREAR UN TIPO PROYECTO
   const [descripcion, setDescripcion] = useState("");
 
-  const createConferences = () => {
+  const createProject_Type = () => {
     Axios.post("http://localhost:3000/createProject_Type", {
-      nombre: descripcion
+      descripcion: descripcion
     }).then((responde) => {
-      getProyect_Type();
-      alert("Conferencia registrada.");
+      getProject_Type();
+      alert("Tipo de proyecto registrado.");
     })
       .catch((error) => {
         console.log(error);
@@ -32,15 +32,15 @@ export default function Project_Type() {
   };
 
   //FUNCION PARA CONSULTAR TODAS LAS PROJECT CREADAS Y TAMBIEN PARA UNA SOLA
-  const getProyect_Type = () => {
+  const getProject_Type = () => {
     Axios.get('http://localhost:3000/getProject_Type').then((respond) => {
-      setProyectTypeList(respond.data)
+      setProjectTypeList(respond.data)
     })
   }
-  const getOnlyProject_Role = (descripcion) => {
+  const getOnlyProject_Type = (descripcion) => {
     Axios.get(`http://localhost:3000/getOnlyProject_Type/${descripcion}`).then((respond) => {
-      setProyectTypeList(respond.data);
-      console.log('Project_RoleList actualizado');
+      setProjectTypeList(respond.data);
+      console.log('Project_Type actualizado');
     })
   }
 
@@ -49,8 +49,8 @@ export default function Project_Type() {
   const handleDelete = (id) => {
     Axios.delete(`http://localhost:3000/deleteProject_Type/${id}`)
       .then((response) => {
-        alert("Tipo proyecto eliminada satisfactoriamente!!");
-        getProyect_Type();
+        alert("Tipo de proyecto eliminado satisfactoriamente!!");
+        getProject_Type();
         console.log(response.data);
       })
       .catch((error) => {
@@ -61,8 +61,8 @@ export default function Project_Type() {
 
 
   // FUNCION PARA ABRIR Y CERRAR LA VENTANA EMERGENTE de edición
-  const openModal = (rol_proyecto) => {
-    setEditingProyecto_Type(rol_proyecto);
+  const openModal = (tipo_proyecto) => {
+    setEditingProjecto_Type(tipo_proyecto);
     setIsModalOpen(true);
   };
   const closeModal = () => {
@@ -75,21 +75,21 @@ export default function Project_Type() {
 
   //ESTADOS PARA GUARDAR LA INFORMACION OBTENIDA DE LA VENTANA EDIT
 
-  const [editingProyecto_Type, setEditingProyecto_Type] = useState({});
+  const [editingProjecto_Type, setEditingProjecto_Type] = useState({});
 
   const handleNombreChange = (e) => {
-    const updatedEditingProyecto_Type = { ...editingProyecto_Type, descripcion: e.target.value };
-    setEditingProyecto_Type(updatedEditingProyecto_Type);
+    const updatedEditingProjecto_Type = { ...editingProjecto_Type, descripcion_tipo_proyecto: e.target.value };
+    setEditingProjecto_Type(updatedEditingProjecto_Type);
   };
 
 
   const updateProject_Type = () => {
-    Axios.put(`http://localhost:3000/updateProject_Type/${editingProyecto_Type.id_tipo_proyecto}`, {
-      descripcion: editingProyecto_Type.descripcion,
+    Axios.put(`http://localhost:3000/updateProject_Type/${editingProjecto_Type.id_tipo_proyecto}`, {
+      descripcion: editingProjecto_Type.descripcion_tipo_proyecto,
     })
       .then(() => {
-        alert('Descripcion actualizada.');
-        getProyect_Type();
+        alert('Tipo de proyecto actualizado.');
+        getProject_Type();
         //closeModal(); // Cierra el modal después de la actualización
       })
       .catch((error) => {
@@ -108,26 +108,26 @@ export default function Project_Type() {
             <InputField label='Nombre' type='text' id='Nombre' placeholder='Nombre' onChange={(e) => setDescripcion(e.target.value)} />
           </div>
           <div className='col-2'>
-            <Buttons title='Consultar' color='white' onClick={() => (descripcion.length === 0 ? getProyect_Type() : getOnlyProject_Role(descripcion))} />
+            <Buttons title='Consultar' color='white' onClick={() => (descripcion.length === 0 ? getProject_Type() : getOnlyProject_Type(descripcion))} />
           </div>
         </div>
         <div className='row'>
           <div className='col-12'>
-            <Grid_Project_Type List={ProyectTypeList} handleDelete={handleDelete} handleEdit={openModal} />
+            <Grid_Project_Type List={ProjectTypeList} handleDelete={handleDelete} handleEdit={openModal} />
           </div>
           <Modal
           isOpen={isModalOpen}
           onRequestClose={closeModal}
           contentLabel='Editar Descripcion'
         >
-          <h2>Editar Rol en Proyecto</h2>
+          <h2>Editar Tipo de Proyecto</h2>
           <div className='col-10'>
             <InputField
               label='Nombre'
               type='text'
               id='Nombre-Descripcion-edit'
               placeholder='Nombre de la sede'
-              value={editingProyecto_Type.descripcion || ''}
+              value={editingProjecto_Type.descripcion_tipo_proyecto || ''}
               onChange={handleNombreChange}
             />
           </div>
@@ -142,7 +142,7 @@ export default function Project_Type() {
         </div>
         <div className='container-fluid mt-4 d-flex justify-content-center'>
           <div className='col-4 d-flex justify-content-center'>
-            <Buttons title='Guardar' color='white' onClick={createConferences} />
+            <Buttons title='Guardar' color='white' onClick={createProject_Type} />
           </div>
         </div>
       </div>
