@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import Title from '../../../../components/Title'
 import InputField from '../../../../components/InputField'
 import Buttons from '../../../../components/Buttons'
-import Grid_Facultades from "../../../../Pages/Admin/Pages-Admin/Falcuties/Grid_Facultades";
+import Grid_Facultades from "../Event_Type/Grid_Event_Type";
 
 
 export default function Event_Type() {
@@ -81,7 +81,7 @@ export default function Event_Type() {
 
   //FUNCION PARA ELIMINAR UNA SEDE CON EL ID
   const handleDelete = (id) => {
-    // Hacer una solicitud DELETE al servidor para eliminar la sede
+    // Hacer una solicitud DELETE al servidor para eliminar el tipo de evento
     Axios.delete(`http://localhost:3000/deleteEvent_Type/${id}`)
       .then((response) => {
         alert("Tipo de evento eliminado satisfactoriamente!");

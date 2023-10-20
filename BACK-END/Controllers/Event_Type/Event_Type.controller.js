@@ -52,7 +52,7 @@ const getOnlyEvent_Type = (req, res) => {
 }
 
 //CONSULTAS PARA PODER ELIMINAR LA facultad
-const DeleteEvent_Type = (req, res) => {
+const deleteEvent_Type = (req, res) => {
     const idTipoEvento = req.params.id;
     conexion.query(
         'DELETE FROM tb_ftipos_eventos WHERE id_tipo_evento = ?',
@@ -92,5 +92,5 @@ const updateEvent_Type = (req, res) => {
     );
 };
 
-module.exports = { createEvent_Type, getEvent_Type, DeleteEvent_Type, updateEvent_Type, getOnlyEvent_Type };
+module.exports = { createEvent_Type, getEvent_Type, deleteEvent_Type, updateEvent_Type, getOnlyEvent_Type };
 

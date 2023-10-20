@@ -9,6 +9,8 @@ const { createProject_Role, getProject_Role, deleteProject_Role, updateProject_R
 const {getProyect_Type, createProject_Type,getOnlyProtect_Type,DeleteProyect_Type,updateProyect_Type} = require('./Controllers/Project_Type/Project_Type.controller.js')
 const {createFaculties, getFaculties,getOnlyFaculties,DeleteFaculties,updateFaculties} = require('./Controllers/Faculties/Faculties-controllers.js')
 const { createDocument_Type, getDocument_Type,getOnlyDocument_Type,deleteDocument_Type,updateDocument_Type} = require('./Controllers/Document_Type/Document_Type_Controllers.js')
+const { createEvent_Type, getEvent_Type,getOnlyEvent_Type,deleteEvent_Type,updateEvent_Type} = require('./Controllers/Event_Type/Event_Type.controller')
+
 
 
 
@@ -94,6 +96,18 @@ app.get('/getOnlyDocument_Type/:descripcion_Tipo', getOnlyDocument_Type)
 app.delete('/deleteDocument_Type/:id', deleteDocument_Type);
 //METODO PARA EDITAR TIPO DOCUMENTO
 app.put('/updateDocument_Type/:id', updateDocument_Type);
+
+//-----------------------------------------------------
+//METODO PARA CREAR TIPO EVENTO
+app.post('/createEvent_Type', createEvent_Type);
+//METODO PARA MOSTRAR TIPO EVENTO
+app.get('/getEvent_Type', getEvent_Type);
+//METODO PARA MOSTRAR UN TIPO EVENTO
+app.get('/getOnlyEvent_Type/:descripcion_Tipo', getOnlyEvent_Type)
+//METODO PARA ELIMINAR TIPO EVENTO
+app.delete('/deleteEvent_Type/:id', deleteEvent_Type);
+//METODO PARA EDITAR TIPO EVENTO
+app.put('/updateEvent_Type/:id', updateEvent_Type);
 
 
 
