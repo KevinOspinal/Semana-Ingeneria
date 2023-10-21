@@ -4,8 +4,7 @@ import Modal from 'react-modal'
 import Title from '../../../../components/Title'
 import InputField from '../../../../components/InputField'
 import Buttons from '../../../../components/Buttons'
-import Grid_Facultades from "../Event_Type/Grid_Event_Type";
-
+import Grid_Event_Type from "../../../../Pages/Admin/Pages-Admin/Event_Type/Grid_Event_Type";
 
 export default function Event_Type() {
 
@@ -13,7 +12,7 @@ export default function Event_Type() {
   const [Event_TypeList, setEvent_TypeList] = useState([])
 
 
-  const handleNombreChange = (e) => {
+  const handleDescripcionChange = (e) => {
     const updatedEditingEvent_Type = { ...editingEvent_Type, descripcion: e.target.value };
     setEditingEvent_Type(updatedEditingEvent_Type);
   };
@@ -36,9 +35,9 @@ export default function Event_Type() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  // Función para actualizar una facultad
+  // Función para actualizar un tipo de evento
   const updateEvent_Type = () => {
-    Axios.put(`http://localhost:3000/updateEvent_Type/${editingEvent_Typed.id_tipo_evento}`, {
+    Axios.put(`http://localhost:3000/updateEvent_Type/${editingEvent_Type.id_tipo_evento}`, {
       descripcion: editingEvent_Type.descripcion,
     })
       .then(() => {
@@ -61,7 +60,7 @@ export default function Event_Type() {
     Axios.post('http://localhost:3000/createEvent_Type', {
       descripcion: descripcion,
     }).then((err,responde) => {
-      alert('FTipo de evento registrado.')
+      alert('Tipo de evento registrado.')
       getEvent_Type();
     }).catch((error) => {
       console.error(error);
@@ -105,34 +104,51 @@ export default function Event_Type() {
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
-        <form method="POST" action="./Headquarters">
-          <div className="mb-5 d-flex justify-content-center">
-            <Title title="TIPO DE EVENTO" />
+        <div className="mb-5 d-flex justify-content-center">
+          <Title title="Tipo de evento" />
+        </div>
+        <div className='row'>
+          <div className='col-10'>
+            <InputField label='nombre' type='text' id='nombre' placeholder='Nombre de la facultad' onChange={(e) => setdescripcion(e.target.value)}/>
           </div>
-          <div className="row">
-            <div className="col-10">
-              <InputField
-                label="Tipo de evento"
-                type="text"
-                id="Tipo de evento"
-                placeholder=""
-              />
-            </div>
-            <div className="col-2">
-              <Buttons title="Consultar" color="white" />
+          <div className='col-2'>
+            <Buttons title='Consultar' color='white'   onClick={() => (descripcion.length === 0 ? getEvent_Type() : getOnlyEvent_Type(descripcion))}/>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-12'>
+            <Grid_Event_Type List={Event_TypeList} handleDelete={handleDelete} handleEdit={openModal} />
+          </div>
+        </div>
+        <Modal
+          isOpen={isModalOpen}
+          onRequestClose={closeModal}
+          contentLabel='Editar descripcion'
+        >
+          <h2>Editar tipo evento</h2>
+          <div className='col-10'>
+            <InputField
+              label='Nombre'
+              type='text'
+              id='Nombre-Descripcion-edit'
+              placeholder='Nombre del tipo evento'
+              value={editingEvent_Type.descripcion|| ''}
+              onChange={handleDescripcionChange}
+            />
+          </div>
+          {/* Agregar campos para otros atributos (dirección, teléfono, etc.) */}
+          <div className='container-fluid mt-4 d-flex justify-content-center'>
+            <div className='col-4 d-flex justify-content-center'>
+              <Buttons title='Guardar Cambios' color='white' onClick={updateEvent_Type} />
             </div>
           </div>
-          <div className="row">
-            <div className="col-12">
-              //grid
-            </div>
+          <button onClick={closeModal}>Cerrar</button>
+        </Modal>
+        <div className='container-fluid mt-4 d-flex justify-content-center'>
+          <div className='col-4 d-flex justify-content-center'>
+            <Buttons title='Guardar' color='white' onClick={createEvent_Type} />
           </div>
-          <div className="container-fluid mt-4 d-flex justify-content-center">
-            <div className="col-4 d-flex justify-content-center">
-              <Buttons title="Guardar" color="white" />
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );

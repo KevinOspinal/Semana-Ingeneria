@@ -18,7 +18,7 @@ const createEvent_Type = (req, res) => {
     )
 }
 
-//CONSULTAS PARA PODER MOSTRAR LAS FACULTADES
+//CONSULTAS PARA PODER MOSTRAR LOS TIPOS DE EVENTOS
 const getEvent_Type = (req, res) => {
     conexion.query('SELECT * FROM tb_tipos_eventos',
         (err, result) => {
@@ -55,7 +55,7 @@ const getOnlyEvent_Type = (req, res) => {
 const deleteEvent_Type = (req, res) => {
     const idTipoEvento = req.params.id;
     conexion.query(
-        'DELETE FROM tb_ftipos_eventos WHERE id_tipo_evento = ?',
+        'DELETE FROM tb_tipos_eventos WHERE id_tipo_evento = ?',
         [idTipoEvento],
         (err, result) => {
             if (err) {
@@ -78,7 +78,7 @@ const updateEvent_Type = (req, res) => {
 
     // Realiza la actualización en la base de datos usando el ID y los nuevos datos
     conexion.query(
-        'UPDATE tb_tipos_eventos = ? WHERE id_tipo_evento = ?',
+        'UPDATE tb_tipos_eventos SET descripcion = ? WHERE id_tipo_evento = ?',
         [descripcion, idTipoEvento],
         (err, result) => {
             if (err) {
