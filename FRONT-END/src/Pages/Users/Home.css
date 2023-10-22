@@ -1,7 +1,18 @@
-
 section{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.section-otrosEventos{
+  min-height:260px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.line {
+  border-bottom: 0.5px solid #c1b9b9; /* Establece un borde inferior de 1 píxel sólido en negro */
+  height: 1em; /* Ajusta la altura de la línea para que coincida con la altura del texto */
+  margin: 0; /* Elimina cualquier margen */
 }
