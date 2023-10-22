@@ -30,7 +30,6 @@ const getProject_Type = (req,res)=>{
 
 const getOnlyProject_Type = (req, res) => {
     const descripcion = req.params.descripcion;
-    console.log(NombreTipoProyecto)
     conexion.query('SELECT * FROM tb_tipos_proyectos WHERE descripcion_tipo_proyecto = ?',[descripcion],
         (err, result) => {
             if (err) {

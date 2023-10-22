@@ -83,13 +83,34 @@ app.delete('/deleteProject_Type/:id', deleteProject_Type);
 //METODO PARA EDITAR Project_Type
 app.put('/updateProject_Type/:id', updateProject_Type);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //-----------------------------------------------------
 //METODO PARA CREAR TIPO DOCUMENTO
 app.post('/createDocument_Type', createDocument_Type);
 //METODO PARA MOSTRAR TIPO DOCUMENTO
 app.get('/getDocument_Type', getDocument_Type);
 //METODO PARA MOSTRAR UN TIPO DOCUMENTO
-app.get('/getOnlyDocument_Type/:descripcion_Tipo', getOnlyDocument_Type)
+app.get('/getOnlyDocument_Type/:descripcion', getOnlyDocument_Type)
 //METODO PARA ELIMINAR TIPO DOCUMENTO
 app.delete('/deleteDocument_Type/:id', deleteDocument_Type);
 //METODO PARA EDITAR TIPO DOCUMENTO
