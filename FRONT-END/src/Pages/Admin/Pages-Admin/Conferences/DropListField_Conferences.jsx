@@ -10,14 +10,14 @@ export default function DropListField_Conferences({
       >
         Sedes
       </label>
-      <div className="col-7 mx-auto rounded border-black">
+      <div className="col-7 mx-auto">
         <select
-          className="form-select mb-5 list"
+          className="form-select mb-auto list border-black"
           id="lista1"
           value={selectSedes}
           onChange={handleChange}
         >
-          <option value="" disabled>
+          <option value="">
             Seleccionar sede
           </option>
           {options.map((option) => (

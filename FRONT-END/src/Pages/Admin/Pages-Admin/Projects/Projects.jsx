@@ -59,13 +59,8 @@ export default function Proyects() {
 
   //FUNCION PARA ACTUALIZAR PROYECTOS
   const updateProjects = () => {
-    console.log('id:', editingProjects.id_proyecto);
-    console.log('Nombre:', editingProjects.nombre);
-    console.log('Descripcion:', editingProjects.descripcion_proyecto);
-    console.log('Tipo Proyecto:', editingProjects.id_tipo_proyecto);
-
     Axios.put(`http://localhost:3000/updateProjects/${editingProjects.id_proyecto}`, {
-      nombre: editingProjects.nombre,
+      nombre: editingProjects.nombre_proyecto,
       descripcion: editingProjects.descripcion_proyecto,
       tipoProyecto: editingProjects.id_tipo_proyecto
     }).then(() => {
@@ -106,7 +101,7 @@ export default function Proyects() {
   const handleNombreChange = (e) => {
     const updatedEditingProjecto = {
       ...editingProjects,
-      nombre: e.target.value,
+      nombre_proyecto: e.target.value,
     };
     setEditingProjects(updatedEditingProjecto);
   };
@@ -189,7 +184,7 @@ export default function Proyects() {
                 type="text"
                 id="Tipo-Nombre-Proyecto"
                 placeholder="Nombre del proyecto"
-                value={editingProjects.nombre || ""}
+                value={editingProjects.nombre_proyecto || ""}
                 onChange={handleNombreChange}
               />
             </div>
