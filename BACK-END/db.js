@@ -5,6 +5,8 @@ const conexion = mysql.createConnection({
     host:'localhost',
     user:'root',
     database:'seming_db2',
+    password:''
+
 })
 
 module.exports = conexion;
