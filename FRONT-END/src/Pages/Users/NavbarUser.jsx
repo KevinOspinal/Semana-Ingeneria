@@ -1,6 +1,6 @@
 import React from 'react'
+import './NavbarUser.css'
 import Logo from '../../assets/img/Logo_Unicatólica.png'
-
 export default function NavbarUser() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
@@ -14,13 +14,13 @@ export default function NavbarUser() {
                     </a>
                     <ul className="navbar-nav mx-auto">
                         <li className="nav-item">
-                            <a className="nav-link mb-2" aria-current="page">CONFERENCIAS</a>
+                            <a className="nav-link mb-2" href='#confenrencias' aria-current="page">CONFERENCIAS</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link mb-2" aria-current="page">EVENTOS</a>
+                            <a className="nav-link mb-2" href='#eventos' aria-current="page">EVENTOS</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link mb-2" aria-current="page">PROYECTOS</a>
+                            <a className="nav-link mb-2" href='#proyectos' aria-current="page">PROYECTOS</a>
                         </li>
                     </ul>
                     <ul className="navbar-nav ml-auto">
