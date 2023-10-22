@@ -5,7 +5,7 @@ const createProjects = (req, res) => {
   const descripcion = req.body.descripcion
   const tipoProyecto = req.body.tipoProyecto
 
-  conexion.query('INSERT INTO tb_proyectos (nombre, descripcion_proyecto, id_tipo_proyecto) VALUES (?,?,?)', [nombre, descripcion, tipoProyecto],
+  conexion.query('INSERT INTO tb_proyectos (nombre_proyecto, descripcion_proyecto, id_tipo_proyecto) VALUES (?,?,?)', [nombre, descripcion, tipoProyecto],
     (err, result) => {
       if (err) {
         console.log(err)
@@ -19,7 +19,7 @@ const createProjects = (req, res) => {
 }
 
 const getProjects = (req, res) => {
-  conexion.query('SELECT p.id_proyecto ,p.nombre, p.descripcion_proyecto , t.descripcion_tipo_proyecto FROM  tb_tipos_proyectos t, tb_proyectos p WHERE  t.id_tipo_proyecto = p.id_tipo_proyecto',
+  conexion.query('SELECT * FROM  tb_tipos_proyectos t, tb_proyectos p WHERE  t.id_tipo_proyecto = p.id_tipo_proyecto',
     (err, result) => {
       if (err) {
         console.log(err)
@@ -35,7 +35,7 @@ const getProjects = (req, res) => {
 const getOnlyProjects = (req, res) => {
   const nombre = req.params.nombre;
   conexion.query(
-    'SELECT p.nombre, p.descripcion_proyecto , t.descripcion_tipo_proyecto FROM  tb_tipos_proyectos t, tb_proyectos p WHERE  t.id_tipo_proyecto = p.id_tipo_proyecto AND p.nombre = ?',
+    'SELECT * FROM  tb_tipos_proyectos t, tb_proyectos p WHERE  t.id_tipo_proyecto = p.id_tipo_proyecto AND p.nombre_proyecto = ?',
     [nombre],
     (err, result) => {
       if (err) {
@@ -52,7 +52,7 @@ const getOnlyProjects = (req, res) => {
 const deleteProjects = (req, res) => {
   const idProyecto = req.params.id;
   conexion.query(
-    'DELETE FROM tb_proyectos WHERE nombre = ?',
+    'DELETE FROM tb_proyectos WHERE id_proyecto = ?',
     [idProyecto],
     (err, result) => {
       if (err) {
@@ -73,7 +73,7 @@ const updateProjects = (req, res) => {
   console.log(nombre, descripcion, tipoProyecto)
 
   conexion.query(
-    'UPDATE tb_proyectos SET nombre = ?, descripcion_proyecto = ?, id_tipo_proyecto = ? WHERE id_proyecto = ?',
+    'UPDATE tb_proyectos SET nombre_proyecto = ?, descripcion_proyecto = ?, id_tipo_proyecto = ? WHERE id_proyecto = ?',
     [nombre, descripcion, tipoProyecto, idProyecto],
     (err, result) => {
       if (err) {

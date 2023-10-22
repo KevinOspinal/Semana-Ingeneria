@@ -17,7 +17,7 @@ export default function User_Type() {
   const handleDescripcionChange = (e) => {
     const updateEditingTipoUsuario = {
       ...editingTipoUsuario,
-      descripcion_tipo: e.target.value,
+      descripcion_tipo_usuario: e.target.value,
     };
     setEditingTipoUsuario(updateEditingTipoUsuario);
   };
@@ -56,7 +56,7 @@ export default function User_Type() {
     Axios.get(`http://localhost:3000/getOnlyUserType/${descripcion}`).then(
       (respond) => {
         setUserTypeList(respond.data);
-        console.log("UserTypeList actualizada:", userTypeList);
+        console.log("UserTypeList actualizada");
       }
     );
   };
@@ -65,7 +65,7 @@ export default function User_Type() {
     Axios.put(
       `http://localhost:3000/updateUserType/${editingTipoUsuario.id_tipo_usuario}`,
       {
-        descripcion: editingTipoUsuario.descripcion_tipo,
+        descripcion: editingTipoUsuario.descripcion_tipo_usuario,
       }
     )
       .then(() => {
@@ -93,7 +93,7 @@ export default function User_Type() {
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
         <div className="mb-5 d-flex justify-content-center">
-          <Title title="TIPO DE USUARIO" />
+          <Title title="TIPOS DE USUARIOS" />
         </div>
           <div className="row">
             <div className="col-10">
@@ -137,7 +137,7 @@ export default function User_Type() {
                   type="text"
                   id="Tipo-Usuario"
                   placeholder="Tipo de usuario"
-                  value={editingTipoUsuario.descripcion_tipo || ""}
+                value={editingTipoUsuario.descripcion_tipo_usuario || ""}
                   onChange={handleDescripcionChange}
                 />
               </div>
