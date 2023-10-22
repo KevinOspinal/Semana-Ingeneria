@@ -17,9 +17,9 @@ export default function Home() {
         </div>
       </div>
       {/*'//EL TITULO INFORMATIVO DE LA SEMANA DE INGENERIA'*/}
-      <div className='container  mb-4 p-0 section-otrosEventos'>
+      <div id='confenrencias' className='container  mb-4 p-0 section-otrosEventos'>
         <div className='row'>
-          <TitleUsers TitleUsers='SEMANA DE LA INGENERIA' />
+          <TitleUsers TitleUsers='SEMANA DE LA INGENERIA' subtitle='CONFERENCICAS' />
           <div className='col-12 d-flex justify-content-center'>
             Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.
           </div>
@@ -30,13 +30,13 @@ export default function Home() {
         <Cards />
       </section>
       <div className='container  mb-4 p-0'>
-        <div className='row'>
+        <div id='eventos' className='row '>
           <TitleUsers TitleUsers='EVENTOS' />
         </div>
       </div>
       {/*ESTAS SON LAS TARJETAS DE LOS EVENTOS'*/}
-      <section className='container'>
-        <div className='row g-4 d-flex justify-content-center'>
+      <section  className='container'>
+        <div  className='row g-4 d-flex justify-content-center'>
           <div className='col-sm-7 col-md-9 col-lg-7'>
             <Cards2 />
           </div>
@@ -49,11 +49,25 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <div className='container  mb-4 p-0'>
+      <div id='proyectos' className='container  mb-4 p-0'>
         <div className='row'>
           <TitleUsers TitleUsers='PROYECTOS' />
         </div>
       </div>
+      {/*ESTAS SON LAS TARJETAS DE LOS EVENTOS'*/}
+      <section className='container'>
+        <div className='row g-4 d-flex justify-content-center'>
+          <div className='col-sm-5 col-md-3 col-lg-5 d-flex align-items-center'>
+            <p>
+              <h1 className='d-flex justify-content-center '>INFORMACION</h1>
+              <br></br>
+              Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.
+            </p>          </div>
+          <div className='col-sm-7 col-md-9 col-lg-7'>
+            <Cards2 />
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

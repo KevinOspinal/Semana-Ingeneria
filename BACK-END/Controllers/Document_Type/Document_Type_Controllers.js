@@ -31,8 +31,7 @@ const getDocument_Type = (req, res) => {
 
 const getOnlyDocument_Type = (req, res) => {
     const descripcion_Tipo = req.params.descripcion; // Cambiado "nombre" a "descripcion"
-
-    conexion.query('SELECT * FROM tb_tipos_documentos WHERE descripcion = ?', [descripcionTipo],
+    conexion.query('SELECT * FROM tb_tipos_documentos WHERE descripcion = ?', [descripcion_Tipo],
         (error, result) => {
             if (error) {
                 console.error(err);
