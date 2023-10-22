@@ -5,7 +5,7 @@ const conexion = require('../../db.js')
 const createEvent_Type = (req, res) => {
     const descripcion = req.body.descripcion
 
-    conexion.query('INSERT INTO tb_tipos_eventos (descripcion) VALUES (?)', [descripcion],
+    conexion.query('INSERT INTO tb_tipos_eventos (descripcion_otro_evento) VALUES (?)', [descripcion],
         (err, result) => {
             if (err) {
                 console.log(err)
@@ -37,7 +37,7 @@ const getEvent_Type = (req, res) => {
 const getOnlyEvent_Type = (req, res) => {
     const DescripcionEvent_Type = req.params.descripcion;
     conexion.query(
-        'SELECT * FROM tb_tipos_eventos WHERE descripcion = ?',
+        'SELECT * FROM tb_tipos_eventos WHERE descripcion_otro_evento = ?',
         [DescripcionEvent_Type],
         (err, result) => {
             if (err) {
@@ -78,7 +78,7 @@ const updateEvent_Type = (req, res) => {
 
     // Realiza la actualización en la base de datos usando el ID y los nuevos datos
     conexion.query(
-        'UPDATE tb_tipos_eventos SET descripcion = ? WHERE id_tipo_evento = ?',
+        'UPDATE tb_tipos_eventos SET descripcion_otro_evento = ? WHERE id_tipo_evento = ?',
         [descripcion, idTipoEvento],
         (err, result) => {
             if (err) {
