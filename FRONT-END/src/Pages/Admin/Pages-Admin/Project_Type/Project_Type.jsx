@@ -78,14 +78,15 @@ export default function Project_Type() {
   const [editingProjecto_Type, setEditingProjecto_Type] = useState({});
 
   const handleNombreChange = (e) => {
-    const updatedEditingProjecto_Type = { ...editingProjecto_Type, descripcion_tipo_proyecto: e.target.value };
+    const updatedEditingProjecto_Type = { 
+      ...editingProjecto_Type, descripcion: e.target.value };
     setEditingProjecto_Type(updatedEditingProjecto_Type);
   };
 
 
   const updateProject_Type = () => {
     Axios.put(`http://localhost:3000/updateProject_Type/${editingProjecto_Type.id_tipo_proyecto}`, {
-      descripcion: editingProjecto_Type.descripcion_tipo_proyecto,
+      descripcion: editingProjecto_Type.descripcion,
     })
       .then(() => {
         alert('Tipo de proyecto actualizado.');
@@ -96,6 +97,8 @@ export default function Project_Type() {
         console.error(error);
       });
   };
+
+  console.log(editingProjecto_Type)
 
   return (
     <div className='container vh-100 d-flex justify-content-center align-items-center'>
@@ -124,10 +127,10 @@ export default function Project_Type() {
           <div className='col-10'>
             <InputField
               label='Nombre'
-              type='text'
-              id='Nombre-Descripcion-edit'
+              type="text"
+              id='Nombre-Descripcion'
               placeholder='Nombre de la sede'
-              value={editingProjecto_Type.descripcion_tipo_proyecto || ''}
+              value={editingProjecto_Type.descripcion || ''}
               onChange={handleNombreChange}
             />
           </div>

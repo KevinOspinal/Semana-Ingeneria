@@ -10,9 +10,9 @@ export default function DropListField_Projects({
       >
         Tipo Proyecto
       </label>
-      <div className="col-7 mx-auto rounded border-black">
+      <div className="col-7 mx-auto">
         <select
-          className="form-select mb-5 list"
+          className="form-select mb-auto list border-black"
           id="lista1"
           value={selectTipoProyecto}
           onChange={handleChange}

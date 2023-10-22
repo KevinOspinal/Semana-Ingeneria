@@ -18,7 +18,7 @@ export default function Grid_User_Type({ List, handleDelete, handleEdit }) {
             {List
               ? List.map((tipo_usuario) => (
                   <tr key={tipo_usuario.id_tipo_usuario}>
-                    <td>{tipo_usuario.descripcion_tipo}</td>
+                  <td>{tipo_usuario.descripcion_tipo_usuario}</td>
                     <td>
                       <button
                         className="btn btn-danger btn-sm mr-2"

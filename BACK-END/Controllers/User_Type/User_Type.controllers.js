@@ -3,7 +3,7 @@ const conexion = require('../../db')
 const createUserType = (req, res) => {
   const descripcion = req.body.descripcion
 
-  conexion.query('INSERT INTO tb_tipos_usuarios (descripcion_tipo) VALUES (?)', [descripcion],
+  conexion.query('INSERT INTO tb_tipos_usuarios (descripcion_tipo_usuario) VALUES (?)', [descripcion],
     (err, result) => {
       if (err) {
         console.log(err)
@@ -33,7 +33,7 @@ const getUserType = (req, res) => {
 const getOnlyUserType = (req, res) => {
   const descripcionTipo = req.params.descripcion;
   conexion.query(
-    'SELECT * FROM tb_tipos_usuarios WHERE descripcion_tipo = ?',
+    'SELECT * FROM tb_tipos_usuarios WHERE descripcion_tipo_usuario = ?',
     [descripcionTipo],
     (err, result) => {
       if (err) {
@@ -71,7 +71,7 @@ const updateUserType = (req, res) => {
 
   // Realiza la actualización en la base de datos usando el ID y los nuevos datos
   conexion.query(
-    'UPDATE tb_tipos_usuarios SET descripcion_tipo = ? WHERE id_tipo_usuario = ?',
+    'UPDATE tb_tipos_usuarios SET descripcion_tipo_usuario = ? WHERE id_tipo_usuario = ?',
     [descripcion, idTipoUsuario],
     (err, result) => {
       if (err) {

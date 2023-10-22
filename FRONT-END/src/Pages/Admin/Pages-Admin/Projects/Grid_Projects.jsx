@@ -20,13 +20,13 @@ export default function Grid_Projects({ List, handleDelete, handleEdit }) {
             {List
               ? List.map((proyectos) => (
                 <tr key={proyectos.id_proyecto}>
-                  <td>{proyectos.nombre}</td>
+                  <td>{proyectos.nombre_proyecto}</td>
                   <td>{proyectos.descripcion_proyecto}</td>
                   <td>{proyectos.descripcion_tipo_proyecto}</td>
                   <td>
                     <button
                       className="btn btn-danger btn-sm mr-2"
-                      onClick={() => handleDelete(proyectos.nombre)}
+                      onClick={() => handleDelete(proyectos.id_proyecto)}
                     >
                       Eliminar
                     </button>

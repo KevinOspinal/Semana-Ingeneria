@@ -31,10 +31,7 @@ const getDocument_Type = (req, res) => {
 };
 
 const getOnlyDocument_Type = (req, res) => {
-    const descripcion_Tipo = req.params.descripcion; 
-    conexion.query(
-        "SELECT * FROM tb_tipos_documentos WHERE descripcion_tipo_documento = ?",
-        [descripcion_Tipo],
+
         (error, result) => {
             if (error) {
                 console.error(error);

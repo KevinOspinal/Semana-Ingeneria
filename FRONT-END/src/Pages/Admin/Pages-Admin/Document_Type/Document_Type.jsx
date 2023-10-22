@@ -13,7 +13,7 @@ export default function Document_Type() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [descripcion, setDescripcion] = useState("");
 
-  
+
   const handleDescripcionChange = (e) => {
     const updatedEditingDocumentType = {
       ...editingDocumentType,
@@ -22,7 +22,7 @@ export default function Document_Type() {
     setEditingDocumentType(updatedEditingDocumentType);
   };
 
-  
+
 
   const openModal = (descripcion) => {
     setEditingDocumentType(descripcion);
@@ -93,6 +93,7 @@ export default function Document_Type() {
 
 
 
+
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
@@ -133,7 +134,7 @@ export default function Document_Type() {
         <Modal
           isOpen={isModalOpen}
           onRequestClose={closeModal}
-          contentLabel="Editar  Tipo Documento"
+          contentLabel="Editar Tipo Documento"
         >
           <h2>Editar Tipo de Documento</h2>
           <div className="col-10">
@@ -142,7 +143,7 @@ export default function Document_Type() {
               type="text"
               id="Tipo-Documento"
               placeholder="Tipo de Documento"
-              value={editingDocumentType.descripcion_tipo_documento || ""}
+
               onChange={handleDescripcionChange}
             />
           </div>

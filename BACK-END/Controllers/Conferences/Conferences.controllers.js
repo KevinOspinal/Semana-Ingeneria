@@ -2,13 +2,14 @@ const conexion = require('../../db')
 
 const createConferences = (req, res) => {
   const nombre = req.body.nombre
+  const descripcion = req.body.descripcion
   const sede = req.body.sede
   const cupo = req.body.cupo
   const fecha = req.body.fecha
   const hora = req.body.hora
   const estado = req.body.estado
 
-  conexion.query('INSERT INTO tb_conferencias (descipcion, id_sede, cupo, fecha, hora, estado_conferencia) VALUES (?,?,?,?,?,?)', [nombre, sede, cupo, fecha, hora, estado],
+  conexion.query('INSERT INTO tb_conferencias (nombre_conferencia, descripcion_conferencia, id_sede, cupo, fecha_conferencia, hora_conferencia, estado_conferencia) VALUES (?,?,?,?,?,?,?)', [nombre, descripcion, sede, cupo, fecha, hora, estado],
     (err, result) => {
       if (err) {
         console.log(err)
@@ -22,7 +23,7 @@ const createConferences = (req, res) => {
 }
 
 const getConferences = (req, res) => {
-  conexion.query('SELECT c.id_conferencia ,c.descipcion, s.nombre_sede, c.cupo, c.fecha , c.hora, c.estado_conferencia FROM  tb_sedes s, tb_conferencias c WHERE  s.id_sede = c.id_sede',
+  conexion.query('SELECT * FROM  tb_sedes s, tb_conferencias c WHERE  s.id_sede = c.id_sede',
     (err, result) => {
       if (err) {
         console.log(err)
@@ -38,7 +39,7 @@ const getConferences = (req, res) => {
 const getOnlyConferences = (req, res) => {
   const nombre = req.params.nombre;
   conexion.query(
-    'SELECT  c.descipcion, s.nombre_sede, c.cupo, c.fecha, c.hora FROM  tb_sedes s, tb_conferencias c WHERE  s.id_sede = c.id_sede AND descipcion = ?',
+    'SELECT * FROM  tb_sedes s, tb_conferencias c WHERE  s.id_sede = c.id_sede AND nombre_conferencia = ?',
     [nombre],
     (err, result) => {
       if (err) {
@@ -53,10 +54,10 @@ const getOnlyConferences = (req, res) => {
 }
 
 const deleteConferences = (req, res) => {
-  const nombreConferences = req.params.id;
+  const idConferencia = req.params.id;
   conexion.query(
-    'DELETE FROM tb_conferencias WHERE descipcion = ?',
-    [nombreConferences],
+    'DELETE FROM tb_conferencias WHERE id_conferencia = ?',
+    [idConferencia],
     (err, result) => {
       if (err) {
         console.error(err);
@@ -70,14 +71,14 @@ const deleteConferences = (req, res) => {
 }
 
 const updateConferences = (req, res) => {
-  const id_conferencia = req.params.id;
+  const idConferencia = req.params.id;
 
-  const { nombre, sede, cupo, fecha, hora, estado } = req.body;
+  const { nombre, descripcion, sede, cupo, fecha, hora, estado } = req.body;
   console.log(nombre, sede, cupo, fecha, hora, estado)
 
   conexion.query(
-    'UPDATE tb_conferencias SET descipcion = ? , id_sede = ?, cupo = ? , fecha = ? , hora = ? , estado_conferencia = ? WHERE id_conferencia = ?',
-    [nombre, sede, cupo, fecha, hora, estado, id_conferencia],
+    'UPDATE tb_conferencias SET nombre_conferencia = ? , descripcion_conferencia = ?,  id_sede = ?, cupo = ? , fecha_conferencia = ? , hora_conferencia = ? , estado_conferencia = ? WHERE id_conferencia = ?',
+    [nombre, descripcion, sede, cupo, fecha, hora, estado, idConferencia],
     (err, result) => {
       if (err) {
         console.error(err);
