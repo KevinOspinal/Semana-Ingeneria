@@ -118,7 +118,7 @@ export default function Project_Role() {
             <InputField label='descripcion' type='text' id='descripcion' placeholder='Nombre de la Descipcion' onChange={(e) => setdescripcion(e.target.value)}/>
           </div>
           <div className='col-2'>
-            <Buttons title='Consultar' color='white'   onClick={() => (descripcion.length === 0 ? getProject_Role() : getOnlyProject_Role(descripcion))}/>
+            <Buttons title='Consultar' color='white' colorbutton='black'   onClick={() => (descripcion.length === 0 ? getProject_Role() : getOnlyProject_Role(descripcion))}/>
           </div>
         </div>
         <div className='row'>
@@ -152,7 +152,7 @@ export default function Project_Role() {
         </Modal>
         <div className='container-fluid mt-4 d-flex justify-content-center'>
           <div className='col-4 d-flex justify-content-center'>
-            <Buttons title='Guardar' color='white' onClick={createProject_Role} />
+            <Buttons title='Guardar' color='white' colorbutton='black' onClick={createProject_Role} />
           </div>
         </div>
       </div>

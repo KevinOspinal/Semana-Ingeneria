@@ -114,6 +114,7 @@ export default function Document_Type() {
             <Buttons
               title="Consultar"
               color="white"
+              colorbutton='black'
               onClick={() =>
                 descripcion.length === 0
                   ? getDocumentType()
@@ -164,6 +165,7 @@ export default function Document_Type() {
               title="Guardar"
               color="white"
               onClick={createDocumentType}
+              colorbutton='black'
             />
           </div>
         </div>

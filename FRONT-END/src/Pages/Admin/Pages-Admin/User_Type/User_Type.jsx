@@ -109,6 +109,7 @@ export default function User_Type() {
               <Buttons
                 title="Consultar"
                 color="white"
+                colorbutton='black'
                 onClick={() =>
                   descripcion.length === 0
                     ? getUserType()
@@ -158,6 +159,7 @@ export default function User_Type() {
                   title="Guardar"
                   color="white"
                   onClick={createUserType}
+                  colorbutton='black'
                 />
               </div>
             </div>

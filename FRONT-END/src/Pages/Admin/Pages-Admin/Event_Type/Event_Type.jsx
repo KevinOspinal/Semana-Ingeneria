@@ -111,9 +111,18 @@ export default function Event_Type() {
           <div className='col-10'>
             <InputField label='nombre' type='text' id='nombre' placeholder='Nombre de la facultad' onChange={(e) => setdescripcion(e.target.value)}/>
           </div>
-          <div className='col-2'>
-            <Buttons title='Consultar' color='white'   onClick={() => (descripcion.length === 0 ? getEvent_Type() : getOnlyEvent_Type(descripcion))}/>
-          </div>
+          <div className="row">
+            <div className="col-10">
+              <InputField
+                label="Tipo de evento"
+                type="text"
+                id="Tipo de evento"
+                placeholder=""
+              />
+            </div>
+            <div className='col-2'>
+              <Buttons title='Consultar' color='white'   onClick={() => (descripcion.length === 0 ? getEvent_Type() : getOnlyEvent_Type(descripcion))}/>
+            </div>
         </div>
         <div className='row'>
           <div className='col-12'>

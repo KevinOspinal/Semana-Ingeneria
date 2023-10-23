@@ -1,9 +1,9 @@
 /* En tu archivo de hojas de estilo CSS (por ejemplo, Home.css) */
 .navbar {
-      position: fixed !important;
-      width: 100%;
-      top: 0;
-      background-color: rgb(255, 255, 255);
-      z-index: 1000; /* Asegura que esté por encima de otros elementos */
-  }
-  
+    position: fixed !important;
+    width: 100%;
+    top: 0;
+    background-color: rgb(255, 255, 255);
+    z-index: 1000;
+    /* Asegura que esté por encima de otros elementos */
+}

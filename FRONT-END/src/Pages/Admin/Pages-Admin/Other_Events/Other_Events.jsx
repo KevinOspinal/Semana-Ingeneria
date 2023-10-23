@@ -13,41 +13,41 @@ export default function Other_Events() {
     <div className='container vh-100 d-flex justify-content-center align-items-center'>
       <div className='row'>
         <div className='mb-5 d-flex justify-content-center'>
-            <Title title='OTROS EVENTOS' />
+          <Title title='OTROS EVENTOS' />
+        </div>
+        <div className='row'>
+          <div className='col-10'>
+            <DropListField label='Sede' selectOption='seleccione una sede' />
           </div>
-            <div className='row'>
-                  <div className='col-10'>
-                  <DropListField label='Sede' selectOption = 'seleccione una sede'/>
-                  </div>
-                  <div className='col-2'>
-                  <Buttons title='Listar Eventos' color='white'   onClick={() => (nombre.length === 0 ? getHeadquarters() : getOnlyHeadquerters(nombre))}/>
-                  </div>
-                  <div className='col-10'>
-                  <DropListField label='Tipo de Evento' selectOption='seleccione un tipo de evento'/>
-                  </div>
-                  <div className='col-10'>
-                    <InputField label='Cupo' type='text' id='cupo' placeholder='cupo disponible' />
-                  </div>
-                  <div className='col-10'>
-                    <InputField label='Fecha' type='date' id='fecha' />
-                  </div>
-                  <div className='col-10'>
-                    <InputField label='Hora' type='time' id='hora' />
-                  </div>
-                  <div className='col-10'>
-                    <InputField label='Estado' type='text' id='estado' placeholder='Estado del evento' />
-                  </div>
-                </div>
-                <div className='row'>
-                  <div className='col-12'>
+          <div className='col-2'>
+            <Buttons title='Listar Eventos' color='white' colorbutton='black' onClick={() => (nombre.length === 0 ? getHeadquarters() : getOnlyHeadquerters(nombre))} />
+          </div>
+          <div className='col-10'>
+            <DropListField label='Tipo de Evento' selectOption='seleccione un tipo de evento' />
+          </div>
+          <div className='col-10'>
+            <InputField label='Cupo' type='text' id='cupo' placeholder='cupo disponible' />
+          </div>
+          <div className='col-10'>
+            <InputField label='Fecha' type='date' id='fecha' />
+          </div>
+          <div className='col-10'>
+            <InputField label='Hora' type='time' id='hora' />
+          </div>
+          <div className='col-10'>
+            <InputField label='Estado' type='text' id='estado' placeholder='Estado del evento' />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-12'>
                   //grid
-                  </div>
-                </div>
-                <div className='container-fluid mt-4 d-flex justify-content-center'>
-                <div className='col-4 d-flex justify-content-center'>
-                  <Buttons title='Guardar' color='white' />
-                </div>
           </div>
+        </div>
+        <div className='container-fluid mt-4 d-flex justify-content-center'>
+          <div className='col-4 d-flex justify-content-center'>
+            <Buttons title='Guardar' colorbutton='black' color='white' />
+          </div>
+        </div>
       </div>
     </div>
   );

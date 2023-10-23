@@ -153,7 +153,7 @@ export default function Proyects() {
             />
           </div>
           <div className="col-2">
-            <Buttons title="Consultar" color="white" onClick={() => (nombre.length === 0 ? getProjects() : getOnlyProjects(nombre))} />
+            <Buttons title="Consultar" colorbutton='black' color="white" onClick={() => (nombre.length === 0 ? getProjects() : getOnlyProjects(nombre))} />
           </div>
           <div className="col-10">
             <InputField
@@ -213,7 +213,7 @@ export default function Proyects() {
           </Modal>
           <div className="container-fluid mt-4 d-flex justify-content-center">
             <div className="col-4 d-flex justify-content-center">
-              <Buttons title="Guardar" color="white" onClick={createProjects} />
+              <Buttons title="Guardar" colorbutton='black' color="white" onClick={createProjects} />
             </div>
           </div>
         </div>
