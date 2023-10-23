@@ -4,8 +4,8 @@ import Home from './Pages/Users/Home'
 
 function App() {
   return (
-    <div>
-      <Admin/>
+    <div className='prueba'>
+      <Home/>
     </div>
   )
 }
