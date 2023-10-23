@@ -160,5 +160,6 @@ export default function Event_Type() {
         </div>
       </div>
     </div>
+  </div>
   );
 }
