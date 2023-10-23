@@ -1,3 +1,6 @@
+body {
+  overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
+}
 section{
   display: flex;
   flex-direction: column;

@@ -1,9 +1,34 @@
 /* En tu archivo de hojas de estilo CSS (por ejemplo, Home.css) */
+
 .navbar {
-    position: fixed !important;
     width: 100%;
     top: 0;
     background-color: rgb(255, 255, 255);
     z-index: 1000;
     /* Asegura que esté por encima de otros elementos */
+}
+
+.navbar:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.custom {
+    max-height: 36rem; /* Ajusta la altura máxima al 80% de la altura de la ventana */
+    overflow-y: auto; /* Agrega una barra de desplazamiento solo si el contenido es demasiado largo */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+.custom::-webkit-scrollbar {
+    width:7px;
+}
+
+.custom::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+.custom::-webkit-scrollbar-track {
+    background: #f1f1f1;
 }

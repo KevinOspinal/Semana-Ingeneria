@@ -110,8 +110,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className='container-fluid d-flex justify-content-center mt-4 mb-5 p-0' style={{ backgroundColor: '#032840' }}>
-        <div className='row'>
+      <footer className='container-fluid d-flex justify-content-center mt-4 mb-5 p-0' style={{ backgroundColor: '#032840' }}>
+        <div className='row'style={{ backgroundColor: '#032840' }}>
           <div className='col-12 d-flex justify-content-center'>
             <img src={logo} alt='logo-unicatolica' style={{ height: '9rem' }} />
           </div>
@@ -130,7 +130,7 @@ export default function Home() {
             HOLA
           </div>
         </div>
-      </div>
+      </footer>
     </div>
   )
 }
