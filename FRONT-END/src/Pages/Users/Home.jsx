@@ -6,18 +6,16 @@ import logo from '../../assets/img/logo-unicatolica-vertical.png'
 import Cards from '../../components/Cards'
 import Cards2 from '../../components/Cards2'
 import TitleUsers from '../../components/TitleUsers'
+
 export default function Home() {
   return (
     <div>
-      {/*'NAVBAR'*/}
       <NavbarUser />
-      {/*'IMAGEN DE LA UNIVERSIDAD'*/}
       <div className='container-fluid mb-5 p-0'>
         <div className='align-items-stretch'>
           <img className='img-fluid w-100' src={Hero_Img} alt='Img del hero principal' />
         </div>
       </div>
-      {/*'//EL TITULO INFORMATIVO DE LA SEMANA DE INGENERIA'*/}
       <div className='container  mb-4 p-0 section-otrosEventos'>
         <div className='row'>
           <TitleUsers TitleUsers='SEMANA DE LA INGENERIA' />
@@ -34,7 +32,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/*'LAS TARJETAS DE LAS CONFERENCIAS'*/}
       <section className='container-fluid'>
         <Cards />
       </section>
@@ -43,7 +40,6 @@ export default function Home() {
           <TitleUsers TitleUsers='EVENTOS' />
         </div>
       </div>
-      {/*ESTAS SON LAS TARJETAS DE LOS EVENTOS'*/}
       <section className='container'>
         <div className='row g-4 d-flex justify-content-center'>
           <div className='col-sm-7 col-md-9 col-lg-7'>
@@ -62,7 +58,6 @@ export default function Home() {
           <TitleUsers TitleUsers='PROYECTOS' />
         </div>
       </div>
-      {/*ESTAS SON LAS TARJETAS DE LOS EVENTOS'*/}
       <section className='container'>
         <div className='row g-4 d-flex justify-content-center'>
           <div className='info-i col-sm-5 col-md-4 col-lg-5 d-flex align-items-center'>
@@ -110,26 +105,17 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <footer className='container-fluid d-flex justify-content-center mt-4 mb-5 p-0' style={{ backgroundColor: '#032840' }}>
-        <div className='row'style={{ backgroundColor: '#032840' }}>
-          <div className='col-12 d-flex justify-content-center'>
-            <img src={logo} alt='logo-unicatolica' style={{ height: '9rem' }} />
-          </div>
-          <div className='col-12 d-flex justify-content-center'>
-            <p className='text-white'>Institución de Educación Superior sujeta a inspección y vigilancia por el Ministerio de Educación Nacional – Resolución No. 944 de 1996 MEN – SNIES 2731</p>
-          </div>
-          <div className='col-12 d-flex flex-column mb-3 text-white'>
-            <div class="p-0 d-flex justify-content-center">
-              <p>Sede Principal Cra. 122 No. 12-459 Pance, Cali – Colombia</p>
-            </div>
-            <div class="p-0 d-flex justify-content-center">
-              <p>Teléfonos: +57 (2) 555 2767 –  +57 (2) 312 0038</p>
-            </div>
-          </div>
-          <div className='col-12 d-flex justify-content-center'>
-            HOLA
-          </div>
-        </div>
+      <footer className="d-flex flex-column align-items-center justify-content-center text-white" style={{background:'#032840'}}>
+        <img className="footer-logo" src={logo} alt="logo img" style={{fontSize:'20px'}} />
+        <p className="footer-text text-center">
+        Institución de Educación Superior sujeta a inspección y vigilancia por el Ministerio de Educación Nacional – Resolución No. 944 de 1996 MEN – SNIES 2731
+        </p>
+        <p className="footer-text text-center">
+         Sede Principal Cra. 122 No. 12-459 Pance, Cali – Colombia
+        </p>
+        <p className="footer-text text-center">
+          Teléfonos: +57 (2) 555 2767 –  +57 (2) 312 0038
+        </p>
       </footer>
     </div>
   )
