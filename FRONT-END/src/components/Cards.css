@@ -3,10 +3,11 @@
   }
 
 .footer-container{
-    background-color: white;
+    background: #f4f4f4;
     position: relative;
     border: 1px solid wheat !important;
     border-radius: 10px;
     bottom: 2rem;
     width: 20rem !important;
 }
+

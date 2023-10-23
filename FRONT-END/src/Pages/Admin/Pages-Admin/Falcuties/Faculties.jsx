@@ -111,7 +111,7 @@ export default function Faculties() {
             <InputField label='nombre' type='text' id='nombre' placeholder='Nombre de la facultad' onChange={(e) => setnombre(e.target.value)}/>
           </div>
           <div className='col-2'>
-            <Buttons title='Consultar' color='white'   onClick={() => (nombre.length === 0 ? getFaculties() : getOnlyFaculties(nombre))}/>
+            <Buttons title='Consultar' color='white' colorbutton='black'   onClick={() => (nombre.length === 0 ? getFaculties() : getOnlyFaculties(nombre))}/>
           </div>
         </div>
         <div className='row'>
@@ -145,7 +145,7 @@ export default function Faculties() {
         </Modal>
         <div className='container-fluid mt-4 d-flex justify-content-center'>
           <div className='col-4 d-flex justify-content-center'>
-            <Buttons title='Guardar' color='white' onClick={createFaculties} />
+            <Buttons title='Guardar' color='white' colorbutton='black' onClick={createFaculties} />
           </div>
         </div>
       </div>

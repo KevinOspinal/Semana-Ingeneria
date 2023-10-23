@@ -119,8 +119,6 @@ export default function Headquarters() {
         console.log('HeadquartersList actualizado:', HeadquartersList);
       })
   }
-
- console.log(editingSede)
   return (
     <div className='container vh-100 d-flex justify-content-center align-items-center'>
       <div className='row'>
@@ -132,7 +130,7 @@ export default function Headquarters() {
             <InputField label='Nombre' type='text' id='Nombre-sede' placeholder='Nombre de la sede' onChange={(e) => setnombre(e.target.value)}/>
           </div>
           <div className='col-2'>
-            <Buttons title='Consultar' color='white'   onClick={() => (nombre.length === 0 ? getHeadquarters() : getOnlyHeadquerters(nombre))}/>
+            <Buttons title='Consultar' colorbutton='black' color='white'   onClick={() => (nombre.length === 0 ? getHeadquarters() : getOnlyHeadquerters(nombre))}/>
           </div>
           <div className='col-10'>
             <InputField label='Direccion' type='text' id='Direccion-sede' placeholder='Direccion de la sede' onChange={(e) => { setdireccion(e.target.value) }} />
@@ -188,7 +186,7 @@ export default function Headquarters() {
         </Modal>
         <div className='container-fluid mt-4 d-flex justify-content-center'>
           <div className='col-4 d-flex justify-content-center'>
-            <Buttons title='Guardar' color='white' onClick={createHeadquarters} />
+            <Buttons title='Guardar' colorbutton='black' color='white' onClick={createHeadquarters} />
           </div>
         </div>
       </div>

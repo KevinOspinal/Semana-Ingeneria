@@ -216,7 +216,7 @@ export default function Conferences() {
 						/>
 					</div>
 					<div className="col-2">
-						<Buttons title="Consultar" color="white" onClick={() => (nombre.length === 0 ? getConferences() : getOnlyConferences(nombre))} />
+						<Buttons title="Consultar" colorbutton='black' color="white"  onClick={() => (nombre.length === 0 ? getConferences() : getOnlyConferences(nombre))} />
 					</div>
 					<div className="col-10">
 						<DropListField_Conferences selectSedes={selectedSede} handleChange={handleSedeChangeInput} options={optionsDrop} />
@@ -331,7 +331,7 @@ export default function Conferences() {
 					</Modal>
 					<div className="container-fluid mt-4 d-flex justify-content-center">
 						<div className="col-4 d-flex justify-content-center">
-							<Buttons title="Guardar" color="white" onClick={createConferences} />
+							<Buttons title="Guardar" color="white" onClick={createConferences}  colorbutton='black' />
 						</div>
 					</div>
 				</div>

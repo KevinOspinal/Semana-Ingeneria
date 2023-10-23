@@ -111,7 +111,7 @@ export default function Project_Type() {
             <InputField label='Nombre' type='text' id='Nombre' placeholder='Nombre' onChange={(e) => setDescripcion(e.target.value)} />
           </div>
           <div className='col-2'>
-            <Buttons title='Consultar' color='white' onClick={() => (descripcion.length === 0 ? getProject_Type() : getOnlyProject_Type(descripcion))} />
+            <Buttons title='Consultar' colorbutton='black' color='white' onClick={() => (descripcion.length === 0 ? getProject_Type() : getOnlyProject_Type(descripcion))} />
           </div>
         </div>
         <div className='row'>
@@ -145,7 +145,7 @@ export default function Project_Type() {
         </div>
         <div className='container-fluid mt-4 d-flex justify-content-center'>
           <div className='col-4 d-flex justify-content-center'>
-            <Buttons title='Guardar' color='white' onClick={createProject_Type} />
+            <Buttons title='Guardar' colorbutton='black' color='white' onClick={createProject_Type} />
           </div>
         </div>
       </div>

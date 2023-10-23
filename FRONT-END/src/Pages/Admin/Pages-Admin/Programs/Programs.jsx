@@ -11,7 +11,6 @@ export default function Programs() {
         <div className="mb-5 d-flex justify-content-center">
           <Title title="PROGRAMAS" />
         </div>
-        <form action="/Programs" method="POST">
           <div className="row">
             <div className="col-10">
               <InputField
@@ -22,7 +21,7 @@ export default function Programs() {
               />
             </div>
             <div className="col-2">
-              <Buttons title="Consultar" color="white" />
+              <Buttons title="Consultar" color="white" colorbutton='black' />
             </div>
             <div className="col-10">
               <DropListField
@@ -38,11 +37,10 @@ export default function Programs() {
             </div>
             <div className="container-fluid mt-4 d-flex justify-content-center">
               <div className="col-4 d-flex justify-content-center">
-                <Buttons title="Guardar" color="white" type="submit" />
+                <Buttons title="Guardar" color="white" colorbutton='black' />
               </div>
             </div>
           </div>
-        </form>
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ export default function Event_Type() {
               />
             </div>
             <div className="col-2">
-              <Buttons title="Consultar" color="white" />
+              <Buttons title="Consultar" color="white" colorbutton='black' />
             </div>
           </div>
           <div className="row">
@@ -31,7 +31,7 @@ export default function Event_Type() {
           </div>
           <div className="container-fluid mt-4 d-flex justify-content-center">
             <div className="col-4 d-flex justify-content-center">
-              <Buttons title="Guardar" color="white" />
+              <Buttons title="Guardar" color="white" colorbutton='black' />
             </div>
           </div>
         </form>

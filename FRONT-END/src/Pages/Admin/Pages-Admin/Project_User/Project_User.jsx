@@ -10,7 +10,6 @@ export default function Project_User() {
         <div className="mb-5 d-flex justify-content-center">
           <Title title="USUARIO POR PROYECTO" />
         </div>
-        <form action="/Proyect_User" method="POST">
           <div className="row">
             <div className="col-10">
               <DropListField
@@ -40,11 +39,10 @@ export default function Project_User() {
             </div>
             <div className="container-fluid mt-4 d-flex justify-content-center">
               <div className="col-4 d-flex justify-content-center">
-                <Buttons title="Guardar" color="white" type="submit" />
+                <Buttons title="Guardar" color="white" colorbutton='black' type="submit" />
               </div>
             </div>
           </div>
-        </form>
       </div>
     </div>
   );
