@@ -17,7 +17,7 @@ export default function Document_Type() {
   const handleDescripcionChange = (e) => {
     const updatedEditingDocumentType = {
       ...editingDocumentType,
-      descripcion_tipo: e.target.value,
+      descripcion_tipo_documento: e.target.value,
     };
     setEditingDocumentType(updatedEditingDocumentType);
   };
@@ -47,8 +47,8 @@ export default function Document_Type() {
   };
 
   const getDocumentType = () => {
-    Axios.get("http://localhost:3000/getDocument_Type").then((response) => {
-      setDocument_typeList(response.data);
+    Axios.get("http://localhost:3000/getDocument_Type").then((responde) => {
+      setDocument_typeList(responde.data);
     });
   };
 
@@ -65,7 +65,7 @@ export default function Document_Type() {
     Axios.put(
       `http://localhost:3000/updateDocument_Type/${editingDocumentType.id_tipo_documento}`,
       {
-        descripcion: editingDocumentType.descripcion_tipo,
+        descripcion_tipo_documento: editingDocumentType.descripcion_tipo_documento, 
       }
     )
       .then(() => {
@@ -76,7 +76,7 @@ export default function Document_Type() {
         console.error(error);
       });
   };
-
+  
   const handleDelete = (id) => {
     Axios.delete(`http://localhost:3000/deleteDocument_Type/${id}`)
       .then((response) => {
@@ -88,8 +88,12 @@ export default function Document_Type() {
         console.error(error);
       });
   };
+  
+ 
 
-  console.log('edi', editingDocumentType)
+
+
+
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
@@ -140,6 +144,7 @@ export default function Document_Type() {
               type="text"
               id="Tipo-Documento"
               placeholder="Tipo de Documento"
+
               onChange={handleDescripcionChange}
             />
           </div>

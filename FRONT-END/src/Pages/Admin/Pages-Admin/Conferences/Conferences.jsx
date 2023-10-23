@@ -29,6 +29,7 @@ export default function Conferences() {
 
 
 	const [nombre, setNombre] = useState("");
+	const [descripcion, setDescripcion] = useState("");
 	const [selectedSede, setSelectedSede] = useState("");
 	const [cupo, setCupo] = useState(0);
 	const [fecha, setFecha] = useState("");
@@ -38,6 +39,7 @@ export default function Conferences() {
 	const createConferences = () => {
 		Axios.post("http://localhost:3000/createConferences", {
 			nombre: nombre,
+			descripcion: descripcion,
 			sede: selectedSede,
 			cupo: cupo,
 			fecha: fecha,
@@ -65,7 +67,7 @@ export default function Conferences() {
 	const getOnlyConferences = (nombre) => {
 		Axios.get(`http://localhost:3000/getOnlyConferences/${nombre}`).then((respond) => {
 			setConferencesList(respond.data);
-			console.log("conferencesList actualizada:", conferencesList);
+			console.log("conferencesList actualizada");
 		}
 		);
 	};
@@ -75,22 +77,15 @@ export default function Conferences() {
 
 	//FUNCION PARA ACTUALIZAR LA CONFERENCIA
 	const updateConferences = () => {
-		console.log('id:', editingConferencias.id_conferencia);
-		console.log('Nombre:', editingConferencias.descipcion);
-		console.log('Sede:', editingConferencias.id_sede);
-		console.log('Cupo:', editingConferencias.cupo);
-		console.log('Fecha:', editingConferencias.fecha);
-		console.log('Hora:', editingConferencias.hora);
-		console.log('Estado:', editingConferencias.estado_conferencia);
-
 		Axios.put(
 			`http://localhost:3000/updateConferences/${editingConferencias.id_conferencia}`,
 			{
-				nombre: editingConferencias.descipcion,
+				nombre: editingConferencias.nombre_conferencia,
+				descripcion: editingConferencias.descripcion_conferencia,
 				sede: editingConferencias.id_sede,
 				cupo: editingConferencias.cupo,
-				fecha: editingConferencias.fecha,
-				hora: editingConferencias.hora,
+				fecha: editingConferencias.fecha_conferencia,
+				hora: editingConferencias.hora_conferencia,
 				estado: editingConferencias.estado_conferencia
 			}).then(() => {
 				alert("Conferencia actializada.");
@@ -137,7 +132,15 @@ export default function Conferences() {
 	const handleNombreChange = (e) => {
 		const updatedEditingConferencia = {
 			...editingConferencias,
-			descipcion: e.target.value,
+			nombre_conferencia: e.target.value,
+		};
+		setEditingConferencias(updatedEditingConferencia);
+	};
+
+	const handleDescripcionChange = (e) => {
+		const updatedEditingConferencia = {
+			...editingConferencias,
+			descripcion_conferencia: e.target.value,
 		};
 		setEditingConferencias(updatedEditingConferencia);
 	};
@@ -161,7 +164,7 @@ export default function Conferences() {
 	const handleFechaChange = (e) => {
 		const updatedEditingConferencia = {
 			...editingConferencias,
-			fecha: e.target.value,
+			fecha_conferencia: e.target.value,
 		};
 		setEditingConferencias(updatedEditingConferencia);
 	};
@@ -169,7 +172,7 @@ export default function Conferences() {
 	const handleHoraChange = (e) => {
 		const updatedEditingConferencia = {
 			...editingConferencias,
-			hora: e.target.value,
+			hora_conferencia: e.target.value,
 		};
 		setEditingConferencias(updatedEditingConferencia);
 	};
@@ -210,13 +213,22 @@ export default function Conferences() {
 						<InputField
 							label="Nombre"
 							type="text"
-							id="Nombre-Conferencias"
-							placeholder="Nombre de la conferencias"
+							id="Nombre-Conferencia"
+							placeholder="Nombre de la conferencia"
 							onChange={(e) => setNombre(e.target.value)}
 						/>
 					</div>
 					<div className="col-2">
 						<Buttons title="Consultar" colorbutton='black' color="white"  onClick={() => (nombre.length === 0 ? getConferences() : getOnlyConferences(nombre))} />
+					</div>
+					<div className="col-10">
+						<InputField
+							label="Descripcion"
+							type="text"
+							id="Descripcion-Conferencia"
+							placeholder="Descripcion de la conferencia"
+							onChange={(e) => setDescripcion(e.target.value)}
+						/>
 					</div>
 					<div className="col-10">
 						<DropListField_Conferences selectSedes={selectedSede} handleChange={handleSedeChangeInput} options={optionsDrop} />
@@ -225,8 +237,8 @@ export default function Conferences() {
 						<InputField
 							label="Cupo"
 							type="number"
-							id="Cupo-Conferencias"
-							placeholder="Cupo de la conferencias"
+							id="Cupo-Conferencia"
+							placeholder="Cupo de la conferencia"
 							onChange={(e) => setCupo(e.target.value)}
 						/>
 					</div>
@@ -234,8 +246,8 @@ export default function Conferences() {
 						<InputField
 							label="Fecha"
 							type="date"
-							id="Fecha-Conferencias"
-							placeholder="Fecha de la conferencias"
+							id="Fecha-Conferencia"
+							placeholder="Fecha de la conferencia"
 							onChange={(e) => setFecha(e.target.value)}
 						/>
 					</div>
@@ -243,8 +255,8 @@ export default function Conferences() {
 						<InputField
 							label="Hora"
 							type="time"
-							id="Hora-Conferencias"
-							placeholder="Hora de la conferencias"
+							id="Hora-Conferencia"
+							placeholder="Hora de la conferencia"
 							onChange={(e) => setHora(e.target.value)}
 						/>
 					</div>
@@ -252,8 +264,8 @@ export default function Conferences() {
 						<InputField
 							label="Estado"
 							type="text"
-							id="Estado-Conferencias"
-							placeholder="Estado de la conferencias"
+							id="Estado-Conferencia"
+							placeholder="Estado de la conferencia"
 							onChange={(e) => setEstado(e.target.value)}
 						/>
 					</div>
@@ -272,10 +284,20 @@ export default function Conferences() {
 							<InputField
 								label="Nombre"
 								type="text"
-								id="Tipo-Nombre-Conferencia"
+								id="Nombre-Conferencia"
 								placeholder="Nombre de la conferencia"
-								value={editingConferencias.descipcion || ""}
+								value={editingConferencias.nombre_conferencia || ""}
 								onChange={handleNombreChange}
+							/>
+						</div>
+						<div className="col-10">
+							<InputField
+								label="Descripcion"
+								type="text"
+								id="Descripcion-Conferencia"
+								placeholder="Descripcion de la conferencia"
+								value={editingConferencias.descripcion_conferencia || ""}
+								onChange={handleDescripcionChange}
 							/>
 						</div>
 						<div className="col-10">
@@ -295,7 +317,7 @@ export default function Conferences() {
 								label="Fecha"
 								type="date"
 								id="Fecha-Conferencia"
-								value={editingConferencias.fecha || ""}
+								value={editingConferencias.fecha_conferencia || ""}
 								onChange={handleFechaChange}
 							/>
 						</div>
@@ -304,7 +326,7 @@ export default function Conferences() {
 								label="Hora"
 								type="time"
 								id="Hora-Conferencia"
-								value={editingConferencias.hora || ""}
+								value={editingConferencias.hora_conferencia || ""}
 								onChange={handleHoraChange}
 							/>
 						</div>

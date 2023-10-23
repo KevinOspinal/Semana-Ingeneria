@@ -94,7 +94,7 @@ export default function Faculties() {
 
   // funcion para traer un solo dato en el grid...
   const getOnlyFaculties = (nombre) => {
-    Axios.get(`http://localhost:3000/getOnlyHFaculties/${nombre}`).then((respond) => {
+    Axios.get(`http://localhost:3000/getOnlyFaculties/${nombre}`).then((respond) => {
         setFacultiesList(respond.data);
         console.log('FacultiesList actualizado:', FacultiesList);
       })
