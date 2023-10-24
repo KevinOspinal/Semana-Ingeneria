@@ -12,6 +12,7 @@ return (
             <tr>
             <th>Nombre</th>
             <th>Facultad</th>
+            <th>Acciones</th>
             </tr>
         </thead>
         <tbody>

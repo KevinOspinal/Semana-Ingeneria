@@ -14,29 +14,29 @@ export default function Programs() {
 
 
 	useEffect(() => {
-		// Coloca aquí la llamada a getHeadquarters
+		// Coloca aquí la llamada a Faculties
 		getFaculties();
-	}, []); // El segundo argumento es un arreglo de dependencias vacío
+	}, []); 
 
 
 
-	//FUNCION PARA CREAR LAS CONFERENCIAS QUE COPTURAMOS EN EL FORM
+	//FUNCION PARA CREAR LOS PROGRAMAS QUE COPTURAMOS EN EL FORM
 
-	//ESTA FUNCION ES PARA CAPTURAR LO QUE HAYA EN LAS SEDES
+	//ESTA FUNCION ES PARA CAPTURAR LO QUE HAYA EN LAS FACULTADES
 	const handleFacultadChangeInput = (e) => {
 		setSelectedFacultad(e.target.value);
 	};
 
 
-	const [nombre, setNombre] = useState("");
+	const [nombre_programa, setNombre] = useState("");
 	const [selectedFacultad, setSelectedFacultad] = useState("");
 
 	const createPrograms = () => {
 		Axios.post("http://localhost:3000/createPrograms", {
-			nombre: nombre,
-			sede: selectedFacultad,
+			nombre_programa: nombre_programa,
+			facultad: selectedFacultad,
 		}).then((responde) => {
-			alert("Conferencia registrada.");
+			alert("Programa registrado.");
 			getPrograms();
 		})
 			.catch((error) => {
@@ -47,17 +47,17 @@ export default function Programs() {
 
 
 
-	//FUNCION PARA CONSULTAR TODAS LAS CONFERENCIAS CREADAS Y TAMBIEN PARA UNA SOLA
+	//FUNCION PARA CONSULTAR TODAS LOS PROGRAMAS CREADOS Y TAMBIEN PARA UNA SOLO
 	const getPrograms = () => {
 		Axios.get("http://localhost:3000/getPrograms").then((respond) => {
 			setProgramsList(respond.data);
 		});
 	};
 
-	const getOnlyPrograms = (nombre) => {
-		Axios.get(`http://localhost:3000/getOnlyConferences/${nombre}`).then((respond) => {
+	const getOnlyPrograms = (nombre_programa) => {
+		Axios.get(`http://localhost:3000/getOnlyPrograms/${nombre_programa}`).then((respond) => {
 			setProgramsList(respond.data);
-			console.log("conferencesList actualizada");
+			console.log("ProgramsList actualizado");
 		}
 		);
 	};
@@ -65,15 +65,15 @@ export default function Programs() {
 
 
 
-	//FUNCION PARA ACTUALIZAR LA CONFERENCIA
+	//FUNCION PARA ACTUALIZAR EL PROGRAMA
 	const updatePrograms= () => {
 		Axios.put(
 			`http://localhost:3000/updatePrograms/${editingProgramas.id_programa}`,
 			{
-				nombre: editingProgramas.nombre_programa,
+				nombre_programa: editingProgramas.nombre_programa,
 				facultad : editingProgramas.id_facultad,
 			}).then(() => {
-				alert("Conferencia actializada.");
+				alert("El programa se ha actializado.");
 				getPrograms();
 			})
 			.catch((error) => {
@@ -83,11 +83,11 @@ export default function Programs() {
 
 
 
-	//FUNCION PARA ELIMINAR UNA CONFERENCIA
+	//FUNCION PARA ELIMINAR UN PROGRAMA
 	const handleDelete = (id) => {
 		Axios.delete(`http://localhost:3000/deletePrograms/${id}`)
 			.then((response) => {
-				alert("Conferencia eliminada satisfactoriamente!!");
+				alert("El Programa se ha eliminado satisfactoriamente!!");
 				getPrograms();
 				console.log(response.data);
 			})
@@ -98,8 +98,8 @@ export default function Programs() {
 
 
 
-	//ESTA FUNCION ES PARA CONSULTAR TODAS LAS SEDES CREADAS
-	const [optionsDrop, setOptionsDrop] = useState([]); // Estado para almacenar la SEDE seleccionado
+	//ESTA FUNCION ES PARA CONSULTAR TODOS LOS PROGRAMADAS CREADOS
+	const [optionsDrop, setOptionsDrop] = useState([]); // Estado para almacenar la FACULTAD seleccionada
 
 	const getFaculties = () => {
 		Axios.get('http://localhost:3000/getFaculties').then((respond) => {
@@ -162,7 +162,7 @@ export default function Programs() {
 						/>
 					</div>
 					<div className="col-2">
-						<Buttons title="Consultar" colorbutton='black' color="white"  onClick={() => (nombre.length === 0 ? getPrograms() : getOnlyPrograms(nombre))} />
+						<Buttons title="Consultar" colorbutton='black' color="white"  onClick={() => (nombre_programa.length === 0 ? getPrograms() : getOnlyPrograms(nombre_programa))} />
 					</div>
 					<div className="col-10">
 						<DropListField_Programs selectFacultades={selectedFacultad} handleChange={handleFacultadChangeInput} options={optionsDrop} />
@@ -182,8 +182,8 @@ export default function Programs() {
 							<InputField
 								label="Nombre"
 								type="text"
-								id="Nombre-Conferencia"
-								placeholder="Nombre de la conferencia"
+								id="Nombre-Programa"
+								placeholder="Nombre del Programa"
 								value={editingProgramas.nombre_programa || ""}
 								onChange={handleNombreChange}
 							/>
@@ -196,6 +196,7 @@ export default function Programs() {
 								<Buttons
 									title="Guardar Cambios"
 									color="white"
+									colorbutton="black"
 									onClick={updatePrograms}
 								/>
 							</div>

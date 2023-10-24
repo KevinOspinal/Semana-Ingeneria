@@ -158,7 +158,7 @@ app.post('/createPrograms', createPrograms);
 //METODO PARA MOSTRAR FACULTADES
 app.get('/getPrograms', getPrograms);
 //METODO PARA MOSTRAR UNA FACULTAD
-app.get('/getPrograms/:nombre', getOnlyPrograms)
+app.get('/getOnlyPrograms/:nombre_programa', getOnlyPrograms)
 //METODO PARA ELIMINAR FACULTADES
 app.delete('/deletePrograms/:id', deletePrograms);
 //METODO PARA EDITAR FACULTADES
