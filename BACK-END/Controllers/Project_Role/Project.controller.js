@@ -1,9 +1,9 @@
 const conexion = require('../../db')
 
 const createProject_Role = (req, res) => {
-    const descripcion = req.body.descripcion
+    const descripcion_rol_proyecto = req.body.descripcion_rol_proyecto
 
-    conexion.query('INSERT INTO tb_roles_proyectos (descripcion) VALUES (?)', [descripcion],
+    conexion.query('INSERT INTO tb_roles_proyectos (descripcion_rol_proyecto) VALUES (?)', [descripcion_rol_proyecto],
         (err, result) => {
             if (err) {
                 console.log(err)
@@ -31,9 +31,9 @@ const getProject_Role = (req, res) => {
 }
 
 const getOnlyProject_Role = (req, res) => {
-    const Nombredescripcion = req.params.descripcion;
+    const Nombredescripcion = req.params.descripcion_rol_proyecto;
     conexion.query(
-        'SELECT * FROM tb_roles_proyectos WHERE descripcion = ?',
+        'SELECT * FROM tb_roles_proyectos WHERE descripcion_rol_proyecto = ?',
         [Nombredescripcion],
         (err, result) => {
             if (err) {
@@ -68,13 +68,13 @@ const deleteProject_Role = (req, res) => {
 //CONSULTA PARA PODER ACTUALIZAR LA DESCRIPCION
 const updateProject_Role = (req, res) => {
     const idRolProyecto = req.params.id;
-    const { descripcion } = req.body;
-    console.log(descripcion)
+    const { descripcion_rol_proyecto } = req.body;
+    console.log(descripcion_rol_proyecto)
 
     // Realiza la actualización en la base de datos usando el ID y los nuevos datos
     conexion.query(
-        'UPDATE tb_roles_proyectos SET descripcion = ? WHERE id_rol_proyecto = ?',
-        [descripcion, idRolProyecto],
+        'UPDATE tb_roles_proyectos SET descripcion_rol_proyecto = ? WHERE id_rol_proyecto = ?',
+        [descripcion_rol_proyecto, idRolProyecto],
         (err, result) => {
             if (err) {
                 console.error(err);

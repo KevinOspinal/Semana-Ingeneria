@@ -11,7 +11,7 @@ const {createFaculties, getFaculties,getOnlyFaculties,DeleteFaculties,updateFacu
 const { createDocument_Type, getDocument_Type,getOnlyDocument_Type,deleteDocument_Type,updateDocument_Type} = require('./Controllers/Document_Type/Document_Type_Controllers.js')
 const { createEvent_Type, getEvent_Type,getOnlyEvent_Type,deleteEvent_Type,updateEvent_Type} = require('./Controllers/Event_Type/Event_Type.controller.js')
 const { createProjects, getProjects, getOnlyProjects, deleteProjects, updateProjects } = require('./Controllers/Projects/Projects.controllers')
-
+const {createPrograms, getPrograms,getOnlyPrograms,deletePrograms,updatePrograms} = require('./Controllers/Programs/Programs_controllers.js')
 
 app.use(cors())
 app.use(express.json())
@@ -76,7 +76,7 @@ app.post('/createProject_Type',createProject_Type);
 app.get('/getProject_Type', getProject_Type);
 
 //METODO PARA MOSTRAR UN Project_Type
-app.get('/getOnlyProject_Type/:descripcion', getOnlyProject_Type)
+app.get('/getOnlyProject_Type/:descripcion_rol_proyecto', getOnlyProject_Type)
 
 //METODO PARA ELIMINAR Project_Type
 app.delete('/deleteProject_Type/:id', deleteProject_Type);
@@ -152,7 +152,17 @@ app.delete('/deleteProjects/:id', deleteProjects);
 //METODO PARA EDITAR PROYECTO
 app.put('/updateProjects/:id', updateProjects);
 
-
+//-----------------------------------------------------
+//METODO PARA CREAR FACULTADES
+app.post('/createPrograms', createPrograms);
+//METODO PARA MOSTRAR FACULTADES
+app.get('/getPrograms', getPrograms);
+//METODO PARA MOSTRAR UNA FACULTAD
+app.get('/getPrograms/:nombre', getOnlyPrograms)
+//METODO PARA ELIMINAR FACULTADES
+app.delete('/deletePrograms/:id', deletePrograms);
+//METODO PARA EDITAR FACULTADES
+app.put('/updatePrograms/:id', updatePrograms);
 
 app.listen(3000, () => {
     console.log('El servidor esta escuchando en el puerto :', 'http://localhost:3000/')

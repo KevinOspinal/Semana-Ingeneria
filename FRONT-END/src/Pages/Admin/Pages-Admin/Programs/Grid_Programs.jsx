@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Grid_Project_Role({ List, handleDelete, handleEdit }) {
+export default function Grid_Programs({ List, handleDelete, handleEdit }) {
 return (
     <div className="container mt-5">
     <div
@@ -10,25 +10,26 @@ return (
         <table className="table">
         <thead className="thead-dark">
             <tr>
-            <th>Descripcion tipo de rol</th>
-            <th>Acciones</th>
+            <th>Nombre</th>
+            <th>Facultad</th>
             </tr>
         </thead>
         <tbody>
             {List
-            ? List.map((tipo_rol_proyecto) => (
-                <tr key={tipo_rol_proyecto.id_rol_proyecto}>
-                <td>{tipo_rol_proyecto.descripcion_rol_proyecto}</td>
+            ? List.map((programas) => (
+                <tr key={programas.id_programa}>
+                <td>{programas.nombre_programa}</td>
+                <td>{programas.nombre_facultad}</td>
                 <td>
                     <button
                     className="btn btn-danger btn-sm mr-2"
-                    onClick={() => handleDelete(tipo_rol_proyecto.id_rol_proyecto)}
+                    onClick={() => handleDelete(programas.id_programa)}
                     >
                     Eliminar
                     </button>
                     <button
                     className="btn btn-primary btn-sm"
-                    onClick={() => handleEdit(tipo_rol_proyecto)}
+                    onClick={() => handleEdit(programas)}
                     >
                     Editar
                     </button>
