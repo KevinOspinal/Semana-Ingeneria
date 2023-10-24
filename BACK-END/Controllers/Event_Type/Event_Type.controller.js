@@ -35,7 +35,7 @@ const getEvent_Type = (req, res) => {
 
 //CONSULTAS PARA PODER MOSTRAR UNA SOLA facultad
 const getOnlyEvent_Type = (req, res) => {
-    const DescripcionEvent_Type = req.params.descripcion;
+    const DescripcionEvent_Type = req.params.descripcion_otro_evento;
     conexion.query(
         'SELECT * FROM tb_tipos_eventos WHERE descripcion_otro_evento = ?',
         [DescripcionEvent_Type],

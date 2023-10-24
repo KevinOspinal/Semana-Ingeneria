@@ -220,7 +220,7 @@ export default function Proyects() {
               <DropListField_Projects
                 handleChange={handleTipoProyectoChange}
                 options={optionsDrop}
-                selectSedes={editingProjects.id_tipo_proyecto}
+                selectTipoProyecto={editingProjects.id_tipo_proyecto}
               />
             </div>
             <div className="container-fluid mt-4 d-flex justify-content-center">
@@ -229,7 +229,7 @@ export default function Proyects() {
                   title="Guardar Cambios"
                   color="white"
                   onClick={updateProjects}
-                  colorbutton='black'
+                  colorbutton="black"
                 />
               </div>
             </div>

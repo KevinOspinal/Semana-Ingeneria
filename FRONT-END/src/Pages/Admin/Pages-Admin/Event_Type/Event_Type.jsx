@@ -13,7 +13,7 @@ export default function Event_Type() {
   const handleDescripcionChange = (e) => {
     const updatedEditingEvent_Type = {
       ...editingEvent_Type,
-      descripcion: e.target.value,
+      descripcion_otro_evento: e.target.value,
     };
     setEditingEvent_Type(updatedEditingEvent_Type);
   };
@@ -39,7 +39,7 @@ export default function Event_Type() {
     Axios.put(
       `http://localhost:3000/updateEvent_Type/${editingEvent_Type.id_tipo_evento}`,
       {
-        descripcion: editingEvent_Type.descripcion,
+        descripcion: editingEvent_Type.descripcion_otro_evento,
       }
     )
       .then(() => {
@@ -53,11 +53,11 @@ export default function Event_Type() {
   };
 
   //FUNCION PARA CREAR LAS facultades
-  const [descripcion, setdescripcion] = useState("");
+  const [descripcion_otro_evento, setdescripcion_otro_evento] = useState("");
 
   const createEvent_Type = () => {
     Axios.post("http://localhost:3000/createEvent_Type", {
-      descripcion: descripcion,
+      descripcion: descripcion_otro_evento,
     })
       .then((err, responde) => {
         alert("Tipo de evento registrado.");
@@ -90,52 +90,42 @@ export default function Event_Type() {
   };
 
   // funcion para traer un solo dato en el grid...
-  const getOnlyEvent_Type = (descripcion) => {
-    Axios.get(`http://localhost:3000/getOnlyEvent_Type/${descripcion}`).then(
-      (respond) => {
-        setEvent_TypeList(respond.data);
-        console.log(" actualizado:", Event_TypeList);
-      }
-    );
+  const getOnlyEvent_Type = (descripcion_otro_evento) => {
+    Axios.get(
+      `http://localhost:3000/getOnlyEvent_Type/${descripcion_otro_evento}`
+    ).then((respond) => {
+      setEvent_TypeList(respond.data);
+      console.log("Actualizado");
+    });
   };
 
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
         <div className="mb-5 d-flex justify-content-center">
-          <Title title="Tipo de evento" />
+          <Title title="TIPOS DE EVENTOS" />
         </div>
         <div className="row">
           <div className="col-10">
             <InputField
-              label="nombre"
+              label="Nombre"
               type="text"
               id="nombre"
               placeholder="Nombre de la facultad"
-              onChange={(e) => setdescripcion(e.target.value)}
+              onChange={(e) => setdescripcion_otro_evento(e.target.value)}
             />
           </div>
-          <div className="row">
-            <div className="col-10">
-              <InputField
-                label="Tipo de evento"
-                type="text"
-                id="Tipo de evento"
-                placeholder=""
-              />
-            </div>
-            <div className="col-2">
-              <Buttons
-                title="Consultar"
-                color="white"
-                colorbutton="black"
-                onClick={() =>
-                  descripcion.length === 0
-                    ? getEvent_Type()
-                    : getOnlyEvent_Type(descripcion)
-                }
-              />
-            </div>
+          <div className="col-2">
+            <Buttons
+              title="Consultar"
+              color="white"
+              colorbutton="black"
+              onClick={() =>
+                descripcion_otro_evento.length === 0
+                  ? getEvent_Type()
+                  : getOnlyEvent_Type(descripcion_otro_evento)
+              }
+            />
           </div>
           <div className="row">
             <div className="col-12">
@@ -158,7 +148,7 @@ export default function Event_Type() {
                 type="text"
                 id="Nombre-Descripcion-edit"
                 placeholder="Nombre del tipo evento"
-                value={editingEvent_Type.descripcion || ""}
+                value={editingEvent_Type.descripcion_otro_evento || ""}
                 onChange={handleDescripcionChange}
               />
             </div>

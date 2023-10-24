@@ -123,7 +123,7 @@ app.post('/createEvent_Type', createEvent_Type);
 //METODO PARA MOSTRAR TIPO EVENTO
 app.get('/getEvent_Type', getEvent_Type);
 //METODO PARA MOSTRAR UN TIPO EVENTO
-app.get('/getOnlyEvent_Type/:descripcion_Tipo', getOnlyEvent_Type)
+app.get('/getOnlyEvent_Type/:descripcion_otro_evento', getOnlyEvent_Type)
 //METODO PARA ELIMINAR TIPO EVENTO
 app.delete('/deleteEvent_Type/:id', deleteEvent_Type);
 //METODO PARA EDITAR TIPO EVENTO
