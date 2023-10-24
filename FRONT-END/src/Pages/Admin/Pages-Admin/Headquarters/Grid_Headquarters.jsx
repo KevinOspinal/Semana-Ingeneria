@@ -1,13 +1,12 @@
 import React from 'react';
 
-export default function Grid_Muestra({ List, handleDelete, handleEdit }) {
+export default function Grid_Headquarters({ List, handleDelete, handleEdit }) {
   return (
     <div className="container mt-5">
       <div className="scrollable-table" style={{ maxHeight: '18rem', overflowY: 'auto' }}>
         <table className="table">
           <thead className="thead-dark">
             <tr>
-              <th>ID</th>
               <th>Nombre</th>
               <th>Direccion</th>
               <th>Telefono</th>
@@ -18,7 +17,6 @@ export default function Grid_Muestra({ List, handleDelete, handleEdit }) {
             {List
               ? List.map((sede) => (
                   <tr key={sede.id_sede}>
-                    <td>{sede.id_sede}</td>
                     <td>{sede.nombre_sede}</td>
                     <td>{sede.direccion}</td>
                     <td>{sede.telefono}</td>

@@ -67,7 +67,7 @@ const updateProject_Type = (req, res) => {
     const { descripcion } = req.body;
     // Realiza la actualización en la base de datos usando el ID y los nuevos datos
     conexion.query(
-        'UPDATE tb_tipos_proyectos SET descripcion = ? WHERE id_tipo_proyecto = ?',
+        'UPDATE tb_tipos_proyectos SET descripcion_tipo_proyecto = ? WHERE id_tipo_proyecto = ?',
         [descripcion, idTipoProyecto],
         (err, result) => {
             if (err) {
