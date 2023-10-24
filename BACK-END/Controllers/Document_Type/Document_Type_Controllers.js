@@ -44,7 +44,8 @@ const getOnlyDocument_Type = (req, res) => {
                 res.json(result);
             }
         }
-};
+    )
+}
 
 // CONSULTAS PARA PODER ELIMINAR EL TIPO DE DOCUMENTO
 const deleteDocument_Type = (req, res) => {
