@@ -34,7 +34,7 @@ export default function Cards({openRegisterModal}) {
           <div className="container-fluid card-footer bg-transparent d-flex justify-content-center align-items-center w-100" >
             <div className="row">
               <div className="col-sm-3 col-md-4 col-lg-3 d-flex align-items-center">
-                <Buttons title='Registrarme' color='#002f59' fontSize='10px'  colorbutton='#ffffff' onClick={openRegisterModal} />
+                <Buttons title='Participar' color='#002f59' fontSize='10px'  colorbutton='#ffffff' onClick={openRegisterModal} />
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@ export default function Cards({openRegisterModal}) {
           <div className="container-fluid card-footer bg-transparent d-flex justify-content-center align-items-center w-100" >
             <div className="row">
               <div className="col-sm-3 col-md-4 col-lg-3 d-flex align-items-center">
-                <Buttons title='Registrarme' color='#002f59' fontSize='10px' onClick={openRegisterModal} />
+                <Buttons title='Participar' color='#002f59' fontSize='10px' onClick={openRegisterModal} />
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function Cards({openRegisterModal}) {
           <div className="container-fluid card-footer bg-transparent d-flex justify-content-center align-items-center w-100" >
             <div className="row">
               <div className="col-sm-3 col-md-4 col-lg-3 d-flex align-items-center">
-                <Buttons title='Registrarme' color='#002f59' fontSize='10px' onClick={openRegisterModal}/>
+                <Buttons title='Participar' color='#002f59' fontSize='10px' onClick={openRegisterModal}/>
               </div>
             </div>
           </div>
@@ -139,7 +139,7 @@ export default function Cards({openRegisterModal}) {
           <div className="container-fluid card-footer bg-transparent d-flex justify-content-center align-items-center w-100" >
             <div className="row">
               <div className="col-sm-3 col-md-4 col-lg-3 d-flex align-items-center">
-                <Buttons title='Registrarme' color='#002f59' fontSize='10px' onClick={openRegisterModal}/>
+                <Buttons title='Participar' color='#002f59' fontSize='10px' onClick={openRegisterModal}/>
               </div>
             </div>
           </div>
@@ -174,7 +174,7 @@ export default function Cards({openRegisterModal}) {
           <div className="container-fluid card-footer bg-transparent d-flex justify-content-center align-items-center w-100" >
             <div className="row">
               <div className="col-sm-3 col-md-4 col-lg-3 d-flex align-items-center">
-                <Buttons title='Registrarme' color='#002f59' fontSize='10px' onClick={openRegisterModal} />
+                <Buttons title='Participar' color='#002f59' fontSize='10px' onClick={openRegisterModal} />
               </div>
             </div>
           </div>
@@ -209,7 +209,7 @@ export default function Cards({openRegisterModal}) {
           <div className="container-fluid card-footer bg-transparent d-flex justify-content-center align-items-center w-100" >
             <div className="row">
               <div className="col-sm-3 col-md-4 col-lg-3 d-flex align-items-center">
-                <Buttons title='Registrarme' color='#002f59' fontSize='10px' onClick={openRegisterModal}/>
+                <Buttons title='Participar' color='#002f59' fontSize='10px' onClick={openRegisterModal}/>
               </div>
             </div>
           </div>
