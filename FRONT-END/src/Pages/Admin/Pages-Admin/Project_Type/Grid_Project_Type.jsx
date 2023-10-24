@@ -18,7 +18,7 @@ export default function Grid_Project_Type({ List, handleDelete, handleEdit }) {
             {List
               ? List.map((tipo_proyecto) => (
                 <tr key={tipo_proyecto.id_tipo_proyecto}>
-                  <td>{tipo_proyecto.descripcion}</td>
+                  <td>{tipo_proyecto.descripcion_tipo_proyecto}</td>
                   <td>
                     <button
                       className="btn btn-danger btn-sm mr-2"

@@ -88,9 +88,6 @@ export default function Document_Type() {
         console.error(error);
       });
   };
-  
- 
-
 
 
 
@@ -144,7 +141,7 @@ export default function Document_Type() {
               type="text"
               id="Tipo-Documento"
               placeholder="Tipo de Documento"
-
+              value={editingDocumentType.descripcion_tipo_documento || ""}
               onChange={handleDescripcionChange}
             />
           </div>
@@ -154,6 +151,7 @@ export default function Document_Type() {
                 title="Guardar Cambios"
                 color="white"
                 onClick={updateDocumentType}
+                colorbutton='black'
               />
             </div>
           </div>

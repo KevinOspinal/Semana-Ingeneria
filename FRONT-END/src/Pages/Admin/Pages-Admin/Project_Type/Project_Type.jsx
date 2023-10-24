@@ -79,14 +79,14 @@ export default function Project_Type() {
 
   const handleNombreChange = (e) => {
     const updatedEditingProjecto_Type = { 
-      ...editingProjecto_Type, descripcion: e.target.value };
+      ...editingProjecto_Type, descripcion_tipo_proyecto: e.target.value };
     setEditingProjecto_Type(updatedEditingProjecto_Type);
   };
 
 
   const updateProject_Type = () => {
     Axios.put(`http://localhost:3000/updateProject_Type/${editingProjecto_Type.id_tipo_proyecto}`, {
-      descripcion: editingProjecto_Type.descripcion,
+      descripcion: editingProjecto_Type.descripcion_tipo_proyecto,
     })
       .then(() => {
         alert('Tipo de proyecto actualizado.');
@@ -97,8 +97,6 @@ export default function Project_Type() {
         console.error(error);
       });
   };
-
-  console.log(editingProjecto_Type)
 
   return (
     <div className='container vh-100 d-flex justify-content-center align-items-center'>
@@ -130,14 +128,14 @@ export default function Project_Type() {
               type="text"
               id='Nombre-Descripcion'
               placeholder='Nombre de la sede'
-              value={editingProjecto_Type.descripcion || ''}
+                value={editingProjecto_Type.descripcion_tipo_proyecto || ''}
               onChange={handleNombreChange}
             />
           </div>
           {/* Agregar campos para otros atributos (dirección, teléfono, etc.) */}
           <div className='container-fluid mt-4 d-flex justify-content-center'>
             <div className='col-4 d-flex justify-content-center'>
-              <Buttons title='Guardar Cambios' color='white' onClick={updateProject_Type} />
+                <Buttons title='Guardar Cambios' color='white' onClick={updateProject_Type} colorbutton='black' />
             </div>
           </div>
           <button onClick={closeModal}>Cerrar</button>

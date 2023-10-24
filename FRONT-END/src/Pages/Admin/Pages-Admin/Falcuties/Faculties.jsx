@@ -1,23 +1,22 @@
-import React, { useState } from 'react'
-import Axios from 'axios'
-import Modal from 'react-modal'
-import Title from '../../../../components/Title'
-import InputField from '../../../../components/InputField'
-import Buttons from '../../../../components/Buttons'
+import React, { useState } from "react";
+import Axios from "axios";
+import Modal from "react-modal";
+import Title from "../../../../components/Title";
+import InputField from "../../../../components/InputField";
+import Buttons from "../../../../components/Buttons";
 import Grid_Facultades from "../../../../Pages/Admin/Pages-Admin/Falcuties/Grid_Facultades";
 
 export default function Faculties() {
-
   //ESTADO DONDE GUARDAMOS LA CONSULTA DE LAS FACULTADES
-  const [FacultiesList, setFacultiesList] = useState([])
-
+  const [FacultiesList, setFacultiesList] = useState([]);
 
   const handleNombreChange = (e) => {
-    const updatedEditingFacultad = { ...editingFacultad, nombre: e.target.value };
+    const updatedEditingFacultad = {
+      ...editingFacultad,
+      nombre_facultad: e.target.value,
+    };
     setEditingFaculties(updatedEditingFacultad);
   };
-
-
 
   //ESTADOS PARA GUARDAR LA INFORMACION OBTENIDA DE LA VENTANA EDIT
   const [editingFacultad, setEditingFaculties] = useState({});
@@ -37,11 +36,14 @@ export default function Faculties() {
   };
   // Función para actualizar una facultad
   const updateFaculties = () => {
-    Axios.put(`http://localhost:3000/updateFaculties/${editingFacultad.id_facultad}`, {
-      nombre: editingFacultad.nombre,
-    })
+    Axios.put(
+      `http://localhost:3000/updateFaculties/${editingFacultad.id_facultad}`,
+      {
+        nombre: editingFacultad.nombre_facultad,
+      }
+    )
       .then(() => {
-        alert('Facultad actualizada.');
+        alert("Facultad actualizada.");
         getFaculties();
         //closeModal(); // Cierra el modal después de la actualización
       })
@@ -50,33 +52,28 @@ export default function Faculties() {
       });
   };
 
-
-
-
   //FUNCION PARA CREAR LAS facultades
-  const [nombre, setnombre] = useState('')
+  const [nombre, setnombre] = useState("");
 
   const createFaculties = () => {
-    Axios.post('http://localhost:3000/createFaculties', {
+    Axios.post("http://localhost:3000/createFaculties", {
       nombre: nombre,
-    }).then((err,responde) => {
-      alert('Facultad registrada.')
-      getFaculties();
-    }).catch((error) => {
-      console.error(error);
-    });
-
-  }
-
-
+    })
+      .then((err, responde) => {
+        alert("Facultad registrada.");
+        getFaculties();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   //FUNCION PARA MOSTRAR LAS FACULTADES EN LA GRID
   const getFaculties = () => {
-    Axios.get('http://localhost:3000/getFaculties').then((respond) => {
-      setFacultiesList(respond.data)
-    })
-  }
-
+    Axios.get("http://localhost:3000/getFaculties").then((respond) => {
+      setFacultiesList(respond.data);
+    });
+  };
 
   //FUNCION PARA ELIMINAR UNA SEDE CON EL ID
   const handleDelete = (id) => {
@@ -94,11 +91,13 @@ export default function Faculties() {
 
   // funcion para traer un solo dato en el grid...
   const getOnlyFaculties = (nombre) => {
-    Axios.get(`http://localhost:3000/getOnlyFaculties/${nombre}`).then((respond) => {
+    Axios.get(`http://localhost:3000/getOnlyFaculties/${nombre}`).then(
+      (respond) => {
         setFacultiesList(respond.data);
-        console.log('FacultiesList actualizado:', FacultiesList);
-      })
-  }
+        console.log("FacultiesList actualizado");
+      }
+    );
+  };
 
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
@@ -106,46 +105,73 @@ export default function Faculties() {
         <div className="mb-5 d-flex justify-content-center">
           <Title title="FACULTADES" />
         </div>
-        <div className='row'>
-          <div className='col-10'>
-            <InputField label='nombre' type='text' id='nombre' placeholder='Nombre de la facultad' onChange={(e) => setnombre(e.target.value)}/>
+        <div className="row">
+          <div className="col-10">
+            <InputField
+              label="Nombre"
+              type="text"
+              id="nombre"
+              placeholder="Nombre de la facultad"
+              onChange={(e) => setnombre(e.target.value)}
+            />
           </div>
-          <div className='col-2'>
-            <Buttons title='Consultar' color='white' colorbutton='black'   onClick={() => (nombre.length === 0 ? getFaculties() : getOnlyFaculties(nombre))}/>
+          <div className="col-2">
+            <Buttons
+              title="Consultar"
+              color="white"
+              colorbutton="black"
+              onClick={() =>
+                nombre.length === 0 ? getFaculties() : getOnlyFaculties(nombre)
+              }
+            />
           </div>
         </div>
-        <div className='row'>
-          <div className='col-12'>
-            <Grid_Facultades List={FacultiesList} handleDelete={handleDelete} handleEdit={openModal} />
+        <div className="row">
+          <div className="col-12">
+            <Grid_Facultades
+              List={FacultiesList}
+              handleDelete={handleDelete}
+              handleEdit={openModal}
+            />
           </div>
         </div>
         <Modal
           isOpen={isModalOpen}
           onRequestClose={closeModal}
-          contentLabel='Editar Nombre'
+          contentLabel="Editar Nombre"
         >
           <h2>Editar Facultad</h2>
-          <div className='col-10'>
+          <div className="col-10">
             <InputField
-              label='Nombre'
-              type='text'
-              id='Nombre-Descripcion-edit'
-              placeholder='Nombre de la facultad'
-              value={editingFacultad.nombre|| ''}
+              label="Nombre"
+              type="text"
+              id="Nombre-Descripcion-edit"
+              placeholder="Nombre de la facultad"
+              value={editingFacultad.nombre_facultad || ""}
               onChange={handleNombreChange}
             />
           </div>
           {/* Agregar campos para otros atributos (dirección, teléfono, etc.) */}
-          <div className='container-fluid mt-4 d-flex justify-content-center'>
-            <div className='col-4 d-flex justify-content-center'>
-              <Buttons title='Guardar Cambios' color='white' onClick={updateFaculties} />
+          <div className="container-fluid mt-4 d-flex justify-content-center">
+            <div className="col-4 d-flex justify-content-center">
+              <Buttons
+                title="Guardar Cambios"
+                color="white"
+                colorbutton="black"
+                onClick={updateFaculties}
+              />
             </div>
           </div>
           <button onClick={closeModal}>Cerrar</button>
         </Modal>
-        <div className='container-fluid mt-4 d-flex justify-content-center'>
-          <div className='col-4 d-flex justify-content-center'>
-            <Buttons title='Guardar' color='white' colorbutton='black' onClick={createFaculties} />
+        <div className="container-fluid mt-4 d-flex justify-content-center">
+          <div className="col-4 d-flex justify-content-center">
+            <Buttons
+              title="Guardar"
+              color="white"
+              colorbutton="black"
+              onClick={createFaculties}
+            />
           </div>
         </div>
       </div>

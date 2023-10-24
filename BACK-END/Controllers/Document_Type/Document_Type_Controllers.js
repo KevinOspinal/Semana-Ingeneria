@@ -31,13 +31,16 @@ const getDocument_Type = (req, res) => {
 };
 
 const getOnlyDocument_Type = (req, res) => {
-
-        (error, result) => {
-            if (error) {
-                console.error(error);
-                res.status(500).json({ message: "Error al consultar el tipo Documento" });
+    const descripcion = req.params.descripcion;
+    conexion.query(
+        'SELECT * FROM  tb_tipos_documentos WHERE descripcion_tipo_documento = ?',
+        [descripcion],
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ message: 'Error al consultar el tipo de documento' });
             } else {
-                console.log("Tipo Documento consultado con éxito");
+                console.log('Tipo de documento consultado con éxito');
                 res.json(result);
             }
         }
@@ -65,7 +68,7 @@ const deleteDocument_Type = (req, res) => {
 const updateDocument_Type = (req, res) => {
     const idDocumentType = req.params.id;
     const { descripcion_tipo_documento } = req.body;
-    
+
 
     // Realiza la actualización en la base de datos usando el ID y los nuevos datos
     conexion.query(

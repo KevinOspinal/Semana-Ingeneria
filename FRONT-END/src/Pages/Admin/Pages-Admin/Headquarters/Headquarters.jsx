@@ -5,7 +5,7 @@ import Modal from 'react-modal'; // Importa react-modal
 import Title from '../../../../components/Title'
 import InputField from '../../../../components/InputField'
 import Buttons from '../../../../components/Buttons'
-import Grid_Muestra from "./Grid_Muestra";
+import Grid_Headquarters from './Grid_Headquarters';
 
 
 
@@ -141,7 +141,7 @@ export default function Headquarters() {
         </div>
         <div className='row'>
           <div className='col-12'>
-            <Grid_Muestra List={HeadquartersList} handleDelete={handleDelete} handleEdit={openModal} />
+            <Grid_Headquarters List={HeadquartersList} handleDelete={handleDelete} handleEdit={openModal} />
           </div>
         </div>
         <Modal
@@ -179,7 +179,7 @@ export default function Headquarters() {
           {/* Agregar campos para otros atributos (dirección, teléfono, etc.) */}
           <div className='container-fluid mt-4 d-flex justify-content-center'>
             <div className='col-4 d-flex justify-content-center'>
-              <Buttons title='Guardar Cambios' color='white' onClick={updateSede} />
+              <Buttons title='Guardar Cambios' color='white' colorbutton='black' onClick={updateSede} />
             </div>
           </div>
           <button onClick={closeModal}>Cerrar</button>
