@@ -5,6 +5,7 @@
     top: 0;
     background-color: rgb(255, 255, 255);
     z-index: 1000;
+    overflow: auto;
     /* Asegura que esté por encima de otros elementos */
 }
 
@@ -16,16 +17,8 @@
 .custom {
     max-height: 36rem; /* Ajusta la altura máxima al 80% de la altura de la ventana */
     min-height: 25rem; /* Ajusta la altura máxima al 80% de la altura de la ventana */
-    overflow-y: auto; /* Agrega una barra de desplazamiento solo si el contenido es demasiado largo */
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 8px;
 }
-.custom::-webkit-scrollbar {
-    width:7px;
-}
 
-.custom::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
-}

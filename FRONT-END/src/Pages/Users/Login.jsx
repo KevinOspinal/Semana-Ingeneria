@@ -10,7 +10,7 @@ export default function Login({showLoginModal,closeModal}) {
             role="dialog"
             style={{ display: showLoginModal ? "flex" : "none", alignItems: 'center' }}
         >
-            <div className="modal-dialog custom" role="document">
+            <div className="modal-dialog" role="document">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">Iniciar Sesión</h5>
