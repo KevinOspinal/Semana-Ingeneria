@@ -2,7 +2,7 @@ import React from 'react';
 import './Cards.css';
 import img from '../assets/img/img-prueba.jpg';
 import Buttons from './Buttons';
-export default function Cards() {
+export default function Cards({openRegisterModal}) {
   return (
     <div className="row d-flex justify-content-center w-100 g-4">
       <div className="col-sm-12 col-md-4 col-lg-2 card border-0 h-100" style={{ width: '22rem' }}> {/* Modifica el ancho de la tarjeta */}
@@ -34,7 +34,7 @@ export default function Cards() {
           <div className="container-fluid card-footer bg-transparent d-flex justify-content-center align-items-center w-100" >
             <div className="row">
               <div className="col-sm-3 col-md-4 col-lg-3 d-flex align-items-center">
-                <Buttons title='Registrarme' color='#002f59' fontSize='10px'  colorbutton='#ffffff' />
+                <Buttons title='Registrarme' color='#002f59' fontSize='10px'  colorbutton='#ffffff' onClick={openRegisterModal} />
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@ export default function Cards() {
           <div className="container-fluid card-footer bg-transparent d-flex justify-content-center align-items-center w-100" >
             <div className="row">
               <div className="col-sm-3 col-md-4 col-lg-3 d-flex align-items-center">
-                <Buttons title='Registrarme' color='#002f59' fontSize='10px' />
+                <Buttons title='Registrarme' color='#002f59' fontSize='10px' onClick={openRegisterModal} />
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function Cards() {
           <div className="container-fluid card-footer bg-transparent d-flex justify-content-center align-items-center w-100" >
             <div className="row">
               <div className="col-sm-3 col-md-4 col-lg-3 d-flex align-items-center">
-                <Buttons title='Registrarme' color='#002f59' fontSize='10px'/>
+                <Buttons title='Registrarme' color='#002f59' fontSize='10px' onClick={openRegisterModal}/>
               </div>
             </div>
           </div>
@@ -139,7 +139,7 @@ export default function Cards() {
           <div className="container-fluid card-footer bg-transparent d-flex justify-content-center align-items-center w-100" >
             <div className="row">
               <div className="col-sm-3 col-md-4 col-lg-3 d-flex align-items-center">
-                <Buttons title='Registrarme' color='#002f59' fontSize='10px'/>
+                <Buttons title='Registrarme' color='#002f59' fontSize='10px' onClick={openRegisterModal}/>
               </div>
             </div>
           </div>
@@ -174,7 +174,7 @@ export default function Cards() {
           <div className="container-fluid card-footer bg-transparent d-flex justify-content-center align-items-center w-100" >
             <div className="row">
               <div className="col-sm-3 col-md-4 col-lg-3 d-flex align-items-center">
-                <Buttons title='Registrarme' color='#002f59' fontSize='10px'/>
+                <Buttons title='Registrarme' color='#002f59' fontSize='10px' onClick={openRegisterModal} />
               </div>
             </div>
           </div>
@@ -209,7 +209,7 @@ export default function Cards() {
           <div className="container-fluid card-footer bg-transparent d-flex justify-content-center align-items-center w-100" >
             <div className="row">
               <div className="col-sm-3 col-md-4 col-lg-3 d-flex align-items-center">
-                <Buttons title='Registrarme' color='#002f59' fontSize='10px'/>
+                <Buttons title='Registrarme' color='#002f59' fontSize='10px' onClick={openRegisterModal}/>
               </div>
             </div>
           </div>

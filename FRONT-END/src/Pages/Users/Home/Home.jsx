@@ -1,16 +1,33 @@
-import React from 'react'
-import NavbarUser from './NavbarUser'
+import React, { useState } from 'react'
+import NavbarUser from '../NavbarUser/NavbarUser'
 import './Home.css'
-import Hero_Img from '../../assets/img/section-footer.png'
-import logo from '../../assets/img/logo-unicatolica-vertical.png'
-import Cards from '../../components/Cards'
-import Cards2 from '../../components/Cards2'
-import TitleUsers from '../../components/TitleUsers'
+import Hero_Img from '../../../assets/img/section-footer.png'
+import logo from '../../../assets/img/logo-unicatolica-vertical.png'
+import Cards from '../../../components/Cards'
+import Cards2 from '../../../components/Cards2'
+import TitleUsers from '../../../components/TitleUsers'
 
 export default function Home() {
+
+
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+
+  const openLoginModal = () => {
+    setShowLoginModal(true);
+  };
+
+  const openRegisterModal = () => {
+    setShowRegisterModal(true);
+  };
+
+  const closeModal = () => {
+    setShowLoginModal(false);
+    setShowRegisterModal(false);
+  };
   return (
     <div>
-      <NavbarUser />
+      <NavbarUser showLoginModal={showLoginModal} showRegisterModal={showRegisterModal} openLoginModal={openLoginModal} openRegisterModal={openRegisterModal} closeModal={closeModal} />
       <div className='container-fluid mb-5 p-0'>
         <div className='align-items-stretch'>
           <img className='img-fluid w-100' src={Hero_Img} alt='Img del hero principal' />
@@ -33,7 +50,7 @@ export default function Home() {
         </div>
       </div>
       <section className='container-fluid'>
-        <Cards />
+        <Cards openRegisterModal={openRegisterModal} closeModal={closeModal}/>
       </section>
       <div id='eventos' className='container  mb-4 p-0'>
         <div className='row '>
@@ -105,13 +122,13 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <footer className="d-flex flex-column align-items-center justify-content-center text-white" style={{background:'#032840'}}>
-        <img className="footer-logo" src={logo} alt="logo img" style={{fontSize:'20px'}} />
+      <footer className="d-flex flex-column align-items-center justify-content-center text-white" style={{ background: '#032840' }}>
+        <img className="footer-logo" src={logo} alt="logo img" style={{ fontSize: '40px' }} />
         <p className="footer-text text-center">
-        Institución de Educación Superior sujeta a inspección y vigilancia por el Ministerio de Educación Nacional – Resolución No. 944 de 1996 MEN – SNIES 2731
+          Institución de Educación Superior sujeta a inspección y vigilancia por el Ministerio de Educación Nacional – Resolución No. 944 de 1996 MEN – SNIES 2731
         </p>
         <p className="footer-text text-center">
-         Sede Principal Cra. 122 No. 12-459 Pance, Cali – Colombia
+          Sede Principal Cra. 122 No. 12-459 Pance, Cali – Colombia
         </p>
         <p className="footer-text text-center">
           Teléfonos: +57 (2) 555 2767 –  +57 (2) 312 0038
