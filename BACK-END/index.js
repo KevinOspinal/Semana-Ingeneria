@@ -135,7 +135,7 @@ app.post('/createFaculties', createFaculties);
 //METODO PARA MOSTRAR FACULTADES
 app.get('/getFaculties', getFaculties);
 //METODO PARA MOSTRAR UNA FACULTAD
-app.get('/getFaculties/:nombre_facultad', getOnlyFaculties)
+app.get('/getOnlyFaculties/:nombre', getOnlyFaculties)
 //METODO PARA ELIMINAR FACULTADES
 app.delete('/deleteFaculties/:id', DeleteFaculties);
 //METODO PARA EDITAR FACULTADES
