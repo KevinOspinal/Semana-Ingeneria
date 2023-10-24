@@ -8,7 +8,7 @@ export default function DropListField_Programs({
         <label
         className="col-2 d-flex justify-content-end align-items-center form-label me-2"
         >
-        Sedes
+        Facultad
         </label>
         <div className="col-7 mx-auto">
         <select

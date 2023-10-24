@@ -63,7 +63,7 @@ app.post('/createProject_Role', createProject_Role);
 //METODO PARA MOSTRAR ROL PROYECTO
 app.get('/getProject_Role', getProject_Role);
 //METODO PARA MOSTRAR UN ROL PROYECTO
-app.get('/getOnlyProject_Role/:descripcion', getOnlyProject_Role)
+app.get('/getOnlyProject_Role/:descripcion_rol_proyecto', getOnlyProject_Role)
 //METODO PARA ELIMINAR ROL PROYECTO
 app.delete('/deleteProject_Role/:id', deleteProject_Role);
 //METODO PARA EDITAR ROL PROYECTO
@@ -76,7 +76,7 @@ app.post('/createProject_Type',createProject_Type);
 app.get('/getProject_Type', getProject_Type);
 
 //METODO PARA MOSTRAR UN Project_Type
-app.get('/getOnlyProject_Type/:descripcion_rol_proyecto', getOnlyProject_Type)
+app.get('/getOnlyProject_Type/:descripcion', getOnlyProject_Type)
 
 //METODO PARA ELIMINAR Project_Type
 app.delete('/deleteProject_Type/:id', deleteProject_Type);
@@ -158,7 +158,7 @@ app.post('/createPrograms', createPrograms);
 //METODO PARA MOSTRAR FACULTADES
 app.get('/getPrograms', getPrograms);
 //METODO PARA MOSTRAR UNA FACULTAD
-app.get('/getPrograms/:nombre', getOnlyPrograms)
+app.get('/getOnlyPrograms/:nombre_programa', getOnlyPrograms)
 //METODO PARA ELIMINAR FACULTADES
 app.delete('/deletePrograms/:id', deletePrograms);
 //METODO PARA EDITAR FACULTADES
