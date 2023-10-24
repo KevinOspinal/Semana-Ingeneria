@@ -145,7 +145,7 @@ export default function Project_Role() {
           {/* Agregar campos para otros atributos (dirección, teléfono, etc.) */}
           <div className='container-fluid mt-4 d-flex justify-content-center'>
             <div className='col-4 d-flex justify-content-center'>
-              <Buttons title='Guardar Cambios' color='white' onClick={updateProject_Role} />
+              <Buttons title='Guardar Cambios' color='white' colorbutton='black' onClick={updateProject_Role} />
             </div>
           </div>
           <button onClick={closeModal}>Cerrar</button>
