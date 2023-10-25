@@ -8,18 +8,18 @@ app.use(express.json()) // Habilita el middleware para analizar datos JSON en la
 app.use(morgan('dev')) // Habilita el middleware morgan con el formato 'dev' para registrar las solicitudes entrantes en la consola
 
 // Importamos rutas desde diferentes archivos
-const auth_Routes = require('./router/auth.routes')
-const conferences_Routes = require('./router/conferences.routes')
-const document_type_Routes = require('./router/document_type.routes')
-const event_type_Routes = require('./router/event_type.routes')
-const faculties_Routes = require('./router/faculties.routes')
-const headquarters_Routes = require('./router/headquarters.routes')
-const other_events_Routes = require('./router/other_events.routes')
-const programs_Routes = require('./router/programs.routes')
-const project_type_Routes = require('./router/project_type.routes')
-const project_role_Routes = require('./router/project_role.routes')
-const projects_Routes = require('./router/projects.routes')
-const user_type_Routes = require('./router/user_type.routes')
+const auth_Routes = require('./src/router/auth.routes')
+const conferences_Routes = require('./src/router/conferences.routes')
+const document_type_Routes = require('./src/router/document_type.routes')
+const event_type_Routes = require('./src/router/event_type.routes')
+const faculties_Routes = require('./src/router/faculties.routes')
+const headquarters_Routes = require('./src/router/headquarters.routes')
+const other_events_Routes = require('./src/router/other_events.routes')
+const programs_Routes = require('./src/router/programs.routes')
+const project_type_Routes = require('./src/router/project_type.routes')
+const project_role_Routes = require('./src/router/project_role.routes')
+const projects_Routes = require('./src/router/projects.routes')
+const user_type_Routes = require('./src/router/user_type.routes')
 
 // Utilizamos las rutas importadas en la aplicación
 app.use('/api',auth_Routes)
