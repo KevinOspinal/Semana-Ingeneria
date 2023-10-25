@@ -1,97 +1,124 @@
-const conexion = require('../../db.js')
+const conexion = require('../../db.js');
 
+// Función asincrónica para crear una sede
+const createHeadquarters = async (req, res) => {
+    try {
+        const nombre = req.body.nombre;
+        const direccion = req.body.direccion;
+        const telefono = req.body.telefono;
 
-//CONSULTAS PARA PODER CREAR UNA SEDE
-const createHeadquarters = (req, res) => {
-    const nombre = req.body.nombre
-    const direccion = req.body.direccion
-    const telefono = req.body.telefono
+        // Realiza la inserción en la base de datos
+        const result = await new Promise((resolve, reject) => {
+            conexion.query('INSERT INTO tb_sedes (nombre_sede, direccion, telefono) VALUES (?, ?, ?)', [nombre, direccion, telefono], (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
 
-    conexion.query('INSERT INTO tb_sedes (nombre_sede, direccion, telefono) VALUES (?, ?, ?)', [nombre, direccion, telefono],
-        (err, result) => {
-            if (err) {
-                console.log(err)
-                res.status(500).json({ message: 'Error al agregar la sede' });
-            } else {
-                console.log('La sede se agregó con éxito');
-                res.status(200).json({ message: 'La sede se agregó con éxito' });
-            }
-        }
-    )
+        console.log('La sede se agregó con éxito');
+        res.status(200).json({ message: 'La sede se agregó con éxito' });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Error al agregar la sede' });
+    }
 }
 
-//CONSULTAS PARA PODER MOSTRAR LAS SEDES
-const getHeadquarters = (req, res) => {
-    conexion.query('SELECT * FROM tb_sedes',
-        (err, result) => {
-            if (err) {
-                console.log(err);
-                res.status(500).json({ message: 'Error al imprimir la sede' });
-            } else {
-                console.log('La mostro la sede con éxito');
-                res.json(result); // Enviar el resultado como un objeto JSON
-            }
-        }
-    )
+// Función asincrónica para obtener todas las sedes
+const getHeadquarters = async (req, res) => {
+    try {
+        // Realiza una consulta para recuperar todas las sedes
+        const result = await new Promise((resolve, reject) => {
+            conexion.query('SELECT * FROM tb_sedes', (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        console.log('Sedes impresas correctamente');
+        res.json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Error al imprimir las sedes' });
+    }
 }
 
-//CONSULTAS PARA PODER MOSTRAR UNA SOLA SEDE
-const getOnlyHeadquerters = (req, res) => {
+// Función asincrónica para obtener una sola sede por nombre
+const getOnlyHeadquerters = async (req, res) => {
     const NombreSede = req.params.nombre;
-    conexion.query(
-        'SELECT * FROM tb_sedes WHERE nombre_sede = ?',
-        [NombreSede],
-        (err, result) => {
-            if (err) {
-                console.error(err);
-                res.status(500).json({ message: 'Error al consultar la sede' });
-            } else {
-                console.log('Sede consultada con éxito');
-                res.json(result);
-            }
-        }
-    );
+
+    try {
+        // Realiza una consulta para recuperar una sede específica por nombre
+        const result = await new Promise((resolve, reject) => {
+            conexion.query('SELECT * FROM tb_sedes WHERE nombre_sede = ?', [NombreSede], (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        console.log('Sede consultada con éxito');
+        res.json(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error al consultar la sede' });
+    }
 }
 
-//CONSULTAS PARA PODER ELIMINAR LA SEDE
-const DeleteHeadquarters = (req, res) => {
+// Función asincrónica para eliminar una sede por su ID
+const DeleteHeadquarters = async (req, res) => {
     const idSede = req.params.id;
-    conexion.query(
-        'DELETE FROM tb_sedes WHERE id_sede = ?',
-        [idSede],
-        (err, result) => {
-            if (err) {
-                console.error(err);
-                res.status(500).json({ message: 'Error al eliminar la sede' });
-            } else {
-                console.log('Sede eliminada con éxito');
-                res.json({ message: 'Sede eliminada con éxito' });
-            }
-        }
-    );
+
+    try {
+        // Realiza una consulta para eliminar una sede por su ID
+        const result = await new Promise((resolve, reject) => {
+            conexion.query('DELETE FROM tb_sedes WHERE id_sede = ?', [idSede], (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        console.log('Sede eliminada con éxito');
+        res.json({ message: 'Sede eliminada con éxito' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error al eliminar la sede' });
+    }
 }
 
-//CONSULTA PARA PODER ACTUALIZAR LA SEDE 
-const updateHeadquarters = (req, res) => {
+// Función asincrónica para actualizar una sede por su ID
+const updateHeadquarters = async (req, res) => {
     const idSede = req.params.id;
     const { nombre, direccion, telefono } = req.body;
-    
-    console.log(nombre, direccion, telefono)
 
-    // Realiza la actualización en la base de datos usando el ID y los nuevos datos
-    conexion.query(
-        'UPDATE tb_sedes SET nombre_sede = ?, direccion = ?, telefono = ? WHERE id_sede = ?',
-        [nombre, direccion, telefono, idSede],
-        (err, result) => {
-            if (err) {
-                console.error(err);
-                res.status(500).json({ message: 'Error al actualizar la sede' });
-            } else {
-                console.log('Sede actualizada con éxito', result);
-                res.status(200).json({ message: 'Sede actualizada con éxito' });
-            }
-        }
-    );
-};
+    try {
+        // Realiza una consulta para actualizar una sede por su ID
+        const result = await new Promise((resolve, reject) => {
+            conexion.query('UPDATE tb_sedes SET nombre_sede = ?, direccion = ?, telefono = ? WHERE id_sede = ?', [nombre, direccion, telefono, idSede], (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        console.log('Sede actualizada con éxito', result);
+        res.status(200).json({ message: 'Sede actualizada con éxito' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error al actualizar la sede' });
+    }
+}
 
 module.exports = { createHeadquarters, getHeadquarters, DeleteHeadquarters, updateHeadquarters, getOnlyHeadquerters };
