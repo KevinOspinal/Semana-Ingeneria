@@ -1,89 +1,130 @@
-const conexion = require('../../db')
+const conexion = require('../../db');
 
-const createUserType = (req, res) => {
-  const descripcion = req.body.descripcion
+// Función asincrónica para crear un tipo de usuario
+const createUserType = async (req, res) => {
+  const descripcion = req.body.descripcion;
 
-  conexion.query('INSERT INTO tb_tipos_usuarios (descripcion_tipo_usuario) VALUES (?)', [descripcion],
-    (err, result) => {
-      if (err) {
-        console.log(err)
-        res.status(500).json({ message: 'Error al agregar el tipo de usuario' })
-      } else {
-        console.log("Tipo de Usuario agregado con exito")
-        res.status(200).json({ message: 'El tipo de usuario se agrego con exito' })
-      }
-    }
-  )
-}
+  try {
+    // Realiza la inserción en la base de datos
+    const result = await new Promise((resolve, reject) => {
+      conexion.query('INSERT INTO tb_tipos_usuarios (descripcion_tipo_usuario) VALUES (?)', [descripcion], (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
 
-const getUserType = (req, res) => {
-  conexion.query('SELECT * FROM tb_tipos_usuarios',
-    (err, result) => {
-      if (err) {
-        console.log(err)
-        res.status(500).json({ message: "Error al imprimir los tipos de usuarios" })
-      } else {
-        console.log("Tipos de Usuarios Imprimidos Correctamente");
-        res.json(result)
-      }
-    }
-  )
-}
-
-const getOnlyUserType = (req, res) => {
-  const descripcionTipo = req.params.descripcion;
-  conexion.query(
-    'SELECT * FROM tb_tipos_usuarios WHERE descripcion_tipo_usuario = ?',
-    [descripcionTipo],
-    (err, result) => {
-      if (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Error al consultar tipo de usuario' });
-      } else {
-        console.log('Tipo de usuario consultada con éxito');
-        res.json(result);
-      }
-    }
-  );
-}
-
-const deleteUserType = (req, res) => {
-  const idTipoUsuario = req.params.id;
-  conexion.query(
-    'DELETE FROM tb_tipos_usuarios WHERE id_tipo_usuario = ?',
-    [idTipoUsuario],
-    (err, result) => {
-      if (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Error al eliminar el tipo de usuario' });
-      } else {
-        console.log('Tipo de usuario eliminada con éxito');
-        res.json({ message: 'Tipo de usuario eliminado con éxito' });
-      }
-    }
-  );
-}
-
-const updateUserType = (req, res) => {
-  const idTipoUsuario = req.params.id;
-  const { descripcion } = req.body;
-  console.log(descripcion)
-
-  // Realiza la actualización en la base de datos usando el ID y los nuevos datos
-  conexion.query(
-    'UPDATE tb_tipos_usuarios SET descripcion_tipo_usuario = ? WHERE id_tipo_usuario = ?',
-    [descripcion, idTipoUsuario],
-    (err, result) => {
-      if (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Error al actualizar el tipo de usuario' });
-      } else {
-        console.log('Tipo de usuario actualizado con éxito', result);
-        res.status(200).json({ message: 'Tipo de usuario actualizado con éxito' });
-      }
-    }
-  );
+    console.log('Tipo de usuario agregado con éxito');
+    res.status(200).json({ message: 'El tipo de usuario se agregó con éxito' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error al agregar el tipo de usuario' });
+  }
 };
 
+// Función asincrónica para obtener todos los tipos de usuario
+const getUserType = async (req, res) => {
+  try {
+    // Realiza una consulta para recuperar todos los tipos de usuario
+    const result = await new Promise((resolve, reject) => {
+      conexion.query('SELECT * FROM tb_tipos_usuarios', (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
 
-module.exports = { createUserType, getUserType, getOnlyUserType, deleteUserType, updateUserType }
+    console.log('Tipos de usuarios impresos correctamente');
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error al imprimir los tipos de usuarios' });
+  }
+};
+
+// Función asincrónica para obtener un tipo de usuario por su descripción
+const getOnlyUserType = async (req, res) => {
+  const descripcionTipo = req.params.descripcion;
+
+  try {
+    // Realiza una consulta para obtener un tipo de usuario por su descripción
+    const result = await new Promise((resolve, reject) => {
+      conexion.query(
+        'SELECT * FROM tb_tipos_usuarios WHERE descripcion_tipo_usuario = ?',
+        [descripcionTipo],
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    });
+
+    console.log('Tipo de usuario consultado con éxito');
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al consultar el tipo de usuario' });
+  }
+};
+
+// Función asincrónica para eliminar un tipo de usuario por su ID
+const deleteUserType = async (req, res) => {
+  const idTipoUsuario = req.params.id;
+
+  try {
+    // Realiza una consulta para eliminar un tipo de usuario por su ID
+    const result = await new Promise((resolve, reject) => {
+      conexion.query('DELETE FROM tb_tipos_usuarios WHERE id_tipo_usuario = ?', [idTipoUsuario], (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+
+    console.log('Tipo de usuario eliminado con éxito');
+    res.json({ message: 'Tipo de usuario eliminado con éxito' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al eliminar el tipo de usuario' });
+  }
+};
+
+// Función asincrónica para actualizar un tipo de usuario por su ID
+const updateUserType = async (req, res) => {
+  const idTipoUsuario = req.params.id;
+  const { descripcion } = req.body;
+
+  try {
+    // Realiza una consulta para actualizar un tipo de usuario por su ID
+    const result = await new Promise((resolve, reject) => {
+      conexion.query(
+        'UPDATE tb_tipos_usuarios SET descripcion_tipo_usuario = ? WHERE id_tipo_usuario = ?',
+        [descripcion, idTipoUsuario],
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    });
+
+    console.log('Tipo de usuario actualizado con éxito');
+    res.status(200).json({ message: 'Tipo de usuario actualizado con éxito' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al actualizar el tipo de usuario' });
+  }
+};
+
+module.exports = { createUserType, getUserType, getOnlyUserType, deleteUserType, updateUserType };

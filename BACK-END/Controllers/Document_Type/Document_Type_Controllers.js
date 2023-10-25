@@ -1,92 +1,129 @@
-const conexion = require("../../db");
+const conexion = require('../../db');
 
-const createDocument_Type = (req, res) => {
+const createDocument_Type = async (req, res) => {
     const descripcion = req.body.descripcion;
 
-    conexion.query(
-        "INSERT INTO tb_tipos_documentos (descripcion_tipo_documento) VALUES (?)",
-        [descripcion],
-        (error, results) => {
-            if (error) {
-                console.log(error);
-                res.status(500).json({ message: "Error al agregar el tipo de Documento" });
-            } else {
-                console.log("El tipo de Documento se agregó con éxito");
-                res.status(200).json({ message: "El tipo de documento se agregó con éxito" });
-            }
-        }
-    );
+    try {
+        const result = await new Promise((resolve, reject) => {
+            conexion.query(
+                "INSERT INTO tb_tipos_documentos (descripcion_tipo_documento) VALUES (?)",
+                [descripcion],
+                (error, results) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(results);
+                    }
+                }
+            );
+        });
+
+        console.log("El tipo de Documento se agregó con éxito");
+        res.status(200).json({ message: "El tipo de documento se agregó con éxito" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error al agregar el tipo de Documento" });
+    }
 };
 
-const getDocument_Type = (req, res) => {
-    conexion.query("SELECT * FROM tb_tipos_documentos", (error, result) => {
-        if (error) {
-            console.log(error);
-            res.status(500).json({ message: "Error al mostrar Tipo de Documento" });
-        } else {
-            console.log("Tipo de Documento mostrado con éxito");
-            res.json(result); // Enviar el resultado como un objeto JSON
-        }
-    });
+const getDocument_Type = async (req, res) => {
+    try {
+        const result = await new Promise((resolve, reject) => {
+            conexion.query("SELECT * FROM tb_tipos_documentos", (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        console.log("Tipo de Documento mostrado con éxito");
+        res.json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error al mostrar Tipo de Documento" });
+    }
 };
 
-const getOnlyDocument_Type = (req, res) => {
+const getOnlyDocument_Type = async (req, res) => {
     const descripcion = req.params.descripcion;
-    conexion.query(
-        'SELECT * FROM  tb_tipos_documentos WHERE descripcion_tipo_documento = ?',
-        [descripcion],
-        (err, result) => {
-            if (err) {
-                console.error(err);
-                res.status(500).json({ message: 'Error al consultar el tipo de documento' });
-            } else {
-                console.log('Tipo de documento consultado con éxito');
-                res.json(result);
-            }
-        }
-    )
+
+    try {
+        const result = await new Promise((resolve, reject) => {
+            conexion.query(
+                'SELECT * FROM  tb_tipos_documentos WHERE descripcion_tipo_documento = ?',
+                [descripcion],
+                (error, result) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(result);
+                    }
+                }
+            );
+        });
+
+        console.log('Tipo de documento consultado con éxito');
+        res.json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Error al consultar el tipo de documento' });
+    }
 }
 
-// CONSULTAS PARA PODER ELIMINAR EL TIPO DE DOCUMENTO
-const deleteDocument_Type = (req, res) => {
+const deleteDocument_Type = async (req, res) => {
     const idDocumentType = req.params.id;
-    conexion.query(
-        "DELETE FROM tb_tipos_documentos WHERE id_tipo_documento = ?",
-        [idDocumentType],
-        (error, result) => {
-            if (error) {
-                console.error(error);
-                res.status(500).json({ message: "Error al eliminar el tipo de Documento" });
-            } else {
-                console.log("Tipo de Documento eliminado con éxito");
-                res.json({ message: "Tipo de documento eliminado con éxito" });
-            }
-        }
-    );
+
+    try {
+        const result = await new Promise((resolve, reject) => {
+            conexion.query(
+                "DELETE FROM tb_tipos_documentos WHERE id_tipo_documento = ?",
+                [idDocumentType],
+                (error, result) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(result);
+                    }
+                }
+            );
+        });
+
+        console.log("Tipo de Documento eliminado con éxito");
+        res.json({ message: "Tipo de documento eliminado con éxito" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error al eliminar el tipo de Documento" });
+    }
 };
 
-// CONSULTA PARA PODER ACTUALIZAR EL TIPO DE DOCUMENTO
-const updateDocument_Type = (req, res) => {
+const updateDocument_Type = async (req, res) => {
     const idDocumentType = req.params.id;
     const { descripcion_tipo_documento } = req.body;
 
+    try {
+        const result = await new Promise((resolve, reject) => {
+            conexion.query(
+                "UPDATE tb_tipos_documentos SET descripcion_tipo_documento = ? WHERE id_tipo_documento = ?",
+                [descripcion_tipo_documento, idDocumentType],
+                (error, result) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(result);
+                    }
+                }
+            );
+        });
 
-    // Realiza la actualización en la base de datos usando el ID y los nuevos datos
-    conexion.query(
-        "UPDATE tb_tipos_documentos SET descripcion_tipo_documento = ? WHERE id_tipo_documento = ?",
-        [descripcion_tipo_documento, idDocumentType],
-        (error, result) => {
-            if (error) {
-                console.error(error);
-                res.status(500).json({ message: "Error al actualizar el tipo de documento" });
-            } else {
-                console.log("Tipo de Documento actualizado con éxito", result);
-                res.status(200).json({ message: "Tipo de documento actualizado con éxito" });
-            }
-        }
-    );
+        console.log("Tipo de Documento actualizado con éxito");
+        res.status(200).json({ message: "Tipo de documento actualizado con éxito" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error al actualizar el tipo de documento" });
+    }
 };
-
 
 module.exports = {
     createDocument_Type,
