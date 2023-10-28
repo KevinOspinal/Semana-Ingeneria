@@ -9,7 +9,7 @@ import Asistentes from './Pages/Users/Home/Home'
 function App() {
   return (
     <div>
-      <Admin/>
+      <Home/>
     </div>
   )
 }
