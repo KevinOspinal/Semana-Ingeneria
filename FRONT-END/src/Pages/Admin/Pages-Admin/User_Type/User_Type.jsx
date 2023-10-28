@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InputField from "../../../../components/InputField";
 import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
-import  Axios  from "axios";
+import Axios from "axios";
 import Modal from "react-modal";
 import Grid_User_Type from "../User_Type/Grid_User_Type";
 
@@ -95,75 +95,76 @@ export default function User_Type() {
         <div className="mb-5 d-flex justify-content-center">
           <Title title="TIPOS DE USUARIOS" />
         </div>
+        <div className="row">
+          <div className="col-10">
+            <InputField
+              label="Descripción"
+              type="text"
+              id="Tipo-Usuario"
+              placeholder="Tipo de usuario"
+              onChange={(e) => setDescripcion(e.target.value)}
+            />
+          </div>
+          <div className="col-2">
+            <Buttons
+              title="Consultar"
+              color="white"
+              colorbutton='black'
+              onClick={() =>
+                descripcion.length === 0
+                  ? getUserType()
+                  : getOnlyUserType(descripcion)
+              }
+            />
+          </div>
           <div className="row">
+            <div className="col-12">
+              <Grid_User_Type
+                List={userTypeList}
+                handleDelete={handleDelete}
+                handleEdit={openModal}
+              />
+            </div>
+          </div>
+          <Modal
+            isOpen={isModalOpen}
+            onRequestClose={closeModal}
+            contentLabel="Editar Sede"
+          >
+            <h2>Editar Tipo de Usuario</h2>
             <div className="col-10">
               <InputField
                 label="Descripción"
                 type="text"
                 id="Tipo-Usuario"
                 placeholder="Tipo de usuario"
-                onChange={(e) => setDescripcion(e.target.value)}
-              />
-            </div>
-            <div className="col-2">
-              <Buttons
-                title="Consultar"
-                color="white"
-                colorbutton='black'
-                onClick={() =>
-                  descripcion.length === 0
-                    ? getUserType()
-                    : getOnlyUserType(descripcion)
-                }
-              />
-            </div>
-            <div className="row">
-              <div className="col-12">
-                <Grid_User_Type
-                  List={userTypeList}
-                  handleDelete={handleDelete}
-                  handleEdit={openModal}
-                />
-              </div>
-            </div>
-            <Modal
-              isOpen={isModalOpen}
-              onRequestClose={closeModal}
-              contentLabel="Editar Sede"
-            >
-              <h2>Editar Tipo de Usuario</h2>
-              <div className="col-10">
-                <InputField
-                  label="Descripción"
-                  type="text"
-                  id="Tipo-Usuario"
-                  placeholder="Tipo de usuario"
                 value={editingTipoUsuario.descripcion_tipo_usuario || ""}
-                  onChange={handleDescripcionChange}
-                />
-              </div>
-              <div className="container-fluid mt-4 d-flex justify-content-center">
-                <div className="col-4 d-flex justify-content-center">
-                  <Buttons
-                    title="Guardar Cambios"
-                    color="white"
-                    onClick={updateTipoUsuario}
-                  />
-                </div>
-              </div>
-              <button onClick={closeModal}>Cerrar</button>
-            </Modal>
+                onChange={handleDescripcionChange}
+              />
+            </div>
             <div className="container-fluid mt-4 d-flex justify-content-center">
               <div className="col-4 d-flex justify-content-center">
                 <Buttons
-                  title="Guardar"
+                  title="Guardar Cambios"
                   color="white"
-                  onClick={createUserType}
+                  onClick={updateTipoUsuario}
                   colorbutton='black'
                 />
               </div>
             </div>
+            <button onClick={closeModal}>Cerrar</button>
+          </Modal>
+          <div className="container-fluid mt-4 d-flex justify-content-center">
+            <div className="col-4 d-flex justify-content-center">
+              <Buttons
+                title="Guardar"
+                color="white"
+                onClick={createUserType}
+                colorbutton='black'
+              />
+            </div>
           </div>
+        </div>
       </div>
     </div>
   );

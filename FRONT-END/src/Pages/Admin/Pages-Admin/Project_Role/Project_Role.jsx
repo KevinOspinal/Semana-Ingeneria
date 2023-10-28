@@ -17,7 +17,7 @@ export default function Project_Role() {
 
 
   const handleNombreChange = (e) => {
-    const updatedEditingrol_proyecto = { ...editingrol_proyecto, descripcion: e.target.value };
+    const updatedEditingrol_proyecto = { ...editingrol_proyecto, descripcion_rol_proyecto: e.target.value };
     setEditingrol_proyecto(updatedEditingrol_proyecto);
   };
 
@@ -47,7 +47,7 @@ export default function Project_Role() {
 
   const updateProject_Role = () => {
     Axios.put(`http://localhost:3000/updateProject_Role/${editingrol_proyecto.id_rol_proyecto}`, {
-      descripcion: editingrol_proyecto.descripcion,
+      descripcion_rol_proyecto: editingrol_proyecto.descripcion_rol_proyecto,
     })
       .then(() => {
         alert('Descripcion actualizada.');
@@ -62,11 +62,11 @@ export default function Project_Role() {
 
 
   //FUNCION PARA CREAR LAS SEDES
-  const [descripcion, setdescripcion] = useState('')
+  const [descripcion_rol_proyecto, setdescripcion] = useState('')
   
   const createProject_Role = () => {
     Axios.post('http://localhost:3000/createProject_Role', {
-      descripcion: descripcion,
+      descripcion_rol_proyecto: descripcion_rol_proyecto,
     }).then((err,responde) => {
       alert('Descripcion registrada.')
       getProject_Role();
@@ -100,8 +100,8 @@ export default function Project_Role() {
   };
 
   // funcion para traer un solo dato en el grid...
-  const getOnlyProject_Role = (descripcion) => {
-    Axios.get(`http://localhost:3000/getOnlyProject_Role/${descripcion}`).then((respond) => {
+  const getOnlyProject_Role = (descripcion_rol_proyecto) => {
+    Axios.get(`http://localhost:3000/getOnlyProject_Role/${descripcion_rol_proyecto}`).then((respond) => {
         setProject_RoleList(respond.data);
         console.log('Project_RoleList actualizado');
       })
@@ -115,10 +115,10 @@ export default function Project_Role() {
         </div>
         <div className='row'>
           <div className='col-10'>
-            <InputField label='descripcion' type='text' id='descripcion' placeholder='Nombre de la Descipcion' onChange={(e) => setdescripcion(e.target.value)}/>
+            <InputField label='Descripcion' type='text' id='Descripcion' placeholder='Nombre de la Descripcion' onChange={(e) => setdescripcion(e.target.value)}/>
           </div>
           <div className='col-2'>
-            <Buttons title='Consultar' color='white' colorbutton='black'   onClick={() => (descripcion.length === 0 ? getProject_Role() : getOnlyProject_Role(descripcion))}/>
+            <Buttons title='Consultar' color='white' colorbutton='black'   onClick={() => (descripcion_rol_proyecto.length === 0 ? getProject_Role() : getOnlyProject_Role(descripcion_rol_proyecto))}/>
           </div>
         </div>
         <div className='row'>
@@ -138,14 +138,14 @@ export default function Project_Role() {
               type='text'
               id='Nombre-Descripcion-edit'
               placeholder='Nombre de la sede'
-              value={editingrol_proyecto.descripcion || ''}
+              value={editingrol_proyecto.descripcion_rol_proyecto || ''}
               onChange={handleNombreChange}
             />
           </div>
           {/* Agregar campos para otros atributos (dirección, teléfono, etc.) */}
           <div className='container-fluid mt-4 d-flex justify-content-center'>
             <div className='col-4 d-flex justify-content-center'>
-              <Buttons title='Guardar Cambios' color='white' onClick={updateProject_Role} />
+              <Buttons title='Guardar Cambios' color='white' colorbutton='black' onClick={updateProject_Role} />
             </div>
           </div>
           <button onClick={closeModal}>Cerrar</button>

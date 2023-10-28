@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Axios from 'axios'
+import Axios from "axios";
 import InputField from "../../../../components/InputField";
 import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
 import DropListField_Projects from "./DropListField_Projects";
-import Grid_Projects from './Grid_Projects'
+import Grid_Projects from "./Grid_Projects";
 import Modal from "react-modal";
 
 export default function Proyects() {
-
   //ESTE ESTADO ES EL GLOBAL PARA CONSULTAR TODAS LOS PROYECTOS
-  const [projectsList, setProjectsList] = useState([])
+  const [projectsList, setProjectsList] = useState([]);
 
   useEffect(() => {
     // Coloca aquí la llamada a getProject_Type
@@ -32,15 +31,16 @@ export default function Proyects() {
     Axios.post("http://localhost:3000/createProjects", {
       nombre: nombre,
       descripcion: descripcion,
-      tipoProyecto: selectedTipoProyecto
-    }).then((responde) => {
-      alert('Proyecto registrado.')
-      getProjects()
+      tipoProyecto: selectedTipoProyecto,
     })
+      .then((responde) => {
+        alert("Proyecto registrado.");
+        getProjects();
+      })
       .catch((error) => {
         console.log(error);
-      })
-  }
+      });
+  };
 
   //FUNCION PARA CONSULTAR TODAS LOS PROYECTOS CREADOS Y TAMBIEN PARA UNO SOLO
   const getProjects = () => {
@@ -50,27 +50,32 @@ export default function Proyects() {
   };
 
   const getOnlyProjects = (nombre) => {
-    Axios.get(`http://localhost:3000/getOnlyProjects/${nombre}`).then((respond) => {
-      setProjectsList(respond.data);
-      console.log("ProyectsList actualizado:");
-    }
+    Axios.get(`http://localhost:3000/getOnlyProjects/${nombre}`).then(
+      (respond) => {
+        setProjectsList(respond.data);
+        console.log("ProyectsList actualizado:");
+      }
     );
   };
 
   //FUNCION PARA ACTUALIZAR PROYECTOS
   const updateProjects = () => {
-    Axios.put(`http://localhost:3000/updateProjects/${editingProjects.id_proyecto}`, {
-      nombre: editingProjects.nombre_proyecto,
-      descripcion: editingProjects.descripcion_proyecto,
-      tipoProyecto: editingProjects.id_tipo_proyecto
-    }).then(() => {
-      alert('Proyecto Actualizados')
-      getProjects()
-    })
-      .catch((error) => {
-        console.log(error)
+    Axios.put(
+      `http://localhost:3000/updateProjects/${editingProjects.id_proyecto}`,
+      {
+        nombre: editingProjects.nombre_proyecto,
+        descripcion: editingProjects.descripcion_proyecto,
+        tipoProyecto: editingProjects.id_tipo_proyecto,
+      }
+    )
+      .then(() => {
+        alert("Proyecto Actualizados");
+        getProjects();
       })
-  }
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   //FUNCION PARA ELIMINAR UN PROYECTO
   const handleDelete = (id) => {
@@ -89,10 +94,10 @@ export default function Proyects() {
   const [optionsDrop, setOptionsDrop] = useState([]); // Estado para almacenar la SEDE seleccionado
 
   const getProject_Type = () => {
-    Axios.get('http://localhost:3000/getProject_Type').then((respond) => {
-      setOptionsDrop(respond.data)
-    })
-  }
+    Axios.get("http://localhost:3000/getProject_Type").then((respond) => {
+      setOptionsDrop(respond.data);
+    });
+  };
 
   //Estas funciones onChame es para capturar los datos del MODAL EDITAR
 
@@ -130,7 +135,6 @@ export default function Proyects() {
     setIsModalOpen(true);
   };
 
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -153,7 +157,14 @@ export default function Proyects() {
             />
           </div>
           <div className="col-2">
-            <Buttons title="Consultar" colorbutton='black' color="white" onClick={() => (nombre.length === 0 ? getProjects() : getOnlyProjects(nombre))} />
+            <Buttons
+              title="Consultar"
+              colorbutton="black"
+              color="white"
+              onClick={() =>
+                nombre.length === 0 ? getProjects() : getOnlyProjects(nombre)
+              }
+            />
           </div>
           <div className="col-10">
             <InputField
@@ -165,11 +176,19 @@ export default function Proyects() {
             />
           </div>
           <div className="col-10">
-            <DropListField_Projects selectTipoProyecto={selectedTipoProyecto} handleChange={handleTipoProyectoChangeInput} options={optionsDrop} />
+            <DropListField_Projects
+              selectTipoProyecto={selectedTipoProyecto}
+              handleChange={handleTipoProyectoChangeInput}
+              options={optionsDrop}
+            />
           </div>
           <div className="row">
             <div className="col-12">
-              <Grid_Projects List={projectsList} handleDelete={handleDelete} handleEdit={openModal} />
+              <Grid_Projects
+                List={projectsList}
+                handleDelete={handleDelete}
+                handleEdit={openModal}
+              />
             </div>
           </div>
           <Modal
@@ -198,7 +217,11 @@ export default function Proyects() {
               />
             </div>
             <div className="col-10">
-              <DropListField_Projects handleChange={handleTipoProyectoChange} options={optionsDrop} selectSedes={editingProjects.id_tipo_proyecto} />
+              <DropListField_Projects
+                handleChange={handleTipoProyectoChange}
+                options={optionsDrop}
+                selectTipoProyecto={editingProjects.id_tipo_proyecto}
+              />
             </div>
             <div className="container-fluid mt-4 d-flex justify-content-center">
               <div className="col-4 d-flex justify-content-center">
@@ -206,6 +229,7 @@ export default function Proyects() {
                   title="Guardar Cambios"
                   color="white"
                   onClick={updateProjects}
+                  colorbutton="black"
                 />
               </div>
             </div>
@@ -213,7 +237,12 @@ export default function Proyects() {
           </Modal>
           <div className="container-fluid mt-4 d-flex justify-content-center">
             <div className="col-4 d-flex justify-content-center">
-              <Buttons title="Guardar" colorbutton='black' color="white" onClick={createProjects} />
+              <Buttons
+                title="Guardar"
+                colorbutton="black"
+                color="white"
+                onClick={createProjects}
+              />
             </div>
           </div>
         </div>

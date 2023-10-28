@@ -1,0 +1,24 @@
+/* En tu archivo de hojas de estilo CSS (por ejemplo, Home.css) */
+
+.navbar {
+    width: 100%;
+    top: 0;
+    background-color: rgb(255, 255, 255);
+    z-index: 1000;
+    overflow: auto;
+    /* Asegura que esté por encima de otros elementos */
+}
+
+.navbar:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgba(250, 246, 246, 0.95);
+}
+
+.custom {
+    max-height: 36rem; /* Ajusta la altura máxima al 80% de la altura de la ventana */
+    min-height: 25rem; /* Ajusta la altura máxima al 80% de la altura de la ventana */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
