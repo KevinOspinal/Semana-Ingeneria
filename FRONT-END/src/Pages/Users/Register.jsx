@@ -58,12 +58,9 @@ export default function Register({ showRegisterModal, closeModal }) {
         >
             <form
                 onSubmit={handleSubmit(async (values) => {
-                    try {
-                        const response = await registerRequest(values);
-                        console.log(response); // Accede a los datos devueltos por el servidor
-                    } catch (error) {
-                        console.error(error);
-                    }
+                    console.log(values)
+                    const res = await registerRequest(values)
+                    console.log(res)
                 })}>
 
                 <div className="modal-dialog custom" role="document">
