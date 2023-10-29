@@ -2,16 +2,22 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import Buttons from "../../components/Buttons";
 import { useForm, Controller } from "react-hook-form";
-import { registerRequest } from "../../api/auth";
-
+import {useAuth} from '../../Context/AuthContext'
+import {useNavigate} from 'react-router-dom'
 
 export default function Register({ showRegisterModal, closeModal }) {
-    const { control, register, handleSubmit, setValue } = useForm(); // Configura el control del formulario
+    const { control, register, handleSubmit, setValue, formState:{errors} } = useForm(); // Configura el control del formulario
     const [optionsDropDocumento, setOptionsDropDocumento] = useState([]);
     const [optionsDropTipoUsuario, setOptionsDropTipoUsuario] = useState([]);
     const [optionsDropProgramas, setOptionsDropTipoPrograma] = useState([]);
+    const {signup,isAuthenticated} = useAuth();
+    const navigate = useNavigate()
+    console.log(isAuthenticated.id_tipo_usuario, 'authenticacion')
 
     useEffect(() => {
+
+        if(isAuthenticated == 1) navigate('/Admin')
+
         const getDocumentType = async () => {
             try {
                 const response = await Axios.get(
@@ -42,7 +48,7 @@ export default function Register({ showRegisterModal, closeModal }) {
         getPrograms();
         getTypeUser();
         getDocumentType();
-    }, []);
+    }, [isAuthenticated]);
 
 
     return (
@@ -58,12 +64,8 @@ export default function Register({ showRegisterModal, closeModal }) {
         >
             <form
                 onSubmit={handleSubmit(async (values) => {
-                    try {
-                        const response = await registerRequest(values);
-                        console.log(response); // Accede a los datos devueltos por el servidor
-                    } catch (error) {
-                        console.error(error);
-                    }
+                    console.log(values)
+                    signup(values)
                 })}>
 
                 <div className="modal-dialog custom" role="document">
@@ -116,6 +118,13 @@ export default function Register({ showRegisterModal, closeModal }) {
                                         </div>
                                     </div>
                                 </div>
+                                {
+                                    errors.id_tipo_documento &&(
+                                        <p>
+                                            Tipo de documento es requerido
+                                        </p>
+                                    )
+                                }
                                 <div className="col-12">
                                     <div className="mb-3 d-flex align-items-center">
                                         <label className="col-sm-4 col-lg-2 d-flex justify-content-end align-items-center form-label me-2">
@@ -130,6 +139,13 @@ export default function Register({ showRegisterModal, closeModal }) {
                                         </div>
                                     </div>
                                 </div>
+                                {
+                                    errors.documento &&(
+                                        <p>
+                                            El documento es requerido
+                                        </p>
+                                    )
+                                }
                                 <div className="col-12 ">
                                     <div className="mb-3 d-flex align-items-center">
                                         <label className="col-2 d-flex justify-content-end align-items-center form-label me-2">
@@ -165,6 +181,13 @@ export default function Register({ showRegisterModal, closeModal }) {
                                         </div>
                                     </div>
                                 </div>
+                                {
+                                    errors.id_tipo_usuario &&(
+                                        <p>
+                                            El tipo de usuario es requerdo
+                                        </p>
+                                    )
+                                }
                                 <div className="col-12 ">
                                     <div className="mb-3 d-flex align-items-center">
                                         <label className="col-2 d-flex justify-content-end align-items-center form-label me-2">
@@ -200,6 +223,13 @@ export default function Register({ showRegisterModal, closeModal }) {
                                         </div>
                                     </div>
                                 </div>
+                                {
+                                    errors.id_programa &&(
+                                        <p>
+                                            El tipo de programa es requerido
+                                        </p>
+                                    )
+                                }
                                 <div className="col-12">
                                     <div className="mb-3 d-flex align-items-center">
                                         <label className="col-sm-4 col-lg-2 d-flex justify-content-end align-items-center form-label me-2">
@@ -215,6 +245,13 @@ export default function Register({ showRegisterModal, closeModal }) {
                                         </div>
                                     </div>
                                 </div>
+                                {
+                                    errors.nombres_usuario &&(
+                                        <p>
+                                           Los nombre son requerido
+                                        </p>
+                                    )
+                                }
                                 <div className="col-12">
                                     <div className="mb-3 d-flex align-items-center">
                                         <label className="col-sm-4 col-lg-2 d-flex justify-content-end align-items-center form-label me-2">
@@ -229,6 +266,13 @@ export default function Register({ showRegisterModal, closeModal }) {
                                         </div>
                                     </div>
                                 </div>
+                                {
+                                    errors.apellidos_usuario &&(
+                                        <p>
+                                           Los apellidos son requeridos
+                                        </p>
+                                    )
+                                }
                                 <div className="col-12">
                                     <div className="mb-3 d-flex align-items-center">
                                         <label className="col-sm-4 col-lg-2 d-flex justify-content-end align-items-center form-label me-2">
@@ -244,6 +288,13 @@ export default function Register({ showRegisterModal, closeModal }) {
                                         </div>
                                     </div>
                                 </div>
+                                {
+                                    errors.correo &&(
+                                        <p>
+                                           El correo es requerido
+                                        </p>
+                                    )
+                                }
                             </div>
                         </div>
                         <div className="modal-footer d-flex justify-content-center">
