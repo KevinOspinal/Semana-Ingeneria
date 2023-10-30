@@ -248,7 +248,7 @@ export default function Register({ showRegisterModal, closeModal }) {
                                 {
                                     errors.nombres_usuario &&(
                                         <p>
-                                           Los nombre son requerido
+                                            Los nombre son requerido
                                         </p>
                                     )
                                 }
@@ -269,7 +269,7 @@ export default function Register({ showRegisterModal, closeModal }) {
                                 {
                                     errors.apellidos_usuario &&(
                                         <p>
-                                           Los apellidos son requeridos
+                                            Los apellidos son requeridos
                                         </p>
                                     )
                                 }
@@ -291,7 +291,7 @@ export default function Register({ showRegisterModal, closeModal }) {
                                 {
                                     errors.correo &&(
                                         <p>
-                                           El correo es requerido
+                                            El correo es requerido
                                         </p>
                                     )
                                 }

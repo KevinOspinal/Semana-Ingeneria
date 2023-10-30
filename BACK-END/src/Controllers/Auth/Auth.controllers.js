@@ -65,13 +65,13 @@ const Register = async (req, res) => {
 // Función para el inicio de sesión (aún no está implementada)
 const Login = async (req, res) => {
     // Extracción de datos del cuerpo de la solicitud HTTP
-    const { Documento } = req.body;
+    const { documento } = req.body;
     try {
         // Realizar una consulta a la base de datos para buscar un usuario por documento
         const result = await new Promise((resolve, reject) => {
             conexion.query(
                 "SELECT * FROM tb_usuarios WHERE documento = ?",
-                [Documento],
+                [documento],
                 (error, results) => {
                     if (error) {
                         reject(error);
@@ -93,7 +93,7 @@ const Login = async (req, res) => {
         }
 
         // Comparar la contraseña proporcionada con la almacenada en la base de datos
-        const isMatch = await bcrypt.compare(Documento, Usuario.contraseña);
+        const isMatch = await bcrypt.compare(documento, Usuario.contraseña);
 
         if (!isMatch) return res.status(400).json({ message: "Contraseña incorrecta" });
 
