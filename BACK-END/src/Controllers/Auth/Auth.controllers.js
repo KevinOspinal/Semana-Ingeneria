@@ -2,16 +2,36 @@
 const conexion = require('../../../db'); // Conexión a la base de datos
 const bcrypt = require('bcryptjs'); // Módulo para el hash de contraseñas
 const CreateAccessToken = require('../../libs/jwt.js'); // Función para crear tokens JWT
-
 // Función para registrar un usuario
 const Register = async (req, res) => {
     // Extracción de datos del cuerpo de la solicitud HTTP
     const { id_tipo_documento, documento, id_tipo_usuario, id_programa, nombres_usuario, apellidos_usuario, correo } = req.body;
-
-    // Hasheo de la contraseña del usuario (usando el número de documento como contraseña)
-    const passwordHash = await bcrypt.hash(documento, 5);
-
     try {
+
+        if(documento.length>13) return res.status(400).json(["El documento debe que tener maximo 12 digitos"])
+
+        // Realizar una consulta a la base de datos para verificar si el correo ya está en uso
+        const UserFound = await new Promise((resolve, reject) => {
+            conexion.query(
+                "SELECT * FROM tb_usuarios WHERE correo = ?",
+                [correo],
+                (error, results) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(results);
+                    }
+                }
+            );
+        });
+
+        if (UserFound.length > 0) {
+            return res.status(400).json(["the mail is alredy in use"])
+        }
+
+        // Hasheo de la contraseña del usuario (usando el número de documento como contraseña)
+        const passwordHash = await bcrypt.hash(documento, 10);
+
         // Realizar una consulta a la base de datos para insertar un nuevo usuario
         const result = await new Promise((resolve, reject) => {
             conexion.query(
@@ -45,16 +65,8 @@ const Register = async (req, res) => {
         // Establecer una cookie en la respuesta (esto podría usarse para autenticación posterior)
         res.cookie('token', token);
         // Responder con un código 200 y un mensaje
-        res.json({
-            id: userData.id,
-            id_tipo_documento: userData.id_tipo_documento,
-            documento: userData.documento,
-            id_tipo_usuario: userData.id_tipo_usuario,
-            id_programa: userData.id_programa,
-            nombres_usuario: userData.nombres_usuario,
-            apellidos_usuario: userData.apellidos_usuario,
-            correo: userData.correo,
-        });
+        res.json(userData);
+        
     } catch (error) {
         // Manejo de errores en caso de falla
         console.error(error);

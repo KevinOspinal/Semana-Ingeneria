@@ -15,10 +15,12 @@
 }
 
 .custom {
-    max-height: 36rem; /* Ajusta la altura máxima al 80% de la altura de la ventana */
+    max-height: 32rem; /* Ajusta la altura máxima al 80% de la altura de la ventana */
     min-height: 25rem; /* Ajusta la altura máxima al 80% de la altura de la ventana */
+    min-width: 25px !important;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 8px;
+    overflow-y: scroll;
 }
 

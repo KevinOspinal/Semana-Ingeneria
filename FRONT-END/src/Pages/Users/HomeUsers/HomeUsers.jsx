@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import NavbarUser from '../NavbarUser/NavbarUser'
-import './HomeUsers.css'
+import './HomeUser.css'
 import Hero_Img from '../../../assets/img/section-footer.png'
 import logo from '../../../assets/img/logo-unicatolica-vertical.png'
 import Cards from '../../../components/Cards'
 import Cards2 from '../../../components/Cards2'
 import TitleUsers from '../../../components/TitleUsers'
 
-export default function HomeUsers() {
+export default function Home() {
 
 
   const [showLoginModal, setShowLoginModal] = useState(false);
