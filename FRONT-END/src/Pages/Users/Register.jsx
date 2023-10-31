@@ -276,7 +276,6 @@ export default function Register({ showRegisterModal, closeModal }) {
                                 {
                                     errors.apellidos_usuario && (
                                         <p className="text-warning bg-dark">
-
                                             Los apellidos son requeridos
                                         </p>
                                     )
@@ -299,7 +298,6 @@ export default function Register({ showRegisterModal, closeModal }) {
                                 {
                                     errors.correo && (
                                         <p className="text-warning bg-dark">
-
                                             El correo es requerido
                                         </p>
                                     )
