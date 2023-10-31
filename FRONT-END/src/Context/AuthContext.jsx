@@ -19,11 +19,11 @@ export const AuthProvider = ({ children }) => {
     const signup = async (user) => {
         try {
             const res = await registerRequest(user)
-            console.log(res.data)
             setuser(res.data)
             setIsAuthenticated(user)
         } catch (error) {
-            console.log(error)
+            //console.log(error.response.data)
+            setErrors(error.response.data)
         }
     }
 
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
             signin,
             user,
             isAuthenticated,
-            setErrors
+            errors
         }}>
             {children}
         </AuthContext.Provider>
