@@ -10,12 +10,16 @@ import { useNavigate } from 'react-router-dom'
 export default function Login({showLoginModal,closeModal}) {
 
     const { register, handleSubmit, formState:{errors}} = useForm()
-    const { signin, user, errors: loginErrors } = useAuth()
-    //const navigate = useNavigate()
+    const { signin, isAuthenticatedLogin , errors: loginErrors } = useAuth()
+    const navigate = useNavigate()
 
-    console.log(user)
+    console.log(isAuthenticatedLogin)
 
-    
+    useEffect(() => {
+
+        if (isAuthenticatedLogin.id_tipo_usuario == 1) navigate('/Admin')
+
+    }, [isAuthenticatedLogin]);
 
     return (
         <div
@@ -48,7 +52,15 @@ export default function Login({showLoginModal,closeModal}) {
                         </div>
                         <div className="container modal-body d-flex justify-content-center align-items-center">
                             <div className="row">
-                                
+                                {
+                                    loginErrors.map((error, i) => (
+                                        <div className="d-flex justify-content-center text-white rounded" key={i} style={{ background: '#002f59' }}>
+                                            {
+                                                error
+                                            }
+                                        </div>
+                                    ))
+                                }
                                 <div className="col-12">
                                     <div className="mb-3 d-flex align-items-center">
                                         <label className="col-sm-4 col-lg-2 d-flex justify-content-end align-items-center form-label me-2">
@@ -65,7 +77,7 @@ export default function Login({showLoginModal,closeModal}) {
                                 </div>
                                 {
                                     errors.documento && (
-                                        <p>
+                                        <p className="text-danger">
                                             El documento es requerido
                                         </p>
                                     )

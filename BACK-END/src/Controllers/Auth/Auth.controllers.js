@@ -8,8 +8,10 @@ const Register = async (req, res) => {
     const { id_tipo_documento, documento, id_tipo_usuario, id_programa, nombres_usuario, apellidos_usuario, correo } = req.body;
     try {
 
-
-        if(documento.length>13) return res.status(400).json(["El documento debe que tener maximo 12 digitos"])
+        console.log(documento.length)
+        if(documento.length>12) {
+            return res.status(400).json(["El documento debe que tener maximo 12 digitos"])
+        } 
 
         // Realizar una consulta a la base de datos para verificar si el correo ya está en uso
         const UserFound = await new Promise((resolve, reject) => {
