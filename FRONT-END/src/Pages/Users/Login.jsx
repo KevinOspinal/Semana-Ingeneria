@@ -10,19 +10,12 @@ import { useNavigate } from 'react-router-dom'
 export default function Login({showLoginModal,closeModal}) {
 
     const { register, handleSubmit, formState:{errors}} = useForm()
-    const { signin, isAuthenticated } = useAuth()
-    const navigate = useNavigate()
-    console.log(isAuthenticated.documento, 'authenticacion')
+    const { signin, user, errors: loginErrors } = useAuth()
+    //const navigate = useNavigate()
+
+    console.log(user)
+
     
-    const onSubmit = handleSubmit(data=>{
-        signin(data)
-    })
-
-    useEffect(() => {
-
-        if (isAuthenticated == 1) navigate('/Admin')
-
-    }, [isAuthenticated]);
 
     return (
         <div
@@ -55,6 +48,7 @@ export default function Login({showLoginModal,closeModal}) {
                         </div>
                         <div className="container modal-body d-flex justify-content-center align-items-center">
                             <div className="row">
+                                
                                 <div className="col-12">
                                     <div className="mb-3 d-flex align-items-center">
                                         <label className="col-sm-4 col-lg-2 d-flex justify-content-end align-items-center form-label me-2">
