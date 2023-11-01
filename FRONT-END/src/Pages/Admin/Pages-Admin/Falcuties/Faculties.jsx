@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import Swal from 'sweetalert2';
 import Modal from "react-modal";
 import Title from "../../../../components/Title";
 import InputField from "../../../../components/InputField";
@@ -34,61 +35,95 @@ export default function Faculties() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  // Función para actualizar una facultad
-  const updateFaculties = () => {
-    Axios.put(
-      `http://localhost:3000/updateFaculties/${editingFacultad.id_facultad}`,
-      {
-        nombre: editingFacultad.nombre_facultad,
-      }
-    )
-      .then(() => {
-        alert("Facultad actualizada.");
-        getFaculties();
-        //closeModal(); // Cierra el modal después de la actualización
-      })
-      .catch((error) => {
-        console.error(error);
+// Función para actualizar una facultad
+const updateFaculties = () => {
+  Axios.put(`http://localhost:3000/updateFaculties/${editingFacultad.id_facultad}`, {
+    nombre: editingFacultad.nombre_facultad,
+  })
+    .then(() => {
+      getFaculties();
+      closeModal(); // Cierra el modal después de la actualización
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Facultad actualizada exitosamente.',
       });
-  };
-
-  //FUNCION PARA CREAR LAS facultades
-  const [nombre, setnombre] = useState("");
-
-  const createFaculties = () => {
-    Axios.post("http://localhost:3000/createFaculties", {
-      nombre: nombre,
     })
-      .then((err, responde) => {
-        alert("Facultad registrada.");
-        getFaculties();
-      })
-      .catch((error) => {
-        console.error(error);
+    .catch((error) => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al actualizar la facultad. Por favor, inténtelo de nuevo más tarde.',
       });
-  };
+    });
+};
 
-  //FUNCION PARA MOSTRAR LAS FACULTADES EN LA GRID
-  const getFaculties = () => {
-    Axios.get("http://localhost:3000/getFaculties").then((respond) => {
+//FUNCION PARA CREAR LAS facultades
+const [nombre, setnombre] = useState("");
+
+const createFaculties = () => {
+  Axios.post("http://localhost:3000/createFaculties", {
+    nombre: nombre,
+  })
+    .then(() => {
+      getFaculties();
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Facultad registrada exitosamente.',
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al registrar la facultad. Por favor, inténtelo de nuevo más tarde.',
+      });
+    });
+};
+
+//FUNCION PARA MOSTRAR LAS FACULTADES EN LA GRID
+const getFaculties = () => {
+  Axios.get("http://localhost:3000/getFaculties")
+    .then((respond) => {
       setFacultiesList(respond.data);
+    })
+    .catch((error) => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al obtener las facultades. Por favor, inténtelo de nuevo más tarde.',
+      });
+    });
+};
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás revertir esto.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminarlo',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Axios.delete(`http://localhost:3000/deleteFaculties/${id}`)
+          .then((response) => {
+            alert('Facultad eliminada satisfactoriamente!');
+            getFaculties();
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     });
   };
-
-  //FUNCION PARA ELIMINAR UNA SEDE CON EL ID
-  const handleDelete = (id) => {
-    // Hacer una solicitud DELETE al servidor para eliminar la sede
-    Axios.delete(`http://localhost:3000/deleteFaculties/${id}`)
-      .then((response) => {
-        alert("Facultad eliminada satisfactoriamente!!");
-        getFaculties();
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
+  
   // funcion para traer un solo dato en el grid...
   const getOnlyFaculties = (nombre) => {
     Axios.get(`http://localhost:3000/getOnlyFaculties/${nombre}`).then(

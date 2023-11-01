@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import Swal from 'sweetalert2';
+
 import Modal from "react-modal";
 import Title from "../../../../components/Title";
 import InputField from "../../../../components/InputField";
@@ -43,14 +45,24 @@ export default function Event_Type() {
       }
     )
       .then(() => {
-        alert("Tipo de evento actualizado.");
         getEvent_Type();
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Tipo de evento actualizado exitosamente.',
+        });
         //closeModal(); // Cierra el modal después de la actualización
       })
       .catch((error) => {
         console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al actualizar el tipo de evento. Por favor, inténtelo de nuevo más tarde.',
+        });
       });
   };
+  
 
   //FUNCION PARA CREAR LAS facultades
   const [descripcion_otro_evento, setdescripcion_otro_evento] = useState("");
@@ -59,14 +71,24 @@ export default function Event_Type() {
     Axios.post("http://localhost:3000/createEvent_Type", {
       descripcion: descripcion_otro_evento,
     })
-      .then((err, responde) => {
-        alert("Tipo de evento registrado.");
+      .then((response) => {
         getEvent_Type();
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Tipo de evento registrado exitosamente.',
+        });
       })
       .catch((error) => {
         console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al registrar el tipo de evento. Por favor, inténtelo de nuevo más tarde.',
+        });
       });
   };
+  
 
   //FUNCION PARA MOSTRAR LAS FACULTADES EN LA GRID
   const getEvent_Type = () => {
@@ -75,29 +97,53 @@ export default function Event_Type() {
     });
   };
 
-  //FUNCION PARA ELIMINAR UNA SEDE CON EL ID
   const handleDelete = (id) => {
-    // Hacer una solicitud DELETE al servidor para eliminar el tipo de evento
-    Axios.delete(`http://localhost:3000/deleteEvent_Type/${id}`)
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás revertir esto.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminarlo',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Axios.delete(`http://localhost:3000/deleteEvent_Type/${id}`)
+          .then((response) => {
+            alert("Tipo de evento eliminado satisfactoriamente!");
+            getEvent_Type();
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    });
+  };
+    // funcion para traer un solo dato en el grid...
+
+  const getOnlyEvent_Type = (descripcion_otro_evento) => {
+    Axios.get(`http://localhost:3000/getOnlyEvent_Type/${descripcion_otro_evento}`)
       .then((response) => {
-        alert("Tipo de evento eliminado satisfactoriamente!");
-        getEvent_Type();
-        console.log(response.data);
+        setEvent_TypeList(response.data);
+        console.log("Event_TypeList actualizada");
+        // Puedes mostrar una notificación de éxito aquí si lo deseas
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Dato obtenido exitosamente.',
+        });
       })
       .catch((error) => {
         console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al obtener el dato. Por favor, inténtelo de nuevo más tarde.',
+        });
       });
   };
-
-  // funcion para traer un solo dato en el grid...
-  const getOnlyEvent_Type = (descripcion_otro_evento) => {
-    Axios.get(
-      `http://localhost:3000/getOnlyEvent_Type/${descripcion_otro_evento}`
-    ).then((respond) => {
-      setEvent_TypeList(respond.data);
-      console.log("Actualizado");
-    });
-  };
+  
 
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
