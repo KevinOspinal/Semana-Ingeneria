@@ -37,7 +37,7 @@ export default function Login({showLoginModal,closeModal}) {
                     console.log(values)
                     signin(values)
                 })}>
-                <div className="modal-dialog custom" role="document">
+                <div className="modal-dialog custom-Login" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title">Iniciar sesion</h5>
@@ -63,10 +63,10 @@ export default function Login({showLoginModal,closeModal}) {
                                 }
                                 <div className="col-12">
                                     <div className="mb-3 d-flex align-items-center">
-                                        <label className="col-sm-4 col-lg-2 d-flex justify-content-end align-items-center form-label me-2">
+                                        <label className="col-4 d-flex justify-content-end align-items-center form-label me-2">
                                             Numero de Documento
                                         </label>
-                                        <div className="col-sm-5 col-lg-7 mx-auto rounded border-black">
+                                        <div className="col-7 mx-auto rounded border-black d-flex justify-content-end align-items-center">
                                             <input
                                                 type="text"
                                                 {...register("documento", { required: true })}

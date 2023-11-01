@@ -96,7 +96,7 @@ export default function Register({ showRegisterModal, closeModal }) {
                                 }
                                 <div className="col-12 ">
                                     <div className="mb-3 d-flex align-items-center">
-                                        <label className="col-2 d-flex justify-content-end align-items-center form-label me-2">
+                                        <label  style={{fontSize:'clamp(8px, 3vw, 15px)'}}  className="col-2 d-flex justify-content-end align-items-center form-label me-2">
                                             Tipo de documento
                                         </label>
                                         <div className="col-7 mx-auto">
@@ -138,10 +138,10 @@ export default function Register({ showRegisterModal, closeModal }) {
                                 </div>
                                 <div className="col-12">
                                     <div className="mb-3 d-flex align-items-center">
-                                        <label className="col-sm-4 col-lg-2 d-flex justify-content-end align-items-center form-label me-2">
+                                        <label style={{fontSize:'clamp(8px, 3vw, 15px)'}} className="col-2 d-flex justify-content-end align-items-center form-label me-2">
                                             Numero de Documento
                                         </label>
-                                        <div className="col-sm-5 col-lg-7 mx-auto rounded border-black">
+                                        <div className="col-7 mx-auto rounded border-black">
                                             <input
                                                 type="text"
                                                 {...register("documento", {
@@ -161,7 +161,7 @@ export default function Register({ showRegisterModal, closeModal }) {
                                 }
                                 <div className="col-12 ">
                                     <div className="mb-3 d-flex align-items-center">
-                                        <label className="col-2 d-flex justify-content-end align-items-center form-label me-2">
+                                        <label style={{fontSize:'clamp(8px, 3vw, 15px)'}} className="col-2 d-flex justify-content-end align-items-center form-label me-2">
                                             Tipo de usuario
                                         </label>
                                         <div className="col-7 mx-auto">
@@ -197,7 +197,7 @@ export default function Register({ showRegisterModal, closeModal }) {
 
                                 <div className="col-12 ">
                                     <div className="mb-3 d-flex align-items-center">
-                                        <label className="col-2 d-flex justify-content-end align-items-center form-label me-2">
+                                        <label style={{fontSize:'clamp(8px, 3vw, 15px)'}} className="col-2 d-flex justify-content-end align-items-center form-label me-2">
                                             Programa
                                         </label>
                                         <div className="col-7 mx-auto">
@@ -239,10 +239,10 @@ export default function Register({ showRegisterModal, closeModal }) {
                                 }
                                 <div className="col-12">
                                     <div className="mb-3 d-flex align-items-center">
-                                        <label className="col-sm-4 col-lg-2 d-flex justify-content-end align-items-center form-label me-2">
+                                        <label style={{fontSize:'clamp(8px, 3vw, 15px)'}} className="col-2 d-flex justify-content-end align-items-center form-label me-2">
                                             Nombres
                                         </label>
-                                        <div className="col-sm-5 col-lg-7 mx-auto rounded border-black">
+                                        <div className="col-7 mx-auto rounded border-black">
                                             <input
                                                 type="text"
                                                 {...register("nombres_usuario", { required: true })}
@@ -261,10 +261,10 @@ export default function Register({ showRegisterModal, closeModal }) {
                                 }
                                 <div className="col-12">
                                     <div className="mb-3 d-flex align-items-center">
-                                        <label className="col-sm-4 col-lg-2 d-flex justify-content-end align-items-center form-label me-2">
+                                        <label style={{fontSize:'clamp(8px, 3vw, 15px)'}} className="col-2 d-flex justify-content-end align-items-center form-label me-2">
                                             Apellidos
                                         </label>
-                                        <div className="col-sm-5 col-lg-7 mx-auto rounded border-black">
+                                        <div className="col-7 mx-auto rounded border-black">
                                             <input
                                                 type="text"
                                                 {...register("apellidos_usuario", { required: true })}
@@ -282,10 +282,10 @@ export default function Register({ showRegisterModal, closeModal }) {
                                 }
                                 <div className="col-12">
                                     <div className="mb-3 d-flex align-items-center">
-                                        <label className="col-sm-4 col-lg-2 d-flex justify-content-end align-items-center form-label me-2">
+                                        <label style={{fontSize:'clamp(8px, 3vw, 15px)'}} className="col-2 d-flex justify-content-end align-items-center form-label me-2">
                                             Correo electrónico
                                         </label>
-                                        <div className="col-sm-5 col-lg-7 mx-auto rounded border-black">
+                                        <div className="col-7 mx-auto rounded border-black">
                                             <input
                                                 type="email"
                                                 {...register("correo", { required: true })}

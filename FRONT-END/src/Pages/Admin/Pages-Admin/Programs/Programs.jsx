@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Swal from 'sweetalert2';
 import Axios from 'axios'
 import InputField from "../../../../components/InputField";
 import Title from "../../../../components/Title";
@@ -33,69 +34,120 @@ export default function Programs() {
 
 	const createPrograms = () => {
 		Axios.post("http://localhost:3000/createPrograms", {
-			nombre_programa: nombre_programa,
-			facultad: selectedFacultad,
-		}).then((responde) => {
-			alert("Programa registrado.");
-			getPrograms();
+		  nombre_programa: nombre_programa,
+		  facultad: selectedFacultad,
 		})
-			.catch((error) => {
-				console.log(error);
+		  .then(() => {
+			getPrograms();
+			Swal.fire({
+			  icon: 'success',
+			  title: 'Éxito',
+			  text: 'Programa registrado exitosamente.',
 			});
-	};
+		  })
+		  .catch((error) => {
+			console.error(error);
+			Swal.fire({
+			  icon: 'error',
+			  title: 'Error',
+			  text: 'Hubo un error al registrar el programa. Por favor, inténtelo de nuevo más tarde.',
+			});
+		  });
+	  };
+	  
 
 
-
-
-	//FUNCION PARA CONSULTAR TODAS LOS PROGRAMAS CREADOS Y TAMBIEN PARA UNA SOLO
-	const getPrograms = () => {
-		Axios.get("http://localhost:3000/getPrograms").then((respond) => {
-			setProgramsList(respond.data);
+// Función para consultar todos los programas creados y también para uno solo
+const getPrograms = () => {
+	Axios.get("http://localhost:3000/getPrograms")
+	  .then((respond) => {
+		setProgramsList(respond.data);
+	  })
+	  .catch((error) => {
+		console.error(error);
+		Swal.fire({
+		  icon: 'error',
+		  title: 'Error',
+		  text: 'Hubo un error al obtener los programas. Por favor, inténtelo de nuevo más tarde.',
 		});
-	};
-
-	const getOnlyPrograms = (nombre_programa) => {
-		Axios.get(`http://localhost:3000/getOnlyPrograms/${nombre_programa}`).then((respond) => {
-			setProgramsList(respond.data);
-			console.log("ProgramsList actualizado");
-		}
-		);
-	};
-
-
-
-
-	//FUNCION PARA ACTUALIZAR EL PROGRAMA
-	const updatePrograms= () => {
-		Axios.put(
-			`http://localhost:3000/updatePrograms/${editingProgramas.id_programa}`,
-			{
-				nombre_programa: editingProgramas.nombre_programa,
-				facultad : editingProgramas.id_facultad,
-			}).then(() => {
-				alert("El programa se ha actializado.");
-				getPrograms();
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	};
-
-
-
-	//FUNCION PARA ELIMINAR UN PROGRAMA
-	const handleDelete = (id) => {
+	  });
+  };
+  
+  const getOnlyPrograms = (nombre_programa) => {
+	Axios.get(`http://localhost:3000/getOnlyPrograms/${nombre_programa}`)
+	  .then((respond) => {
+		setProgramsList(respond.data);
+		console.log("ProgramsList actualizado");
+	  })
+	  .catch((error) => {
+		console.error(error);
+		Swal.fire({
+		  icon: 'error',
+		  title: 'Error',
+		  text: 'Hubo un error al obtener el programa. Por favor, inténtelo de nuevo más tarde.',
+		});
+	  });
+  };
+  
+  // Función para actualizar el programa
+  const updatePrograms = () => {
+	Axios.put(
+	  `http://localhost:3000/updatePrograms/${editingProgramas.id_programa}`,
+	  {
+		nombre_programa: editingProgramas.nombre_programa,
+		facultad: editingProgramas.id_facultad,
+	  })
+	  .then(() => {
+		getPrograms();
+		closeModal(); // Cierra el modal después de la actualización
+		Swal.fire({
+		  icon: 'success',
+		  title: 'Éxito',
+		  text: 'Programa actualizado exitosamente.',
+		});
+	  })
+	  .catch((error) => {
+		console.error(error);
+		Swal.fire({
+		  icon: 'error',
+		  title: 'Error',
+		  text: 'Hubo un error al actualizar el programa. Por favor, inténtelo de nuevo más tarde.',
+		});
+	  });
+  };
+  
+  const handleDelete = (id) => {
+	Swal.fire({
+	  title: '¿Estás seguro?',
+	  text: 'Esta acción eliminará el programa permanentemente.',
+	  icon: 'warning',
+	  showCancelButton: true,
+	  confirmButtonColor: '#3085d6',
+	  cancelButtonColor: '#d33',
+	  confirmButtonText: 'Sí, eliminarlo',
+	}).then((result) => {
+	  if (result.isConfirmed) {
 		Axios.delete(`http://localhost:3000/deletePrograms/${id}`)
-			.then((response) => {
-				alert("El Programa se ha eliminado satisfactoriamente!!");
-				getPrograms();
-				console.log(response.data);
-			})
-			.catch((error) => {
-				console.error(error);
+		  .then(() => {
+			getPrograms();
+			Swal.fire({
+			  icon: 'success',
+			  title: 'Éxito',
+			  text: 'Programa eliminado exitosamente.',
 			});
-	};
-
+		  })
+		  .catch((error) => {
+			console.error(error);
+			Swal.fire({
+			  icon: 'error',
+			  title: 'Error',
+			  text: 'Hubo un error al eliminar el programa. Por favor, inténtelo de nuevo más tarde.',
+			});
+		  });
+	  }
+	});
+  };
+  
 
 
 	//ESTA FUNCION ES PARA CONSULTAR TODOS LOS PROGRAMADAS CREADOS
