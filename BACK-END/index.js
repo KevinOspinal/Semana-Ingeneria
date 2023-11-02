@@ -4,7 +4,10 @@ const morgan = require('morgan') // Importa el módulo morgan (para el registro 
 const cors = require('cors') // Importa el módulo cors (para permitir solicitudes cruzadas entre dominios
 const cookieParser = require('cookie-parser')
 
-app.use(cors()) // Habilita el middleware CORS para permitir solicitudes desde otros dominios
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+})) // Habilita el middleware CORS para permitir solicitudes desde otros dominios
 app.use(express.json()) // Habilita el middleware para analizar datos JSON en las solicitudes
 app.use(morgan('dev')) // Habilita el middleware morgan con el formato 'dev' para registrar las solicitudes entrantes en la consola
 app.use(cookieParser())

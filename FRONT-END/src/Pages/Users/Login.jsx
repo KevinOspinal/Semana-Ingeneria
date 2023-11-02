@@ -1,25 +1,15 @@
-
-import { useEffect } from "react";
 import Buttons from "../../components/Buttons";
 import { useForm } from "react-hook-form";
 import { useAuth } from '../../Context/AuthContext'
-import { useNavigate } from 'react-router-dom'
+
 
 
 
 export default function Login({showLoginModal,closeModal}) {
 
     const { register, handleSubmit, formState:{errors}} = useForm()
-    const { signin, isAuthenticatedLogin , errors: loginErrors } = useAuth()
-    const navigate = useNavigate()
-
-    console.log(isAuthenticatedLogin)
-
-    useEffect(() => {
-
-        if (isAuthenticatedLogin.id_tipo_usuario == 1) navigate('/Admin')
-
-    }, [isAuthenticatedLogin]);
+    const { signin, errors: loginErrors } = useAuth()
+    
 
     return (
         <div

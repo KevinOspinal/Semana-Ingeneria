@@ -2,6 +2,8 @@
 const conexion = require('../../../db'); // Conexión a la base de datos
 const bcrypt = require('bcryptjs'); // Módulo para el hash de contraseñas
 const CreateAccessToken = require('../../libs/jwt.js'); // Función para crear tokens JWT
+const jwt = require('jsonwebtoken');
+const TOKEN_SECRET = require('../../../config');
 // Función para registrar un usuario
 const Register = async (req, res) => {
     // Extracción de datos del cuerpo de la solicitud HTTP
@@ -112,7 +114,7 @@ const Login = async (req, res) => {
             );
         });
         // Verificar si se encontró un usuario
-        if (result.length < 1) {
+        if (!result.length) {
             return res
                 .status(400)
                 .json(["Usuario no encontrado"]);
@@ -183,5 +185,41 @@ const Profile = async (req, res) => {
     res.send("profile");
 };
 
+const verityToken = async (req, res) => {
+    const {token} = req.cookies
+
+    if(!token) return res.status(401).json(['No autorizado'])
+    jwt.verify(token, TOKEN_SECRET, async (err, user) => {
+        if (err) return res.status(401).json(['No autorizado'])
+
+        const decode = jwt.verify(token, TOKEN_SECRET)
+
+        const tokenId = decode.id
+
+        const result = await new Promise((resolve, reject) => {
+            conexion.query(
+                "SELECT * FROM tb_usuarios WHERE id_usuario = ?",
+                [tokenId],
+                (error, results) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(results);
+                    }
+                }
+            );
+        });
+        if (!result.length) return res.status(401).json(['No autorizado'])
+
+        res.json({
+            id: result[0].id_usuario,
+            id_tipo_usuario: result[0].id_tipo_usuario,
+            nombres: result[0].nombres_usuario,
+            apellidos: result[0].apellidos_usuario,
+            correo: result[0].correo,
+        })
+    })
+}
+
 // Exportar las funciones para su uso en otros lugares del código
-module.exports = { Register, Login, Logout, Profile };
+module.exports = { Register, Login, Logout, Profile, verityToken };
