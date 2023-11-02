@@ -1,5 +1,7 @@
 /**ROL POR PROYECTO */
 import React, { useState } from 'react'
+import Swal from 'sweetalert2';
+
 import Axios from 'axios'
 import Modal from 'react-modal'; // Importa react-modal
 import Title from '../../../../components/Title'
@@ -44,68 +46,126 @@ export default function Project_Role() {
 
   //ESTADOS PARA GUARDAR LA INFORMACION OBTENIDA DE LA VENTANA EDIT
   const [editingrol_proyecto, setEditingrol_proyecto] = useState({});
-
-  const updateProject_Role = () => {
-    Axios.put(`http://localhost:3000/updateProject_Role/${editingrol_proyecto.id_rol_proyecto}`, {
-      descripcion_rol_proyecto: editingrol_proyecto.descripcion_rol_proyecto,
-    })
-      .then(() => {
-        alert('Descripcion actualizada.');
-        getProject_Role();
-        //closeModal(); // Cierra el modal después de la actualización
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-
-
-  //FUNCION PARA CREAR LAS SEDES
-  const [descripcion_rol_proyecto, setdescripcion] = useState('')
-  
-  const createProject_Role = () => {
-    Axios.post('http://localhost:3000/createProject_Role', {
-      descripcion_rol_proyecto: descripcion_rol_proyecto,
-    }).then((err,responde) => {
-      alert('Descripcion registrada.')
+// Función para actualizar un rol de proyecto
+const updateProject_Role = () => {
+  Axios.put(`http://localhost:3000/updateProject_Role/${editingrol_proyecto.id_rol_proyecto}`, {
+    descripcion_rol_proyecto: editingrol_proyecto.descripcion_rol_proyecto,
+  })
+    .then(() => {
       getProject_Role();
-    }).catch((error) => {
-      console.error(error);
-    });
-
-  }
-
-
-
-  //FUNCION PARA MOSTRAR LAS SEDES EN LA GRID
-  const getProject_Role = () => {
-    Axios.get('http://localhost:3000/getProject_Role').then((respond) => {
-      setProject_RoleList(respond.data)
-    })
-  }
-
-  //FUNCION PARA ELIMINAR UNA SEDE CON EL ID
-  const handleDelete = (id) => {
-    // Hacer una solicitud DELETE al servidor para eliminar la sede
-    Axios.delete(`http://localhost:3000/deleteProject_Role/${id}`)
-      .then((response) => {
-        alert("Tipo de usuario eliminado satisfactoriamente!!");
-        getProject_Role();
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
+      closeModal(); // Cierra el modal después de la actualización
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Descripción actualizada exitosamente.',
       });
-  };
+    })
+    .catch((error) => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al actualizar la descripción. Por favor, inténtelo de nuevo más tarde.',
+      });
+    });
+};
 
-  // funcion para traer un solo dato en el grid...
-  const getOnlyProject_Role = (descripcion_rol_proyecto) => {
-    Axios.get(`http://localhost:3000/getOnlyProject_Role/${descripcion_rol_proyecto}`).then((respond) => {
-        setProject_RoleList(respond.data);
-        console.log('Project_RoleList actualizado');
-      })
-  }
+// Función para crear un rol de proyecto
+const [descripcion_rol_proyecto, setdescripcion] = useState('');
+
+const createProject_Role = () => {
+  Axios.post('http://localhost:3000/createProject_Role', {
+    descripcion_rol_proyecto: descripcion_rol_proyecto,
+  })
+    .then(() => {
+      getProject_Role();
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Descripción registrada exitosamente.',
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al registrar la descripción. Por favor, inténtelo de nuevo más tarde.',
+      });
+    });
+};
+
+// Función para mostrar los roles de proyecto en la grid
+const getProject_Role = () => {
+  Axios.get('http://localhost:3000/getProject_Role')
+    .then((respond) => {
+      setProject_RoleList(respond.data);
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Roles de proyecto obtenidos exitosamente.',
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al obtener los roles de proyecto. Por favor, inténtelo de nuevo más tarde.',
+      });
+    });
+};
+
+// Función para eliminar un rol de proyecto
+const handleDelete = (id) => {
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: 'Esta acción eliminará el rol de proyecto permanentemente.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, eliminarlo',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Axios.delete(`http://localhost:3000/deleteProject_Role/${id}`)
+        .then(() => {
+          getProject_Role();
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Rol de proyecto eliminado exitosamente.',
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un error al eliminar el rol de proyecto. Por favor, inténtelo de nuevo más tarde.',
+          });
+        });
+    }
+  });
+};
+
+
+// Función para traer un solo dato en la grid...
+const getOnlyProject_Role = (descripcion_rol_proyecto) => {
+  Axios.get(`http://localhost:3000/getOnlyProject_Role/${descripcion_rol_proyecto}`)
+    .then((respond) => {
+      setProject_RoleList(respond.data);
+      console.log('Project_RoleList actualizado');
+    })
+    .catch((error) => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al obtener el rol de proyecto. Por favor, inténtelo de nuevo más tarde.',
+      });
+    });
+};
 
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">

@@ -1,4 +1,6 @@
 import React from "react";
+import Swal from 'sweetalert2';
+
 import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
 import DropListField from "../../../../components/DropListField";
