@@ -3,7 +3,7 @@ import Axios from "axios";
 import Buttons from "../../components/Buttons";
 import { useForm, Controller } from "react-hook-form";
 import { useAuth } from '../../Context/AuthContext'
-import { useNavigate } from 'react-router-dom'
+
 
 export default function Register({ showRegisterModal, closeModal }) {
     const { control, register, handleSubmit, setValue, formState: { errors } } = useForm(); // Configura el control del formulario
@@ -11,14 +11,9 @@ export default function Register({ showRegisterModal, closeModal }) {
     const [optionsDropTipoUsuario, setOptionsDropTipoUsuario] = useState([]);
     const [optionsDropProgramas, setOptionsDropTipoPrograma] = useState([]);
     
-    const { signup, isAuthenticated, errors: registerErrors } = useAuth();
-
-    const navigate = useNavigate()
-    console.log(isAuthenticated, 'authenticacion')
+    const { signup, errors: registerErrors } = useAuth();
 
     useEffect(() => {
-
-        if (isAuthenticated.id_tipo_usuario == 1) navigate('/Admin')
 
         const getDocumentType = async () => {
             try {
@@ -50,7 +45,7 @@ export default function Register({ showRegisterModal, closeModal }) {
         getPrograms();
         getTypeUser();
         getDocumentType();
-    }, [isAuthenticated]);
+    }, []);
 
 
     return (

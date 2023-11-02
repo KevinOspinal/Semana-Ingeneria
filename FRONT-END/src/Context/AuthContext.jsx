@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { registerRequest, loginRequest } from "../api/auth.js";
+import { registerRequest, loginRequest, verityTokenRequet } from "../api/auth.js";
+import Cookies from 'js-cookie'
 import Swal from 'sweetalert2';
 
 export const AuthContext = createContext();
@@ -16,13 +17,17 @@ export const AuthProvider = ({ children }) => {
     const [user, setuser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState([]);
     const [isAuthenticatedLogin, setIsAuthenticatedLogin] = useState([]);
+    const [isLogin, setIsLogin] = useState(false);
     const [errors, setErrors] = useState([]);
+    const [loading, setLoading] = useState(true);
+    
 
     const signup = async (user) => {
         try {
             const res = await registerRequest(user);
             setuser(res.data);
             setIsAuthenticated(user);
+            setIsLogin(true)
             Swal.fire({
                 icon: 'success',
                 title: 'Éxito',
@@ -45,6 +50,7 @@ export const AuthProvider = ({ children }) => {
             const res = await loginRequest(user);
             console.log(res.data);
             setIsAuthenticatedLogin(res.data);
+            setIsLogin(true)
             Swal.fire({
                 icon: 'success',
                 title: 'Éxito',
@@ -71,6 +77,41 @@ export const AuthProvider = ({ children }) => {
         }
     }, [errors]);
 
+    useEffect(() => {
+        async function checkLogin() {
+            const cookies = Cookies.get()
+
+            if (!cookies.token) {
+                setIsLogin(false)
+                setLoading(false);
+                setIsAuthenticatedLogin([])
+                setIsAuthenticated([])
+                setuser(null)
+                return;
+            }
+                try {
+                    const res = await verityTokenRequet(cookies.token)
+                    if (!res.data) {
+                        setIsLogin(false);
+                        setLoading(false);
+                        return;
+                    }
+
+                    setIsLogin(true)
+                    setIsAuthenticatedLogin(res.data)
+                    setIsAuthenticated(res.data)
+                    setLoading(false);
+                } catch (error) {
+                    setIsLogin(false)
+                    setIsAuthenticatedLogin([])
+                    setIsAuthenticated([])
+                    setuser(null)
+                    setLoading(false);
+                }
+        }
+        checkLogin()
+    }, [])
+
     return (
         <AuthContext.Provider value={{
             signup,
@@ -78,6 +119,8 @@ export const AuthProvider = ({ children }) => {
             user,
             isAuthenticated,
             isAuthenticatedLogin,
+            isLogin,
+            loading,
             errors
         }}>
             {children}

@@ -4,7 +4,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Admin from './Pages/Admin/Admin';
 import Home from './Pages/Users/Home/Home';
 import HomeUsers from './Pages/Users/HomeUsers/HomeUsers';
+import Assistants from './Pages/Users/Assistants/Assistants';
 import { AuthProvider } from './Context/AuthContext';
+import ProtectedRoute from './ProtectedRoute'
 
 function App() {
   return (
@@ -12,8 +14,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/HomeUsers' element={<HomeUsers />} />
-          <Route path='/Admin' element={<Admin />} />
+          <Route element={<ProtectedRoute/>}>
+            <Route path='/HomeUsers' element={<HomeUsers />} />
+            <Route path='/Assistants' element={<Assistants />} />
+            <Route path='/Admin' element={<Admin />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
