@@ -25,6 +25,8 @@ export default function Home() {
     setShowLoginModal(false);
     setShowRegisterModal(false);
   };
+
+  console.log('...HOMEUSERS...')
   return (
     <div>
       <NavbarUser showLoginModal={showLoginModal} showRegisterModal={showRegisterModal} openLoginModal={openLoginModal} openRegisterModal={openRegisterModal} closeModal={closeModal} />

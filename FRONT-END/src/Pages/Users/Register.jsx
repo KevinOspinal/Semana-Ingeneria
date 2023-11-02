@@ -3,6 +3,7 @@ import Axios from "axios";
 import Buttons from "../../components/Buttons";
 import { useForm, Controller } from "react-hook-form";
 import { useAuth } from '../../Context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Register({ showRegisterModal, closeModal }) {
@@ -11,9 +12,13 @@ export default function Register({ showRegisterModal, closeModal }) {
     const [optionsDropTipoUsuario, setOptionsDropTipoUsuario] = useState([]);
     const [optionsDropProgramas, setOptionsDropTipoPrograma] = useState([]);
     
-    const { signup, errors: registerErrors } = useAuth();
+    const { signup, isAuthenticated, isLogin, errors: registerErrors } = useAuth();
+    const navigate = useNavigate()
 
     useEffect(() => {
+
+            if (isAuthenticated.id_tipo_usuario == 1) return navigate('/Admin')
+            if (isAuthenticated.id_tipo_usuario == 2) return navigate('/HomeUsers')
 
         const getDocumentType = async () => {
             try {
@@ -45,7 +50,7 @@ export default function Register({ showRegisterModal, closeModal }) {
         getPrograms();
         getTypeUser();
         getDocumentType();
-    }, []);
+    }, [isAuthenticated]);
 
 
     return (
