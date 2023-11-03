@@ -48,11 +48,6 @@ const getProject_Type = () => {
   Axios.get('http://localhost:3000/getProject_Type')
     .then((respond) => {
       setProjectTypeList(respond.data);
-      Swal.fire({
-        icon: 'success',
-        title: 'Éxito',
-        text: 'Tipos de proyecto obtenidos exitosamente.',
-      });
     })
     .catch((error) => {
       console.error(error);
