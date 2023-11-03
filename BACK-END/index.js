@@ -6,12 +6,11 @@ const { createUserType, getUserType, getOnlyUserType, deleteUserType, updateUser
 const { createConferences, getConferences, getOnlyConferences, deleteConferences, updateConferences } = require('./Controllers/Conferences/Conferences.controllers.js')
 const { createOtherEvent, getOtherEvent, deleteOtherEvent, updateOtherEvent} = require('./Controllers/Other_Events/Other_Events_Controllers.js')
 const { createProject_Role, getProject_Role, deleteProject_Role, updateProject_Role, getOnlyProject_Role } = require('./Controllers/Project_Role/Project.controller')
-const {getProyect_Type, createProject_Type,getOnlyProtect_Type,DeleteProyect_Type,updateProyect_Type} = require('./Controllers/Project_Type/Project_Type.controller.js')
+const {getProject_Type, createProject_Type,getOnlyProject_Type,deleteProject_Type,updateProject_Type} = require('./Controllers/Project_Type/Project_Type.controller.js')
 const {createFaculties, getFaculties,getOnlyFaculties,DeleteFaculties,updateFaculties} = require('./Controllers/Faculties/Faculties-controllers.js')
 const { createDocument_Type, getDocument_Type,getOnlyDocument_Type,deleteDocument_Type,updateDocument_Type} = require('./Controllers/Document_Type/Document_Type_Controllers.js')
 const { createEvent_Type, getEvent_Type,getOnlyEvent_Type,deleteEvent_Type,updateEvent_Type} = require('./Controllers/Event_Type/Event_Type.controller.js')
-
-
+const { createProjects, getProjects, getOnlyProjects, deleteProjects, updateProjects } = require('./Controllers/Projects/Projects.controllers')
 
 
 app.use(cors())
@@ -53,10 +52,10 @@ app.put('/updateConferences/:id', updateConferences);
 //METODO PARA CREAR OTRO EVENTO
 app.post('/createOtherEvent', createOtherEvent);
 //METODO PARA MOSTRAR LOS OTROS EVENTOS
-app.get('/getOtherEvent', getOtherEvent);;
+app.get('/getOtherEvent', getOtherEvent);
 //METODO PARA ELIMINAR OTRO EVENTO
 app.delete('/deleteOtherEvent/:id', deleteOtherEvent);
-//METODO PARA EDITAR LA MONDA DE LAS SEDES
+//METODO PARA EDITAR un evento
 app.put('/updateOtherEvent/:id', updateOtherEvent);
 //--------------------------------------------------------------------------------------------------------------------------
 //METODO PARA CREAR ROL PROYECTO
@@ -74,16 +73,16 @@ app.put('/updateProject_Role/:id', updateProject_Role);
 app.post('/createProject_Type',createProject_Type);
 
 //METODO PARA MOSTRAR Project_Type
-app.get('/getProject_Type', getProyect_Type);
+app.get('/getProject_Type', getProject_Type);
 
 //METODO PARA MOSTRAR UN Project_Type
-app.get('/getOnlyProject_Type/:descripcion', getOnlyProtect_Type)
+app.get('/getOnlyProject_Type/:descripcion', getOnlyProject_Type)
 
 //METODO PARA ELIMINAR Project_Type
-app.delete('/deleteProject_Type/:id', DeleteProyect_Type);
+app.delete('/deleteProject_Type/:id', deleteProject_Type);
 
 //METODO PARA EDITAR Project_Type
-app.put('/updateProject_Type/:id', updateProyect_Type);
+app.put('/updateProject_Type/:id', updateProject_Type);
 
 //-----------------------------------------------------
 //METODO PARA CREAR TIPO DOCUMENTO
@@ -120,7 +119,17 @@ app.get('/getFaculties/:nombre_facultad', getOnlyFaculties)
 app.delete('/deleteFaculties/:id', DeleteFaculties);
 //METODO PARA EDITAR FACULTADES
 app.put('/updateFaculties/:id', updateFaculties);
-
+//------------------------------------------------------
+//METODO PARA CREAR PROYECTOS
+app.post('/createProjects', createProjects);
+//METODO PARA MOSTRAR PROYECTOS
+app.get('/getProjects', getProjects);
+//METODO PARA MOSTRAR UN PROYECTO
+app.get('/getOnlyProjects/:nombre', getOnlyProjects)
+//METODO PARA ELIMINAR PROYECTO
+app.delete('/deleteProjects/:id', deleteProjects);
+//METODO PARA EDITAR PROYECTO
+app.put('/updateProjects/:id', updateProjects);
 
 
 
