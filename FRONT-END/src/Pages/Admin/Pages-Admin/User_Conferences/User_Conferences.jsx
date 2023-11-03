@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 
 import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
+import Grid_User_Conference from "./Grid_User_Conference";
 import DropListField from "../../../../components/DropListField";
 import InputField from "../../../../components/InputField";
 
@@ -15,22 +16,22 @@ export default function User_Conferences() {
         </div>
         <div className="row">
           <div className="col-10">
-            <InputField
-              label="Cedula"
-              type="text"
-              id="Cedula-Usuario-Conferencia"
-              placeholder="Documento"
-            />
-          </div>
-          <div className="col-10">
             <DropListField
               label="Conferencia"
               id=""
               selectOption="Seleciona conferencia "
             />
           </div>
+          <div className="col-10">
+            <InputField
+              label="Documento"
+              type="text"
+              id="Documento"
+              placeholder="Documento"
+            />
+          </div>
           <div className="row">
-            <div className="col-12">//grid</div>
+            <Grid_User_Conference className='col-12' />
           </div>
           <div className="container-fluid mt-4 d-flex justify-content-center">
             <div className="col-4 d-flex justify-content-center">

@@ -8,12 +8,13 @@ const createConferences = async (req, res) => {
   const fecha = req.body.fecha;
   const hora = req.body.hora;
   const estado = req.body.estado;
+  const conferencista = req.body.conferencista;
 
   try {
     const result = await new Promise((resolve, reject) => {
       conexion.query(
-        'INSERT INTO tb_conferencias (nombre_conferencia, descripcion_conferencia, id_sede, cupo, fecha_conferencia, hora_conferencia, estado_conferencia) VALUES (?,?,?,?,?,?,?)',
-        [nombre, descripcion, sede, cupo, fecha, hora, estado],
+        'INSERT INTO tb_conferencias (nombre_conferencia, descripcion_conferencia, id_sede, cupo, fecha_conferencia, hora_conferencia, conferencista, estado_conferencia) VALUES (?,?,?,?,?,?,?,?)',
+        [nombre, descripcion, sede, cupo, fecha, hora, conferencista, estado],
         (err, result) => {
           if (err) {
             reject(err);
@@ -102,13 +103,13 @@ const deleteConferences = async (req, res) => {
 
 const updateConferences = async (req, res) => {
   const idConferencia = req.params.id;
-  const { nombre, descripcion, sede, cupo, fecha, hora, estado } = req.body;
+  const { nombre, descripcion, sede, cupo, fecha, hora, conferencista, estado } = req.body;
 
   try {
     const result = await new Promise((resolve, reject) => {
       conexion.query(
-        'UPDATE tb_conferencias SET nombre_conferencia = ? , descripcion_conferencia = ?,  id_sede = ?, cupo = ? , fecha_conferencia = ? , hora_conferencia = ? , estado_conferencia = ? WHERE id_conferencia = ?',
-        [nombre, descripcion, sede, cupo, fecha, hora, estado, idConferencia],
+        'UPDATE tb_conferencias SET nombre_conferencia = ? , descripcion_conferencia = ?,  id_sede = ?, cupo = ? , fecha_conferencia = ? , hora_conferencia = ? , conferencista = ?, estado_conferencia = ? WHERE id_conferencia = ?',
+        [nombre, descripcion, sede, cupo, fecha, hora, conferencista, estado, idConferencia],
         (err, result) => {
           if (err) {
             reject(err);

@@ -30,6 +30,7 @@ export default function Conferences() {
   const [cupo, setCupo] = useState(0);
   const [fecha, setFecha] = useState("");
   const [hora, setHora] = useState("");
+  const [conferencista, setConferencista] = useState("");
   const [estado, setEstado] = useState("");
 
   const createConferences = () => {
@@ -40,6 +41,7 @@ export default function Conferences() {
       cupo: cupo,
       fecha: fecha,
       hora: hora,
+      conferencista: conferencista,
       estado: estado,
     })
       .then((response) => {
@@ -107,6 +109,7 @@ const getConferences = () => {
         cupo: editingConferencias.cupo,
         fecha: editingConferencias.fecha_conferencia,
         hora: editingConferencias.hora_conferencia,
+        conferencista: editingConferencias.conferencista,
         estado: editingConferencias.estado_conferencia,
       }
     )
@@ -223,6 +226,14 @@ const getConferences = () => {
     setEditingConferencias(updatedEditingConferencia);
   };
 
+  const handleConferencistaChange = (e) => {
+    const updatedEditingConferencia = {
+      ...editingConferencias,
+      conferencista: e.target.value,
+    };
+    setEditingConferencias(updatedEditingConferencia);
+  };
+
   const handleEstadoChange = (e) => {
     const updatedEditingConferencia = {
       ...editingConferencias,
@@ -316,6 +327,15 @@ const getConferences = () => {
           </div>
           <div className="col-10">
             <InputField
+              label="Conferencista"
+              type="text"
+              id="Conferencista"
+              placeholder="Conferencista"
+              onChange={(e) => setConferencista(e.target.value)}
+            />
+          </div>
+          <div className="col-10">
+            <InputField
               label="Estado"
               type="text"
               id="Estado-Conferencia"
@@ -394,6 +414,16 @@ const getConferences = () => {
             </div>
             <div className="col-10">
               <InputField
+                label="Conferencista"
+                type="text"
+                id="Conferencista"
+                placeholder="Conferencista"
+                value={editingConferencias.conferencista || ""}
+                onChange={handleConferencistaChange}
+              />
+            </div>
+            <div className="col-10">
+              <InputField
                 label="Estado"
                 type="text"
                 id="Estado-Conferencia"
@@ -408,6 +438,7 @@ const getConferences = () => {
                   title="Guardar Cambios"
                   color="white"
                   onClick={updateConferences}
+                  colorbutton='black'
                 />
               </div>
             </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Grid_Conferences({ List, handleDelete, handleEdit }) {
+export default function Grid_User_Conference({ List, handleDelete, handleEdit }) {
   // Función para formatear la fecha con mes en letras
   const formatDate = (dateString) => {
     const options = {
@@ -33,14 +33,11 @@ export default function Grid_Conferences({ List, handleDelete, handleEdit }) {
         <table className="table">
           <thead className="thead-dark">
             <tr>
-              <th>Nombre</th>
-              <th>Descripcion</th>
-              <th>Sede</th>
-              <th>Cupo</th>
-              <th>Fecha</th>
-              <th>Hora</th>
-              <th>Conferencista</th>
-              <th>Estado</th>
+              <th>Conferencia</th>
+              <th>Numero documento</th>
+              <th>Nombres</th>
+              <th>Apellidos</th>
+              <th>Estado usuario</th>
               <th>Acciones</th>
             </tr>
           </thead>
