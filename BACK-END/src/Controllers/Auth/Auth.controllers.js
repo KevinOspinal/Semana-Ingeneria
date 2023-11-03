@@ -147,6 +147,7 @@ const Logout = async (req, res) => {
 const Profile = async (req, res) => {
     // Obtiene el ID de usuario del objeto req.user (asumiendo que el usuario ha iniciado sesión previamente)
     const UserId = req.user.id;
+    
     try {
         // Realizar una consulta a la base de datos para obtener los detalles del usuario por su ID
         const result = await new Promise((resolve, reject) => {

@@ -25,6 +25,8 @@ const project_type_Routes = require('./src/router/project_type.routes')
 const project_role_Routes = require('./src/router/project_role.routes')
 const projects_Routes = require('./src/router/projects.routes')
 const user_type_Routes = require('./src/router/user_type.routes')
+const User_Conferences_Routes = require('./src/router/user_conferences.routes')
+
 
 // Utilizamos las rutas importadas en la aplicación
 app.use('/api',auth_Routes)
@@ -39,6 +41,7 @@ app.use(project_type_Routes)
 app.use(project_role_Routes)
 app.use(projects_Routes)
 app.use(user_type_Routes)
+app.use(User_Conferences_Routes)
 
 
 app.listen(3000, () => {
