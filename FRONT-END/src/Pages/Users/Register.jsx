@@ -12,14 +12,10 @@ export default function Register({ showRegisterModal, closeModal }) {
     const [optionsDropTipoUsuario, setOptionsDropTipoUsuario] = useState([]);
     const [optionsDropProgramas, setOptionsDropTipoPrograma] = useState([]);
     
-    const { signup, isAuthenticated, isLogin, errors: registerErrors } = useAuth();
-    const navigate = useNavigate()
+    const { signup, isAuthenticated, isLogin, loading,  errors: registerErrors } = useAuth();
+    //const navigate = useNavigate()
 
     useEffect(() => {
-
-            if (isAuthenticated.id_tipo_usuario == 1) return navigate('/Admin')
-            if (isAuthenticated.id_tipo_usuario == 2) return navigate('/HomeUsers')
-
         const getDocumentType = async () => {
             try {
                 const response = await Axios.get(
@@ -50,7 +46,7 @@ export default function Register({ showRegisterModal, closeModal }) {
         getPrograms();
         getTypeUser();
         getDocumentType();
-    }, [isAuthenticated]);
+    }, []);
 
 
     return (
@@ -68,6 +64,7 @@ export default function Register({ showRegisterModal, closeModal }) {
                 onSubmit={handleSubmit(async (values) => {
                     console.log(values)
                     signup(values)
+                    closeModal()
                 })}>
 
                 <div className="modal-dialog custom" role="document">
@@ -179,15 +176,22 @@ export default function Register({ showRegisterModal, closeModal }) {
                                                             setValue("id_tipo_usuario", id_tipo_usuario);
                                                         }}
                                                     >
-                                                        <option value="">Seleccionar Programa</option>
-                                                        {optionsDropTipoUsuario.map((option) => (
-                                                            <option
-                                                                key={option.id_tipo_usuario}
-                                                                value={option.id_tipo_usuario}
-                                                            >
-                                                                {option.descripcion_tipo_usuario}
-                                                            </option>
-                                                        ))}
+                                                        <option value="">Seleccionar Tipo de usuario</option>
+                                                        {optionsDropTipoUsuario
+                                                            .filter((option) => {
+                                                                const descripcion = option.descripcion_tipo_usuario.toLowerCase();
+                                                                return (
+                                                                    descripcion == "estudiante" ||
+                                                                    descripcion == "docente" ||
+                                                                    descripcion == "invitado" ||
+                                                                    descripcion == "conferencista"
+                                                                );
+                                                            })
+                                                            .map((option) => (
+                                                                <option key={option.id_tipo_usuario} value={option.id_tipo_usuario}>
+                                                                    {option.descripcion_tipo_usuario}
+                                                                </option>
+                                                            ))}
                                                     </select>
                                                 )}
                                             />

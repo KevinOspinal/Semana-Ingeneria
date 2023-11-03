@@ -15,8 +15,24 @@ export default function Login({showLoginModal,closeModal}) {
 
     useEffect(() => {
         if (isLogin){
-            if (isAuthenticatedLogin.id_tipo_usuario == 1)  return navigate('/Admin')
-            if (isAuthenticatedLogin.id_tipo_usuario == 2) return navigate('/HomeUsers')
+            switch (isAuthenticatedLogin.id_tipo_usuario) {
+                case 1: 
+                case 2: 
+                case 3: 
+                case 4:
+                    navigate('/HomeUsers');
+                    break;
+                case 5:
+                    navigate('/Admin')
+                    break;
+                case 6:
+                    navigate('/Assistants')
+                    break;
+                // Agrega más casos si es necesario
+                default:
+                // Código a ejecutar si no coincide con ninguno de los casos anteriores
+            }
+
         }
 
             

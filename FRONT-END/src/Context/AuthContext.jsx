@@ -17,10 +17,9 @@ export const AuthProvider = ({ children }) => {
     const [user, setuser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState([]);
     const [isAuthenticatedLogin, setIsAuthenticatedLogin] = useState([]);
-    const [isLogin, setIsLogin] = useState(false);
     const [errors, setErrors] = useState([]);
+    const [isLogin, setIsLogin] = useState(false);
     const [loading, setLoading] = useState(true);
-    
 
     const signup = async (user) => {
         try {
@@ -40,7 +39,7 @@ export const AuthProvider = ({ children }) => {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Hubo un error al registrarse. Por favor, inténtelo de nuevo más tarde.',
+                text: `Hubo un error al registrarse. ${error.response.data}`,
             });
         }
     }
@@ -62,7 +61,7 @@ export const AuthProvider = ({ children }) => {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Hubo un error al iniciar sesión. Por favor, verifique sus credenciales e inténtelo de nuevo.',
+                text: `Hubo un error al iniciar sesión. ${error.response.data}` ,
             });
         }
     }
@@ -84,7 +83,6 @@ export const AuthProvider = ({ children }) => {
                 setIsLogin(false)
                 setLoading(false);
                 setIsAuthenticatedLogin([])
-                setIsAuthenticated([])
                 setuser(null)
                 return;
             }
@@ -98,12 +96,10 @@ export const AuthProvider = ({ children }) => {
 
                     setIsLogin(true)
                     setIsAuthenticatedLogin(res.data)
-                    setIsAuthenticated(res.data)
                     setLoading(false);
                 } catch (error) {
                     setIsLogin(false)
                     setIsAuthenticatedLogin([])
-                    setIsAuthenticated([])
                     setuser(null)
                     setLoading(false);
                 }
