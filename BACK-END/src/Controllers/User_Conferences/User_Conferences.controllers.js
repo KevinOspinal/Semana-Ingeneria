@@ -6,8 +6,6 @@ const createUserConferences = async (req, res) => {
     const id_usuario = req.body.id_usuario;
     const estado_usuario = 'I'
 
-    console.log(Conferencia, id_usuario, estado_usuario, 'aaaaa')
-
     try {
         const result = await new Promise((resolve, reject) => {
             conexion.query(
@@ -74,7 +72,33 @@ const getOnlyUserConferences = async (req, res) => {
     catch (error) {
         console.log(error, 'hi')
         res.status(500).json({ message: 'Error al imprimir el tipo de usuario por conferencia' });
+    }
+}
 
+const getOnlyUserConferencesAsis = async (req, res) => {
+    const idConferencia = req.params.id_conferencia;
+    const documento = req.query.documento;
+
+    console.log(documento, idConferencia)
+    try {
+        const result = await new Promise((resolve, reject) => {
+            conexion.query(
+                'SELECT * FROM tb_usuarios_conferencias ucf, tb_usuarios us, tb_conferencias c WHERE ucf.id_usuario = us.id_usuario AND ucf.id_conferencia = c.id_conferencia AND us.documento = ? AND c.id_conferencia = ?', [documento, idConferencia],
+                (err, result) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result);
+                    }
+                }
+            );
+        })
+        console.log('Conferencia consultada con éxito');
+        res.json(result);
+    }
+    catch (error) {
+        console.log(error, 'hi')
+        res.status(500).json({ message: 'Error al imprimir el tipo de usuario por conferencia' });
     }
 }
 
@@ -110,26 +134,54 @@ const updateUserConferences = async (req, res) => {
     const idUserConferences = req.params.id;
     const estado = req.body.estado
     try {
-      const result = await new Promise((resolve, reject) => {
-        conexion.query(
-          'UPDATE tb_usuarios_conferencias SET estado_usuario = ? WHERE id_usuario_conferencia = ?',
-          [estado, idUserConferences],
-          (err, result) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-  
-      console.log('Usuario por conferencia actualizada con éxito');
-      res.status(200).json({ message: 'Usuario por conferencia  actualizada con éxito' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error al actualizar el Usuario por conferencia ' });
-    }
-  };
+        const result = await new Promise((resolve, reject) => {
+            conexion.query(
+                'UPDATE tb_usuarios_conferencias SET estado_usuario = ? WHERE id_usuario_conferencia = ?',
+                [estado, idUserConferences],
+                (err, result) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result);
+                    }
+                }
+            );
+        });
 
-module.exports = { createUserConferences, getUserConferences, getOnlyUserConferences,deleteUserConferences, updateUserConferences }
+        console.log('Usuario por conferencia actualizada con éxito');
+        res.status(200).json({ message: 'Usuario por conferencia  actualizada con éxito' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error al actualizar el Usuario por conferencia ' });
+    }
+};
+
+const updateUserConferencesAsis = async (req, res) => {
+    console.log('paso por aqui')
+    const idUserConferences = req.params.id;
+    const estado = 'A'
+    console.log('id:',idUserConferences)
+    try {
+        const result = await new Promise((resolve, reject) => {
+            conexion.query(
+                'UPDATE tb_usuarios_conferencias SET estado_usuario = ? WHERE id_usuario_conferencia = ?',
+                [estado, idUserConferences],
+                (err, result) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result);
+                    }
+                }
+            );
+        });
+
+        console.log('Usuario por conferencia actualizada con éxito');
+        res.status(200).json({ message: 'Usuario por conferencia  actualizada con éxito' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error al actualizar el Usuario por conferencia ' });
+    }
+};
+
+module.exports = { createUserConferences, getUserConferences, getOnlyUserConferences, deleteUserConferences, updateUserConferences, getOnlyUserConferencesAsis, updateUserConferencesAsis }

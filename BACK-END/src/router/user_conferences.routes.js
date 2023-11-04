@@ -1,6 +1,6 @@
 const Router = require('express')
 const router = Router();
-const {createUserConferences,getUserConferences,getOnlyUserConferences,deleteUserConferences ,updateUserConferences} = require('../Controllers/User_Conferences/User_Conferences.controllers.js')
+const { createUserConferences, getUserConferences, getOnlyUserConferences, deleteUserConferences, updateUserConferences, getOnlyUserConferencesAsis, updateUserConferencesAsis } = require('../Controllers/User_Conferences/User_Conferences.controllers.js')
 
 
 //METODO PARA CREAR PROYECTOS
@@ -14,5 +14,10 @@ router.delete('/deleteUserConferences/:id', deleteUserConferences);
 //METODO PARA EDITAR EL ESTADO DE USUARIO POR CONFERENCIA
 router.put('/updateUserConferences/:id', updateUserConferences);
 
+//ASISTENTE
+//METODO PARA MOSTRAR UN SOLO USUAIRO POR CONFERENCIA 
+router.get('/getOnlyUserConferencesAsis/:id_conferencia', getOnlyUserConferencesAsis)
+//METODO PARA EDITAR EL ESTADO DE USUARIO POR CONFERENCIA
+router.put('/updateUserConferencesAsis/:id', updateUserConferencesAsis);
 
 module.exports = router;
