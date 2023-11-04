@@ -1,42 +1,184 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import Axios from "axios";
 import Swal from 'sweetalert2';
 
-import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
-import Grid_User_Conference from "./Grid_User_Conference";
-import DropListField from "../../../../components/DropListField";
-import InputField from "../../../../components/InputField";
+import Title from "../../../../components/Title";
+import Grid_User_Conference_Asis from "./Grid_User_Conference";
 
 export default function User_Conferences() {
+  const { control, register, handleSubmit, setValue, formState: { errors } } = useForm();
+
+
+  const [optionsDropConferencias, setOptionsDropConferencias] = useState([]);
+  const [conferencesList, setConferencesList] = useState([]);
+  
+  
+  const getUserConferences = () => {
+    Axios.get(`http://localhost:3000/getUserConferences`)
+      .then((response) => {
+        setConferencesList(response.data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Usuario por conferencia registrada exitosamente.',
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al obtener las conferencias. Por favor, inténtelo de nuevo más tarde.',
+        });
+      });
+  };
+
+
+  const getOnlyUserConferences = (documento) => {
+    Axios.get(`http://localhost:3000/getOnlyUserConferences/${documento}`)
+      .then((response) => {
+        setConferencesList(response.data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Usuario por conferencia registrada exitosamente.',
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al obtener las conferencias. Por favor, inténtelo de nuevo más tarde.',
+        });
+      });
+  };
+
+  const updateUserConferences = (id) => {
+    console.log('id:', id)
+    Axios.put(
+      `http://localhost:3000/updateUserConferences/${id}`)
+      .then(() => {
+        getUserConferences()
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Conferencia actualizada exitosamente.',
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al actualizar la conferencia. Por favor, inténtelo de nuevo más tarde.',
+        });
+      });
+  };
+
+
+  useEffect(() => {
+    const getConferences = async () => {
+      try {
+        const response = await Axios.get("http://localhost:3000/getConferences");
+        setOptionsDropConferencias(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getConferences();
+  }, []);
+
+
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">
-        <div className="mb-5 d-flex justify-content-center">
-          <Title title="USUARIO POR CONFERENCIA" />
-        </div>
         <div className="row">
-          <div className="col-10">
-            <DropListField
-              label="Conferencia"
-              id=""
-              selectOption="Seleciona conferencia "
-            />
+          <div className="mb-5 d-flex justify-content-center">
+            <Title title="USUARIO POR CONFERENCIAS" />
           </div>
-          <div className="col-10">
-            <InputField
-              label="Documento"
-              type="text"
-              id="Documento"
-              placeholder="Documento"
-            />
-          </div>
-          <div className="row">
-            <Grid_User_Conference className='col-12' />
-          </div>
-          <div className="container-fluid mt-4 d-flex justify-content-center">
-            <div className="col-4 d-flex justify-content-center">
-              <Buttons title="Guardar" colorbutton="black" color="white" />
+        </div>
+        <form
+          onSubmit={handleSubmit((values) => {
+            console.log(values)
+            const { id_conferencia, documento } = values;
+            getOnlyUserConferences(documento)
+          })}>
+          <div className="container modal-body d-flex justify-content-center align-items-center">
+            <div className="row">
+              <div className="col-12">
+                <div className="mb-3 d-flex align-items-center">
+                  <label style={{ fontSize: 'clamp(8px, 3vw, 15px)' }} className="col-2 d-flex justify-content-end align-items-center form-label me-2">
+                    Conferencia
+                  </label>
+                  <div className="col-7 mx-auto">
+                    <Controller
+                      name="id_conferencia"
+                      control={control}
+                      defaultValue={null}
+                      render={({ field }) => (
+                        <div>
+                          <select
+                            className="form-select mb-auto list border-black"
+                            {...field}
+                            onChange={(e) => {
+                              const Conferencias = parseInt(e.target.value);
+                              field.onChange(Conferencias);
+                              setValue("id_conferencia", Conferencias);
+                            }}
+                          >
+                            <option value="">Seleccionar la Conferencia</option>
+                            {optionsDropConferencias.map((option) => (
+                              <option
+                                key={option.id_conferencia}
+                                value={option.id_conferencia}
+                              >
+                                {option.nombre_conferencia}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="mb-3 d-flex align-items-center">
+                  <label style={{ fontSize: 'clamp(8px, 3vw, 15px)' }} className="col-2 d-flex justify-content-end align-items-center form-label me-2">
+                    Documento
+                  </label>
+                  <div className="col-7 mx-auto rounded border-black">
+                    <input
+                      type="text"
+                      {...register("documento", {
+                        required: true
+                      })}
+                      className="form-control border-black"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+          <div className="modal-footer d-flex justify-content-center">
+            <Buttons
+              type="submit"
+              title="Consultar por documento"
+              color="#002f59"
+              fontSize="18px"
+              colorbutton="#ffffff"
+            />
+          </div>
+        </form>
+        <div className='col-12 mt-3 d-flex justify-content-center'>
+                <Buttons title='Listar todos' colorbutton='black' color='white' onClick={getUserConferences}/>
+              </div>
+        <div className="row">
+          <div className="col-12">
+            <Grid_User_Conference_Asis List={conferencesList} handleEdit={updateUserConferences} />
           </div>
         </div>
       </div>
