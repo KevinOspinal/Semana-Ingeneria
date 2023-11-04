@@ -2,13 +2,11 @@ import "../NavbarUser/NavbarUser.css";
 import { useAuth } from '../../../Context/AuthContext'
 import {Link} from 'react-router-dom'
 import Logo from "../../../assets/img/logo_unicatolica.png";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 export default function NavbarUser() {
 
-    const {logout,user} = useAuth()
-    console.log(user)
-    const [usuario, setusuario] = useState([])
+    const {logout, user} = useAuth()
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light">

@@ -6,6 +6,7 @@ import logo from '../../../assets/img/logo-unicatolica-vertical.png'
 import Cards from '../../../components/Cards'
 import Cards2 from '../../../components/Cards2'
 import TitleUsers from '../../../components/TitleUsers'
+import { useAuth } from '../../../Context/AuthContext'
 
 export default function Home() {
   return (
