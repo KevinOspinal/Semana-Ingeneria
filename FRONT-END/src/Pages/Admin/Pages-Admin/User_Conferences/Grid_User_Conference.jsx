@@ -1,28 +1,6 @@
 import React from "react";
 
-export default function Grid_User_Conference({ List, handleDelete, handleEdit }) {
-  // Función para formatear la fecha con mes en letras
-  const formatDate = (dateString) => {
-    const options = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
-
-  // Función para formatear la hora en formato de 12 horas
-  const formatTime = (timeString) => {
-    const options = {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    };
-    return new Date(`1970-01-01T${timeString}`).toLocaleTimeString(
-      undefined,
-      options
-    );
-  };
+export default function Grid_User_Conference({ List, handleEdit }) {
 
   return (
     <div className="container mt-5">
@@ -46,27 +24,16 @@ export default function Grid_User_Conference({ List, handleDelete, handleEdit })
               ? List.map((conferencias) => (
                   <tr key={conferencias.id_conferencia}>
                     <td>{conferencias.nombre_conferencia}</td>
-                    <td>{conferencias.descripcion_conferencia}</td>
-                    <td>{conferencias.nombre_sede}</td>
-                    <td>{conferencias.cupo}</td>
-                    <td>{formatDate(conferencias.fecha_conferencia)}</td>
-                    <td>{formatTime(conferencias.hora_conferencia)}</td>
-                    <td>{conferencias.conferencista}</td>
-                    <td>{conferencias.estado_conferencia}</td>
+                    <td>{conferencias.documento}</td>
+                    <td>{conferencias.nombres_usuario}</td>
+                    <td>{conferencias.apellidos_usuario}</td>
+                    <td>{conferencias.estado_usuario}</td>
                     <td>
                       <button
-                        className="btn btn-danger btn-sm mr-2"
-                        onClick={() =>
-                          handleDelete(conferencias.id_conferencia)
-                        }
-                      >
-                        Eliminar
-                      </button>
-                      <button
                         className="btn btn-primary btn-sm"
-                        onClick={() => handleEdit(conferencias)}
+                        onClick={() => handleEdit(conferencias.id_usuario_conferencia)}
                       >
-                        Editar
+                        Asistio
                       </button>
                     </td>
                   </tr>
