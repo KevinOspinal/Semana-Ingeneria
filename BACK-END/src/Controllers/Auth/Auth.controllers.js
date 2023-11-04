@@ -118,7 +118,10 @@ const Login = async (req, res) => {
 
         const Usuario = {
             id: result[0].id_usuario,
-            id_tipo_usuario: result[0].id_tipo_usuario
+            id_tipo_usuario: result[0].id_tipo_usuario,
+            nombres: result[0].nombres_usuario,
+            apellidos_usuario: result[0].apellidos_usuario,
+            documento: result[0].documento
         };
 
         // Creación de un token de acceso JWT para el usuario autenticado
@@ -147,7 +150,6 @@ const Logout = async (req, res) => {
 const Profile = async (req, res) => {
     // Obtiene el ID de usuario del objeto req.user (asumiendo que el usuario ha iniciado sesión previamente)
     const UserId = req.user.id;
-    
     try {
         // Realizar una consulta a la base de datos para obtener los detalles del usuario por su ID
         const result = await new Promise((resolve, reject) => {

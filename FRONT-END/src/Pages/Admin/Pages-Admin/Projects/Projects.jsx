@@ -219,10 +219,10 @@ export default function Proyects() {
   return (
     <div className="container d-flex justify-content-center align-items-center">
       <div className="row">
-        <div className="mb-5 d-flex justify-content-center">
+        <div className="mt-5 d-flex justify-content-center">
           <Title title="PROYECTOS" />
         </div>
-        <div className="row">
+        <div className="row mt-5">
           <div className="col-10">
             <InputField
               label="Nombre"

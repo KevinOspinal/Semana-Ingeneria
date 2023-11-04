@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import NavbarUser from '../NavbarUser/NavbarUser'
+import NavbarUser from '../HomeUsers/NavbarUser'
 import './HomeUser.css'
 import Hero_Img from '../../../assets/img/section-footer.png'
 import logo from '../../../assets/img/logo-unicatolica-vertical.png'
@@ -7,35 +7,11 @@ import Cards from '../../../components/Cards'
 import Cards2 from '../../../components/Cards2'
 import TitleUsers from '../../../components/TitleUsers'
 import { useAuth } from '../../../Context/AuthContext'
-import {Link} from 'react-router-dom'
 
 export default function Home() {
-
-  const {logout} = useAuth()
-
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
-
-  const openLoginModal = () => {
-    setShowLoginModal(true);
-  };
-
-  const openRegisterModal = () => {
-    setShowRegisterModal(true);
-  };
-
-  const closeModal = () => {
-    setShowLoginModal(false);
-    setShowRegisterModal(false);
-  };
-
-  console.log('...HOMEUSERS...')
   return (
     <div>
-      <NavbarUser showLoginModal={showLoginModal} showRegisterModal={showRegisterModal} openLoginModal={openLoginModal} openRegisterModal={openRegisterModal} closeModal={closeModal} />
-      <Link to='/' onClick={() => {
-        logout()
-      } }>Logout</Link>
+      <NavbarUser />
       <div className='container-fluid mb-5 p-0'>
         <div className='align-items-stretch'>
           <img className='img-fluid w-100' src={Hero_Img} alt='Img del hero principal' />
@@ -58,7 +34,7 @@ export default function Home() {
         </div>
       </div>
       <section className='container-fluid'>
-        <Cards openRegisterModal={openRegisterModal} closeModal={closeModal}/>
+        <Cards />
       </section>
       <div id='eventos' className='container  mb-4 p-0'>
         <div className='row '>
