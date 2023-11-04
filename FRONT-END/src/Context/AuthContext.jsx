@@ -49,6 +49,7 @@ export const AuthProvider = ({ children }) => {
             const res = await loginRequest(user);
             setIsAuthenticatedLogin(res.data);
             setIsLogin(true)
+            setuser(res.data)
             Swal.fire({
                 icon: 'success',
                 title: 'Éxito',

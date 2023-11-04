@@ -28,7 +28,7 @@ export default function Grid_Conferences({ List, handleDelete, handleEdit }) {
     <div className="container mt-5">
       <div
         className="scrollable-table"
-        style={{ maxHeight: "18rem", overflowY: "auto" }}
+        style={{ maxHeight: "15rem", overflowY: "auto" }}
       >
         <table className="table">
           <thead className="thead-dark">

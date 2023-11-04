@@ -20,7 +20,7 @@ export default function Assistants() {
         <div className='col-12'>
           <User_Conferences_Asis />
         </div>
-        <div className='col-12 d-flex justify-content-center'>
+        <div className='col-12 d-flex justify-content-center mb-3'>
           <Buttons
             title="Cerrar sesion"
             color="#002f59"

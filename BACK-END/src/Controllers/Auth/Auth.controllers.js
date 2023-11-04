@@ -118,7 +118,10 @@ const Login = async (req, res) => {
 
         const Usuario = {
             id: result[0].id_usuario,
-            id_tipo_usuario: result[0].id_tipo_usuario
+            id_tipo_usuario: result[0].id_tipo_usuario,
+            nombres: result[0].nombres_usuario,
+            apellidos_usuario: result[0].apellidos_usuario,
+            documento: result[0].documento
         };
 
         // Creación de un token de acceso JWT para el usuario autenticado
