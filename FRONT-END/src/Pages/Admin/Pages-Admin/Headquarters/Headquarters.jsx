@@ -1,5 +1,6 @@
 /**SEDES */
 import React, { useState } from 'react'
+import Swal from 'sweetalert2';
 import Axios from 'axios'
 import Modal from 'react-modal'; // Importa react-modal
 import Title from '../../../../components/Title'
@@ -49,76 +50,135 @@ export default function Headquarters() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  // Función para actualizar una sede
-  const updateSede = () => {
-    Axios.put(`http://localhost:3000/updateHeadquarters/${editingSede.id_sede}`, {
-      nombre: editingSede.nombre_sede,
-      direccion: editingSede.direccion,
-      telefono: editingSede.telefono
-    })
-      .then(() => {
-        alert('Sede actualizada.');
-        getHeadquarters();
-        //closeModal(); // Cierra el modal después de la actualización
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-
-
-
-  //FUNCION PARA CREAR LAS SEDES
-  const [nombre, setnombre] = useState('')
-  const [direccion, setdireccion] = useState('')
-  const [telefono, settelefono] = useState('')
-
-  const createHeadquarters = () => {
-    Axios.post('http://localhost:3000/createHeadquarters', {
-      nombre: nombre,
-      direccion: direccion,
-      telefono: telefono
-    }).then((err,responde) => {
-      alert('Sede registrada.')
+// Función para actualizar una sede
+const updateSede = () => {
+  Axios.put(`http://localhost:3000/updateHeadquarters/${editingSede.id_sede}`, {
+    nombre: editingSede.nombre_sede,
+    direccion: editingSede.direccion,
+    telefono: editingSede.telefono,
+  })
+    .then(() => {
       getHeadquarters();
-    }).catch((error) => {
-      console.error(error);
-    });
-
-  }
-
-
-
-  //FUNCION PARA MOSTRAR LAS SEDES EN LA GRID
-  const getHeadquarters = () => {
-    Axios.get('http://localhost:3000/getHeadquarters').then((respond) => {
-      setHeadquartersList(respond.data)
-    })
-  }
-
-
-  //FUNCION PARA ELIMINAR UNA SEDE CON EL ID
-  const handleDelete = (id) => {
-    // Hacer una solicitud DELETE al servidor para eliminar la sede
-    Axios.delete(`http://localhost:3000/deleteHeadquarters/${id}`)
-      .then((response) => {
-        alert("sede eliminada satisfactoriamente!!");
-        getHeadquarters();
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
+      closeModal(); // Cierra el modal después de la actualización
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Sede actualizada exitosamente.',
       });
-  };
+    })
+    .catch((error) => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al actualizar la sede. Por favor, inténtelo de nuevo más tarde.',
+      });
+    });
+};
 
-  // funcion para traer un solo dato en el grid...
-  const getOnlyHeadquerters = (nombre) => {
-    Axios.get(`http://localhost:3000/getOnlyHeadquarters/${nombre}`).then((respond) => {
-        setHeadquartersList(respond.data);
-        console.log('HeadquartersList actualizado:', HeadquartersList);
-      })
-  }
+// FUNCION PARA CREAR LAS SEDES
+const [nombre, setnombre] = useState('');
+const [direccion, setdireccion] = useState('');
+const [telefono, settelefono] = useState('');
+
+const createHeadquarters = () => {
+  Axios.post('http://localhost:3000/createHeadquarters', {
+    nombre: nombre,
+    direccion: direccion,
+    telefono: telefono,
+  })
+    .then(() => {
+      alert('Sede registrada.');
+      getHeadquarters();
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Sede registrada exitosamente.',
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al registrar la sede. Por favor, inténtelo de nuevo más tarde.',
+      });
+    });
+};
+
+// FUNCION PARA MOSTRAR LAS SEDES EN LA GRID
+const getHeadquarters = () => {
+  Axios.get('http://localhost:3000/getHeadquarters')
+    .then((respond) => {
+      setHeadquartersList(respond.data);
+      
+    })
+    .catch((error) => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al obtener las sedes. Por favor, inténtelo de nuevo más tarde.',
+      });
+    });
+};
+
+// FUNCION PARA ELIMINAR UNA SEDE CON EL ID
+const handleDelete = (id) => {
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: 'No podrás revertir esto.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, eliminarlo',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Axios.delete(`http://localhost:3000/deleteHeadquarters/${id}`)
+        .then((response) => {
+          getHeadquarters();
+          console.log(response.data);
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Sede eliminada exitosamente.',
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un error al eliminar la sede. Por favor, inténtelo de nuevo más tarde.',
+          });
+        });
+    }
+  });
+};
+
+// Función para traer un solo dato en el grid...
+const getOnlyHeadquerters = (nombre) => {
+  Axios.get(`http://localhost:3000/getOnlyHeadquarters/${nombre}`)
+    .then((respond) => {
+      setHeadquartersList(respond.data);
+      console.log('HeadquartersList actualizado:', HeadquartersList);
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Dato obtenido exitosamente.',
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al obtener el dato. Por favor, inténtelo de nuevo más tarde.',
+      });
+    });
+};
+
   return (
     <div className='container vh-100 d-flex justify-content-center align-items-center'>
       <div className='row'>
@@ -186,7 +246,7 @@ export default function Headquarters() {
         </Modal>
         <div className='container-fluid mt-4 d-flex justify-content-center'>
           <div className='col-4 d-flex justify-content-center'>
-            <Buttons title='Guardar' colorbutton='black' color='white' onClick={createHeadquarters} />
+            <Buttons title='Crear' colorbutton='black' color='white' onClick={createHeadquarters} />
           </div>
         </div>
       </div>

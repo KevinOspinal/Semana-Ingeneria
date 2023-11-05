@@ -1,33 +1,53 @@
-import React, { useState } from 'react'
-import NavbarUser from '../NavbarUser/NavbarUser'
-import './HomeUsers.css'
+import { useState, useEffect } from 'react'
+import Axios from 'axios'
+import NavbarUser from '../HomeUsers/NavbarUser'
+import './HomeUser.css'
 import Hero_Img from '../../../assets/img/section-footer.png'
 import logo from '../../../assets/img/logo-unicatolica-vertical.png'
 import Cards from '../../../components/Cards'
 import Cards2 from '../../../components/Cards2'
 import TitleUsers from '../../../components/TitleUsers'
 
-export default function HomeUsers() {
+export default function Home() {
+
+  const [conferencesList, setConferencesList] = useState([]);
+  const [id_conferencia, setId_conferencia] = useState(null);
 
 
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
-
-  const openLoginModal = () => {
-    setShowLoginModal(true);
+  const getConferences = () => {
+    Axios.get("http://localhost:3000/getConferences")
+      .then((response) => {
+        setConferencesList(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
-  const openRegisterModal = () => {
-    setShowRegisterModal(true);
+  //FUNCION PARA ACTUALIZAR UNA CONFERENCIA
+  const UpdateConferences = (id) => {
+    Axios.put(`http://localhost:3000/updateRegistroCupo/${id}`)
+      .then((response) => {
+        console.log(response)
+        setId_conferencia(id);
+        // Después de la actualización, vuelva a cargar la lista de conferencias
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
-  const closeModal = () => {
-    setShowLoginModal(false);
-    setShowRegisterModal(false);
-  };
+  if(id_conferencia){
+    useEffect(() => {
+      getConferences()
+    }, [])
+  }
+
+  getConferences()
+
   return (
     <div>
-      <NavbarUser showLoginModal={showLoginModal} showRegisterModal={showRegisterModal} openLoginModal={openLoginModal} openRegisterModal={openRegisterModal} closeModal={closeModal} />
+      <NavbarUser />
       <div className='container-fluid mb-5 p-0'>
         <div className='align-items-stretch'>
           <img className='img-fluid w-100' src={Hero_Img} alt='Img del hero principal' />
@@ -50,7 +70,7 @@ export default function HomeUsers() {
         </div>
       </div>
       <section className='container-fluid'>
-        <Cards openRegisterModal={openRegisterModal} closeModal={closeModal}/>
+        <Cards List={conferencesList} Obtener_ID={UpdateConferences}/>
       </section>
       <div id='eventos' className='container  mb-4 p-0'>
         <div className='row '>

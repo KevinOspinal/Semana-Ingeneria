@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from 'sweetalert2';
 import InputField from "../../../../components/InputField";
 import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
@@ -37,12 +38,44 @@ export default function User_Type() {
     Axios.post("http://localhost:3000/createUserType", {
       descripcion: descripcion,
     })
-      .then((err, responde) => {
-        alert("Tipo de usuario registrado.");
+      .then((response) => {
         getUserType();
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Tipo de usuario registrado exitosamente.',
+        });
       })
       .catch((error) => {
         console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al registrar el tipo de usuario. Por favor, inténtelo de nuevo más tarde.',
+        });
+      });
+  };
+  
+  const updateTipoUsuario = () => {
+    Axios.put(`http://localhost:3000/updateUserType/${editingTipoUsuario.id_tipo_usuario}`, {
+      descripcion: editingTipoUsuario.descripcion_tipo_usuario,
+    })
+      .then((response) => {
+        getUserType();
+        closeModal()
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Tipo de usuario actualizado exitosamente.',
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al actualizar el tipo de usuario. Por favor, inténtelo de nuevo más tarde.',
+        });
       });
   };
 
@@ -51,43 +84,52 @@ export default function User_Type() {
       setUserTypeList(respond.data);
     });
   };
-
   const getOnlyUserType = (descripcion) => {
-    Axios.get(`http://localhost:3000/getOnlyUserType/${descripcion}`).then(
-      (respond) => {
-        setUserTypeList(respond.data);
-        console.log("UserTypeList actualizada");
-      }
-    );
-  };
-
-  const updateTipoUsuario = () => {
-    Axios.put(
-      `http://localhost:3000/updateUserType/${editingTipoUsuario.id_tipo_usuario}`,
-      {
-        descripcion: editingTipoUsuario.descripcion_tipo_usuario,
-      }
-    )
-      .then(() => {
-        alert("Tipo de usuario actializado.");
-        getUserType();
+    Axios.get(`http://localhost:3000/getOnlyUserType/${descripcion}`)
+      .then((respond) => {
+        setUserTypeList(respond.data);  
+        // Mostrar notificación de éxito
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Datos del tipo de usuario obtenidos exitosamente.',
+        });
       })
       .catch((error) => {
         console.error(error);
+        // Mostrar notificación de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al obtener los datos del tipo de usuario. Por favor, inténtelo de nuevo más tarde.',
+        });
       });
   };
+  
 
   const handleDelete = (id) => {
-    Axios.delete(`http://localhost:3000/deleteUserType/${id}`)
-      .then((response) => {
-        alert("Tipo de usuario eliminado satisfactoriamente!!");
-        getUserType();
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará el tipo de usuario permanentemente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminarlo',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Axios.delete(`http://localhost:3000/deleteUserType/${id}`)
+          .then((response) => {
+            getUserType();
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    });
   };
+  
 
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">

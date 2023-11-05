@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import Swal from 'sweetalert2';
 import InputField from "../../../../components/InputField";
 import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
@@ -29,6 +30,7 @@ export default function Conferences() {
   const [cupo, setCupo] = useState(0);
   const [fecha, setFecha] = useState("");
   const [hora, setHora] = useState("");
+  const [conferencista, setConferencista] = useState("");
   const [estado, setEstado] = useState("");
 
   const createConferences = () => {
@@ -39,32 +41,62 @@ export default function Conferences() {
       cupo: cupo,
       fecha: fecha,
       hora: hora,
+      conferencista: conferencista,
       estado: estado,
     })
-      .then((responde) => {
-        alert("Conferencia registrada.");
+      .then((response) => {
         getConferences();
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Conferencia registrada exitosamente.',
+        });
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al crear la conferencia. Por favor, inténtelo de nuevo más tarde.',
+        });
       });
   };
+  
+const getConferences = () => {
+    Axios.get("http://localhost:3000/getConferences")
+        .then((response) => {
+            setConferencesList(response.data);
+        })
+        .catch((error) => {
+            console.error(error);
 
-  //FUNCION PARA CONSULTAR TODAS LAS CONFERENCIAS CREADAS Y TAMBIEN PARA UNA SOLA
-  const getConferences = () => {
-    Axios.get("http://localhost:3000/getConferences").then((respond) => {
-      setConferencesList(respond.data);
-    });
-  };
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hubo un error al obtener las conferencias. Por favor, inténtelo de nuevo más tarde.',
+            });
+        });
+};
 
   const getOnlyConferences = (nombre) => {
-    Axios.get(`http://localhost:3000/getOnlyConferences/${nombre}`).then(
-      (respond) => {
-        setConferencesList(respond.data);
-        console.log("conferencesList actualizada");
-      }
-    );
-  };
+    Axios.get(`http://localhost:3000/getOnlyConferences/${nombre}`)
+        .then((response) => {
+            setConferencesList(response.data);
+            Swal.fire({
+              icon: 'success',
+              title: 'Éxito',
+              text: 'Conferencia registrada exitosamente.',
+            });
+        })
+        .catch((error) => {
+            console.error(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hubo un error al obtener las conferencias. Por favor, inténtelo de nuevo más tarde.',
+            });
+        });
+};
 
   //FUNCION PARA ACTUALIZAR LA CONFERENCIA
   const updateConferences = () => {
@@ -77,30 +109,61 @@ export default function Conferences() {
         cupo: editingConferencias.cupo,
         fecha: editingConferencias.fecha_conferencia,
         hora: editingConferencias.hora_conferencia,
+        conferencista: editingConferencias.conferencista,
         estado: editingConferencias.estado_conferencia,
       }
     )
       .then(() => {
-        alert("Conferencia actializada.");
         getConferences();
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Conferencia actualizada exitosamente.',
+        });
       })
       .catch((error) => {
         console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al actualizar la conferencia. Por favor, inténtelo de nuevo más tarde.',
+      });
       });
   };
 
   //FUNCION PARA ELIMINAR UNA CONFERENCIA
   const handleDelete = (id) => {
-    Axios.delete(`http://localhost:3000/deleteConferences/${id}`)
-      .then((response) => {
-        alert("Conferencia eliminada satisfactoriamente!!");
-        getConferences();
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás revertir esto.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminarlo',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Axios.delete(`http://localhost:3000/deleteConferences/${id}`)
+          .then((response) => {
+            getConferences();
+            Swal.fire({
+              icon: 'success',
+              title: 'Éxito',
+              text: 'Conferencia eliminada exitosamente.',
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Hubo un error al eliminar la conferencia. Por favor, inténtelo de nuevo más tarde.',
+            });
+          });
+      }
+    });
   };
+  
 
   //ESTA FUNCION ES PARA CONSULTAR TODAS LAS SEDES CREADAS
   const [optionsDrop, setOptionsDrop] = useState([]); // Estado para almacenar la SEDE seleccionado
@@ -159,6 +222,14 @@ export default function Conferences() {
     const updatedEditingConferencia = {
       ...editingConferencias,
       hora_conferencia: e.target.value,
+    };
+    setEditingConferencias(updatedEditingConferencia);
+  };
+
+  const handleConferencistaChange = (e) => {
+    const updatedEditingConferencia = {
+      ...editingConferencias,
+      conferencista: e.target.value,
     };
     setEditingConferencias(updatedEditingConferencia);
   };
@@ -256,6 +327,15 @@ export default function Conferences() {
           </div>
           <div className="col-10">
             <InputField
+              label="Conferencista"
+              type="text"
+              id="Conferencista"
+              placeholder="Conferencista"
+              onChange={(e) => setConferencista(e.target.value)}
+            />
+          </div>
+          <div className="col-10">
+            <InputField
               label="Estado"
               type="text"
               id="Estado-Conferencia"
@@ -334,6 +414,16 @@ export default function Conferences() {
             </div>
             <div className="col-10">
               <InputField
+                label="Conferencista"
+                type="text"
+                id="Conferencista"
+                placeholder="Conferencista"
+                value={editingConferencias.conferencista || ""}
+                onChange={handleConferencistaChange}
+              />
+            </div>
+            <div className="col-10">
+              <InputField
                 label="Estado"
                 type="text"
                 id="Estado-Conferencia"
@@ -348,6 +438,7 @@ export default function Conferences() {
                   title="Guardar Cambios"
                   color="white"
                   onClick={updateConferences}
+                  colorbutton='black'
                 />
               </div>
             </div>
