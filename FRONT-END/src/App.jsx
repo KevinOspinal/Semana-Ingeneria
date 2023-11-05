@@ -16,7 +16,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/HomeUsers' element={<HomeUsers />} />
           <Route path='/Admin' element={<Admin />} />
-          <Route path='/Asistente' element={<Asistentes />} />
+          <Route path='/Asistente' element={<Assistants />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
