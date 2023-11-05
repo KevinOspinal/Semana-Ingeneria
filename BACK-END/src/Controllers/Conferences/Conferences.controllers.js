@@ -9,12 +9,12 @@ const createConferences = async (req, res) => {
   const hora = req.body.hora;
   const estado = req.body.estado;
   const conferencista = req.body.conferencista;
-
+  const Cupos_Registrados = 0;
   try {
     const result = await new Promise((resolve, reject) => {
       conexion.query(
-        'INSERT INTO tb_conferencias (nombre_conferencia, descripcion_conferencia, id_sede, cupo, fecha_conferencia, hora_conferencia, conferencista, estado_conferencia) VALUES (?,?,?,?,?,?,?,?)',
-        [nombre, descripcion, sede, cupo, fecha, hora, conferencista, estado],
+        'INSERT INTO tb_conferencias (nombre_conferencia, descripcion_conferencia, id_sede, cupo, fecha_conferencia, hora_conferencia, conferencista, estado_conferencia,Cupos_Registrados) VALUES (?,?,?,?,?,?,?,?,?)',
+        [nombre, descripcion, sede, cupo, fecha, hora, conferencista, estado,Cupos_Registrados],
         (err, result) => {
           if (err) {
             reject(err);
@@ -128,4 +128,34 @@ const updateConferences = async (req, res) => {
   }
 };
 
-module.exports = { createConferences, getConferences, getOnlyConferences, deleteConferences, updateConferences };
+
+
+
+
+//REGISTRO DE HOME USER
+const updateRegistroCupo = async (req, res) => {
+  const idConferencia = req.params.id;
+  const contador = 1;
+
+  try {
+    const result = await new Promise((resolve, reject) => {
+      conexion.query(
+        'UPDATE tb_conferencias SET Cupos_Registrados = Cupos_Registrados + ? WHERE id_conferencia = ?',
+        [contador, idConferencia],
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    })
+  }catch (error) {
+    console.log(error)
+  }
+}
+
+
+
+module.exports = { createConferences, getConferences, getOnlyConferences, deleteConferences, updateConferences,updateRegistroCupo };
