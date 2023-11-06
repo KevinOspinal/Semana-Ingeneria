@@ -2,7 +2,7 @@ import React from 'react';
 import './Cards.css';
 import img from '../assets/img/img-prueba.jpg';
 import Buttons from './Buttons';
-export default function Cards({ List, Obtener_ID }) {
+export default function Cards({ List, Obtener_ID, registrado }) {
 
   const formatDate = (dateString) => {
     const options = {

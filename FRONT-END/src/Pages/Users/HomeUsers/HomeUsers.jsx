@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Swal from 'sweetalert2';
 import Axios from 'axios'
 import NavbarUser from '../HomeUsers/NavbarUser'
 import './HomeUser.css'
@@ -17,7 +18,10 @@ export default function Home() {
 
   const [conferencesList, setConferencesList] = useState([]);
   const [id_conferencia, setId_conferencia] = useState(null);
+  const [registrado, setRegistrado] = useState(false)
 
+  console.log(id_conferencia)
+  console.log(registrado)
 
   const getConferences = () => {
     Axios.get("http://localhost:3000/getConferences")
@@ -43,11 +47,19 @@ export default function Home() {
       Conferencia : id,
       id_usuario : user.id
     }).then((response) => {
-      console.log(response)
-      // Después de la actualización, vuelva a cargar la lista de conferencias
+      setRegistrado(true)
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Conferencia registrada exitosamente.',
+      });
     })
       .catch((error) => {
-        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al registrarte al registrarte a la conferencia. Por favor, inténtelo de nuevo más tarde.',
+        });
       });
   };
 
@@ -83,7 +95,7 @@ export default function Home() {
         </div>
       </div>
       <section className='container-fluid'>
-        <Cards List={conferencesList} Obtener_ID={UpdateConferences} />
+        <Cards List={conferencesList} Obtener_ID={UpdateConferences} registrado={registrado} id={id_conferencia}/>
       </section>
       <div id='eventos' className='container  mb-4 p-0'>
         <div className='row '>
