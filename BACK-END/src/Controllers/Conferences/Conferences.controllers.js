@@ -140,7 +140,7 @@ const updateRegistroCupo = async (req, res) => {
   try {
     const result = await new Promise((resolve, reject) => {
       conexion.query(
-        'UPDATE tb_conferencias SET Cupos_Registrados = Cupos_Registrados + ? WHERE id_conferencia = ?',
+        'UPDATE tb_conferencias SET Cupos_Registrados = Cupos_Registrados + ? WHERE id_conferencia = ? ',
         [contador, idConferencia],
         (err, result) => {
           if (err) {
