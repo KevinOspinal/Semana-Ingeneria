@@ -31,16 +31,13 @@ const Register = async (req, res) => {
         });
 
         if (UserFound.length > 0) {
-            return res.status(400).json(["the mail is alredy in use"])
+            return res.status(400).json(["Este correo ya esta en uso"])
         }
-
-        // Hasheo de la contraseña del usuario (usando el número de documento como contraseña)
-        const passwordHash = await bcrypt.hash(documento, 10);
 
         // Realizar una consulta a la base de datos para insertar un nuevo usuario
         const result = await new Promise((resolve, reject) => {
             conexion.query(
-                "INSERT INTO tb_usuarios (id_tipo_documento, documento, id_tipo_usuario, id_programa, nombres_usuario, apellidos_usuario, correo, contraseña) VALUES (?,?,?,?,?,?,?,?)",
+                "INSERT INTO tb_usuarios (id_tipo_documento, documento, id_tipo_usuario, id_programa, nombres_usuario, apellidos_usuario, correo) VALUES (?,?,?,?,?,?,?)",
                 [
                     id_tipo_documento,
                     documento,
@@ -49,7 +46,6 @@ const Register = async (req, res) => {
                     nombres_usuario,
                     apellidos_usuario,
                     correo,
-                    passwordHash,
                 ],
                 (error, results) => {
                     if (error) {
@@ -77,7 +73,7 @@ const Register = async (req, res) => {
         const token = await CreateAccessToken({ id: result.insertId });
 
         // Establecer una cookie en la respuesta (esto podría usarse para autenticación posterior)
-        res.cookie("token", token);
+        //res.cookie("token", token);
         // Responder con un código 200 y un mensaje
         res.json(userData);
         
@@ -122,7 +118,10 @@ const Login = async (req, res) => {
 
         const Usuario = {
             id: result[0].id_usuario,
-            id_tipo_usuario: result[0].id_tipo_usuario
+            id_tipo_usuario: result[0].id_tipo_usuario,
+            nombres: result[0].nombres_usuario,
+            apellidos_usuario: result[0].apellidos_usuario,
+            documento: result[0].documento
         };
 
         // Creación de un token de acceso JWT para el usuario autenticado

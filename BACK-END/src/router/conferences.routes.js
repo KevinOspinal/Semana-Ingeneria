@@ -1,6 +1,6 @@
 const Router = require('express')
 const router = Router();
-const { createConferences, getConferences, getOnlyConferences, deleteConferences, updateConferences } = require('../Controllers/Conferences/Conferences.controllers.js')
+const { createConferences, getConferences, getOnlyConferences, deleteConferences, updateConferences, updateRegistroCupo } = require('../Controllers/Conferences/Conferences.controllers.js')
 
 //METODO PARA CREAR UNA CONFERENCIA
 router.post('/createConferences', createConferences)
@@ -12,5 +12,12 @@ router.get('/getOnlyConferences/:nombre', getOnlyConferences)
 router.delete('/deleteConferences/:id', deleteConferences);
 //METODO PARA EDITARR UNA CONFERENCIA
 router.put('/updateConferences/:id', updateConferences);
+
+
+
+
+//HOME USER
+router.put('/updateRegistroCupo/:id', updateRegistroCupo);
+
 
 module.exports = router;

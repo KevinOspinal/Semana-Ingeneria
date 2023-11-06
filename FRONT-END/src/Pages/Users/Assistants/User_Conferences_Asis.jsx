@@ -3,20 +3,21 @@ import { useForm, Controller } from "react-hook-form";
 import Axios from "axios";
 import Swal from 'sweetalert2';
 
-import Buttons from "../../../../components/Buttons";
-import Title from "../../../../components/Title";
-import Grid_User_Conference_Asis from "./Grid_User_Conference";
+import Buttons from "../../../components/Buttons";
+import Title from "../../../components/Title";
+import Grid_User_Conference_Asis from "./Grid_User_Conference_Asis";
 
-export default function User_Conferences() {
+export default function User_Conferences_Asis() {
   const { control, register, handleSubmit, setValue, formState: { errors } } = useForm();
-
-
   const [optionsDropConferencias, setOptionsDropConferencias] = useState([]);
   const [conferencesList, setConferencesList] = useState([]);
+  const [data, setData] = useState();
+
   
-  
-  const getUserConferences = () => {
-    Axios.get(`http://localhost:3000/getUserConferences`)
+
+
+  const getOnlyConferencesAsis = (id_conferencia, documento) => {
+    Axios.get(`http://localhost:3000/getOnlyUserConferencesAsis/${id_conferencia}?documento=${documento}`)
       .then((response) => {
         setConferencesList(response.data);
         Swal.fire({
@@ -35,33 +36,13 @@ export default function User_Conferences() {
       });
   };
 
-
-  const getOnlyUserConferences = (documento) => {
-    Axios.get(`http://localhost:3000/getOnlyUserConferences/${documento}`)
-      .then((response) => {
-        setConferencesList(response.data);
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Usuario por conferencia registrada exitosamente.',
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Hubo un error al obtener las conferencias. Por favor, inténtelo de nuevo más tarde.',
-        });
-      });
-  };
-
-  const updateUserConferences = (id) => {
+  const updateUserConferencesAsis = (id) => {
     console.log('id:', id)
     Axios.put(
-      `http://localhost:3000/updateUserConferences/${id}`)
+      `http://localhost:3000/updateUserConferencesAsis/${id}`)
       .then(() => {
-        getUserConferences()
+        const { id_conferencia, documento } = data;
+        getOnlyConferencesAsis(id_conferencia, documento)
         Swal.fire({
           icon: 'success',
           title: 'Éxito',
@@ -101,14 +82,15 @@ export default function User_Conferences() {
           </div>
         </div>
         <form
-          onSubmit={handleSubmit((values) => {
+          onSubmit={handleSubmit( (values) => {
             console.log(values)
+            setData(values)
             const { id_conferencia, documento } = values;
-            getOnlyUserConferences(documento)
+            getOnlyConferencesAsis(id_conferencia, documento);
           })}>
           <div className="container modal-body d-flex justify-content-center align-items-center">
             <div className="row">
-              <div className="col-12">
+              <div className="col-12 ">
                 <div className="mb-3 d-flex align-items-center">
                   <label style={{ fontSize: 'clamp(8px, 3vw, 15px)' }} className="col-2 d-flex justify-content-end align-items-center form-label me-2">
                     Conferencia
@@ -161,24 +143,28 @@ export default function User_Conferences() {
                   </div>
                 </div>
               </div>
+              {
+                errors.documento && (
+                  <p className="text-warning bg-dark">
+                    El documento es requerido
+                  </p>
+                )
+              }
             </div>
           </div>
           <div className="modal-footer d-flex justify-content-center">
             <Buttons
               type="submit"
-              title="Consultar por documento"
+              title="Consultar"
               color="#002f59"
               fontSize="18px"
               colorbutton="#ffffff"
             />
           </div>
         </form>
-        <div className='col-12 mt-3 d-flex justify-content-center'>
-                <Buttons title='Listar todos' colorbutton='black' color='white' onClick={getUserConferences}/>
-              </div>
         <div className="row">
           <div className="col-12">
-            <Grid_User_Conference_Asis List={conferencesList} handleEdit={updateUserConferences} />
+            <Grid_User_Conference_Asis List={conferencesList} handleEdit={updateUserConferencesAsis} />
           </div>
         </div>
       </div>
