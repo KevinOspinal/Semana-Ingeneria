@@ -5,6 +5,7 @@ const createUserConferences = async (req, res) => {
     const Conferencia = req.body.Conferencia;
     const id_usuario = req.body.id_usuario;
     const estado_usuario = 'I'
+    console.log(Conferencia)
 
     try {
         const result = await new Promise((resolve, reject) => {

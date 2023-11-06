@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Swal from 'sweetalert2';
 import Axios from 'axios'
 import NavbarUser from '../HomeUsers/NavbarUser'
 import './HomeUser.css'
@@ -8,11 +9,19 @@ import Cards from '../../../components/Cards'
 import Cards2 from '../../../components/Cards2'
 import TitleUsers from '../../../components/TitleUsers'
 
+import { useAuth } from '../../../Context/AuthContext'
+
 export default function Home() {
+
+  const { user } = useAuth()
+
 
   const [conferencesList, setConferencesList] = useState([]);
   const [id_conferencia, setId_conferencia] = useState(null);
+  const [registrado, setRegistrado] = useState(false)
 
+  console.log(id_conferencia)
+  console.log(registrado)
 
   const getConferences = () => {
     Axios.get("http://localhost:3000/getConferences")
@@ -23,27 +32,43 @@ export default function Home() {
         console.error(error);
       });
   };
-
   //FUNCION PARA ACTUALIZAR UNA CONFERENCIA
   const UpdateConferences = (id) => {
+    setId_conferencia(id);
     Axios.put(`http://localhost:3000/updateRegistroCupo/${id}`)
       .then((response) => {
         console.log(response)
-        setId_conferencia(id);
         // Después de la actualización, vuelva a cargar la lista de conferencias
       })
       .catch((error) => {
         console.error(error);
       });
+    Axios.post(`http://localhost:3000/createUserConferences`, {
+      Conferencia : id,
+      id_usuario : user.id
+    }).then((response) => {
+      setRegistrado(true)
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Conferencia registrada exitosamente.',
+      });
+    })
+      .catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al registrarte al registrarte a la conferencia. Por favor, inténtelo de nuevo más tarde.',
+        });
+      });
   };
 
-  if(id_conferencia){
-    useEffect(() => {
-      getConferences()
-    }, [])
-  }
+  useEffect(() => {
 
-  getConferences()
+    getConferences()
+
+  }, [id_conferencia])
+
 
   return (
     <div>
@@ -70,7 +95,7 @@ export default function Home() {
         </div>
       </div>
       <section className='container-fluid'>
-        <Cards List={conferencesList} Obtener_ID={UpdateConferences}/>
+        <Cards List={conferencesList} Obtener_ID={UpdateConferences} registrado={registrado} id={id_conferencia}/>
       </section>
       <div id='eventos' className='container  mb-4 p-0'>
         <div className='row '>
