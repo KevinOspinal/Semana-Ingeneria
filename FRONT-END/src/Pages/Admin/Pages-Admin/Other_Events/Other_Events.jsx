@@ -4,8 +4,10 @@ import InputField from "../../../../components/InputField";
 import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
 import Grid_Other_Events from "./Grid_Other_Events";
-import DropListField_Other_Events from "./DropListField_Other_Events";
+import DropListField_Other_Events from "./DropListField_Other_Events copy";
+import DropListField_Other_Events2 from "./DropListField_Other_Events2";
 import Modal from "react-modal";
+import axios from "axios";
 
 
 export default function Other_Events() {
@@ -15,6 +17,7 @@ export default function Other_Events() {
   useEffect(() => {
     // Coloca aquí la llamada a getHeadquarters
     getHeadquarters();
+    getEvent_Type();
   }, []); // El segundo argumento es un arreglo de dependencias vacío
 
   //FUNCION PARA CREAR LAS CONFERENCIAS QUE COPTURAMOS EN EL FORM
@@ -24,7 +27,12 @@ export default function Other_Events() {
     setSelectedSede(e.target.value);
   };
 
+  const handleTipoEventoChangeInput = (e) => {
+    setSelectedTipoEvento(e.target.value);
+  };
+
   const [nombre_evento, setNombre] = useState("");
+  const [selectTipoEvento, setSelectedTipoEvento] = useState("");
   const [selectedSede, setSelectedSede] = useState("");
   const [cupo, setCupo] = useState(0);
   const [fecha, setFecha] = useState("");
@@ -32,9 +40,12 @@ export default function Other_Events() {
   const [descripcion_otros_eventos, setDescripcion] = useState("");
   const [estado_evento, setEstado] = useState("");
 
+
+
   const createOther_Events = () => {
     Axios.post("http://localhost:3000/createOther_Events", {
       nombre_evento: nombre_evento,
+      TipoEvento: selectTipoEvento,
       sede: selectedSede,
       cupo: cupo,
       fecha: fecha,
@@ -73,6 +84,7 @@ export default function Other_Events() {
       `http://localhost:3000/updateOther_Events/${editingotros_Eventos.id_otro_evento}`,
       {
         nombre_evento: editingotros_Eventos.nombre_evento,
+        TipoEvento: editingotros_Eventos.id_tipo_evento,
         sede: editingotros_Eventos.id_sede,
         cupo: editingotros_Eventos.cupo,
         fecha: editingotros_Eventos.fecha,
@@ -112,6 +124,14 @@ export default function Other_Events() {
     });
   };
 
+  const [optionsDrop2, setOptionsDrop2] = useState([]);
+
+  const getEvent_Type = () =>{
+    axios.get("http://localhost:3000/getEvent_Type").then((respond) => {
+      setOptionsDrop2(respond.data);
+    });
+  }
+
   //Estas funciones onChame es para capturar los datos del MODAL EDITAR
 
   const [editingotros_Eventos, setEditingotros_Eventos] = useState({});
@@ -120,6 +140,14 @@ export default function Other_Events() {
     const updatedEditingotros_Eventos = {
       ...editingotros_Eventos,
       nombre_evento: e.target.value,
+    };
+    setEditingotros_Eventos(updatedEditingotros_Eventos);
+  };
+
+  const handleTipoEventoChange = (e) => {
+    const updatedEditingotros_Eventos = {
+      ...editingotros_Eventos,
+      id_tipo_evento: e.target.value,
     };
     setEditingotros_Eventos(updatedEditingotros_Eventos);
   };
@@ -214,6 +242,13 @@ export default function Other_Events() {
             />
           </div>
           <div className="col-10">
+            <DropListField_Other_Events2
+              selectTipoEvento={selectTipoEvento}
+              handleChange={handleTipoEventoChangeInput}
+              options={optionsDrop2}
+            />
+          </div>
+          <div className="col-10">
             <DropListField_Other_Events
               selectSedes={selectedSede}
               handleChange={handleSedeChangeInput}
@@ -288,6 +323,13 @@ export default function Other_Events() {
                 placeholder="Nombre de Otros Eventos"
                 value={editingotros_Eventos.nombre_evento || ""}
                 onChange={handleNombreChange}
+              />
+            </div>
+            <div className="col-10">
+              <DropListField_Other_Events2
+                handleChange={handleTipoEventoChange}
+                options={optionsDrop2}
+                selectTipoEvento={editingotros_Eventos.id_tipo_evento}
               />
             </div>
             <div className="col-10">

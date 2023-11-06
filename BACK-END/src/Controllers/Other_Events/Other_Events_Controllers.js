@@ -4,6 +4,7 @@ const conexion = require('../../../db'); // Conexión a la base de datos
 const createOther_Events = async (req, res) => {
 
     const nombre_evento = req.body.nombre_evento;
+    const TipoEvento = req.body.TipoEvento;
     const sede = req.body.sede;
     const cupo = req.body.cupo;
     const fecha = req.body.fecha;
@@ -14,8 +15,8 @@ const createOther_Events = async (req, res) => {
     try {
         // Realiza la inserción en la base de datos
         const result = await new Promise((resolve, reject) => {
-            conexion.query('INSERT INTO tb_otros_eventos  (nombre_evento, id_sede , cupo, fecha, hora, descripcion_otros_eventos, estado_evento ) VALUES (?,?,?,?,?,?,?)', 
-            [nombre_evento, sede, cupo, fecha, hora, descripcion_otros_eventos, estado_evento],
+            conexion.query('INSERT INTO tb_otros_eventos  (nombre_evento, id_tipo_evento, id_sede , cupo, fecha, hora, descripcion_otros_eventos, estado_evento ) VALUES (?,?,?,?,?,?,?,?)', 
+            [nombre_evento, TipoEvento, sede, cupo, fecha, hora, descripcion_otros_eventos, estado_evento],
             (err, result) => {
                 if (err) {
                     reject(err);
@@ -38,7 +39,7 @@ const getOther_Events = async (req, res) => {
     try {
         // Realiza una consulta para recuperar todos los programas junto con sus facultades
         const result = await new Promise((resolve, reject) => {
-            conexion.query('SELECT * FROM  tb_sedes s, tb_otros_eventos c WHERE  s.id_sede = c.id_sede', (err, result) => {
+            conexion.query('SELECT * FROM  tb_sedes s, tb_otros_eventos c, tb_tipos_eventos a WHERE  s.id_sede = c.id_sede AND a.id_tipo_evento = c.id_tipo_evento', (err, result) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -63,7 +64,7 @@ const getOnlyOther_Events = async (req, res) => {
         // Realiza una consulta para obtener un programa por su nombre junto con su facultad
         const result = await new Promise((resolve, reject) => {
             conexion.query(
-                'SELECT * FROM  tb_sedes s, tb_otros_eventos c WHERE  s.id_sede = c.id_sede AND nombre_evento = ?',
+                'SELECT * FROM  tb_sedes s, tb_otros_eventos c, tb_tipos_eventos a WHERE  s.id_sede = c.id_sede AND a.id_tipo_evento = c.id_tipo_evento AND nombre_evento = ?',
                 [nombre_evento],
                 (err, result) => {
                     if (err) {
@@ -110,14 +111,14 @@ const deleteOther_Events = async (req, res) => {
 // Función asincrónica para actualizar un programa por su ID
 const updateOther_Events = async (req, res) => {
     const idotros_Eventos = req.params.id;
-    const { nombre_evento, sede, cupo, fecha, hora, descripcion_otros_eventos, estado_evento } = req.body;
+    const { nombre_evento, TipoEvento, sede, cupo, fecha, hora, descripcion_otros_eventos, estado_evento } = req.body;
 
     try {
         // Realiza una consulta para actualizar un programa por su ID
         const result = await new Promise((resolve, reject) => {
             conexion.query(
-                'UPDATE tb_otros_eventos SET nombre_evento = ? ,  id_sede = ?  WHERE id_otro_evento = ?',
-                [ nombre_evento, sede, cupo, fecha, hora, descripcion_otros_eventos, estado_evento, idotros_Eventos],
+                'UPDATE tb_otros_eventos SET nombre_evento = ?, id_tipo_evento = ?,  id_sede = ?, cupo = ?, fecha = ?, hora = ?, descripcion_otros_eventos = ?, estado_evento = ? WHERE id_otro_evento = ?',
+                [ nombre_evento, TipoEvento, sede, cupo, fecha, hora, descripcion_otros_eventos, estado_evento, idotros_Eventos],
                 (err, result) => {
                     if (err) {
                         reject(err);
