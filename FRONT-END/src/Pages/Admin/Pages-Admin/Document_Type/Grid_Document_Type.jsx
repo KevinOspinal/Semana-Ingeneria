@@ -8,16 +8,15 @@ export default function Grid_Document_Type({ List, handleDelete, handleEdit }) {
           <thead className="thead-dark">
             <tr>
               
-              <th>Descripción tipo de documento</th> {/* Cambiado de "Nombre" a "Descripción tipo de documento" */}
+              <th>Descripción tipo de documento</th> 
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {List
               ? List.map((tipo_documento) => (
-                <tr key={tipo_documento.id_tipo_documento}>
-                  
-                  <td>{tipo_documento.descripcion}</td> {/* Cambiado de "nombre_sede" a "descripcion" */}
+                <tr key={tipo_documento.id_tipo_documento}>   
+                  <td>{tipo_documento.descripcion_tipo_documento}</td> 
                   <td>
                     <button className="btn btn-danger btn-sm mr-2" 
                       onClick={() => handleDelete(tipo_documento.id_tipo_documento)}>Eliminar</button>

@@ -1,18 +1,18 @@
 const express = require('express')
-const app = express();
-const cors = require('cors')
-const { createHeadquarters, getHeadquarters,DeleteHeadquarters,updateHeadquarters,getOnlyHeadquerters} = require('./Controllers/Headquarters/Headquartes.controllers.js')
-const { createUserType, getUserType, getOnlyUserType, deleteUserType, updateUserType } = require('./Controllers/User_Type/User_Type.controllers.js')
-const { createConferences, getConferences, getOnlyConferences, deleteConferences, updateConferences } = require('./Controllers/Conferences/Conferences.controllers.js')
-const { createOtherEvent, getOtherEvent, deleteOtherEvent, updateOtherEvent} = require('./Controllers/Other_Events/Other_Events_Controllers.js')
-const { createProject_Role, getProject_Role, deleteProject_Role, updateProject_Role, getOnlyProject_Role } = require('./Controllers/Project_Role/Project.controller')
-const {getProject_Type, createProject_Type,getOnlyProject_Type,deleteProject_Type,updateProject_Type} = require('./Controllers/Project_Type/Project_Type.controller.js')
-const {createFaculties, getFaculties,getOnlyFaculties,DeleteFaculties,updateFaculties} = require('./Controllers/Faculties/Faculties-controllers.js')
-const { createDocument_Type, getDocument_Type,getOnlyDocument_Type,deleteDocument_Type,updateDocument_Type} = require('./Controllers/Document_Type/Document_Type_Controllers.js')
-const { createEvent_Type, getEvent_Type,getOnlyEvent_Type,deleteEvent_Type,updateEvent_Type} = require('./Controllers/Event_Type/Event_Type.controller.js')
-const { createProjects, getProjects, getOnlyProjects, deleteProjects, updateProjects } = require('./Controllers/Projects/Projects.controllers')
+const app = express(); 
+const morgan = require('morgan') // Importa el módulo morgan (para el registro de solicitudes
+const cors = require('cors') // Importa el módulo cors (para permitir solicitudes cruzadas entre dominios
+const cookieParser = require('cookie-parser')
 
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+})) // Habilita el middleware CORS para permitir solicitudes desde otros dominios
+app.use(express.json()) // Habilita el middleware para analizar datos JSON en las solicitudes
+app.use(morgan('dev')) // Habilita el middleware morgan con el formato 'dev' para registrar las solicitudes entrantes en la consola
+app.use(cookieParser())
 
+<<<<<<< HEAD
 app.use(cors())
 app.use(express.json())
 
@@ -130,7 +130,35 @@ app.get('/getOnlyProjects/:nombre', getOnlyProjects)
 app.delete('/deleteProjects/:id', deleteProjects);
 //METODO PARA EDITAR PROYECTO
 app.put('/updateProjects/:id', updateProjects);
+=======
+// Importamos rutas desde diferentes archivos
+const auth_Routes = require('./src/router/auth.routes')
+const conferences_Routes = require('./src/router/conferences.routes')
+const document_type_Routes = require('./src/router/document_type.routes')
+const event_type_Routes = require('./src/router/event_type.routes')
+const faculties_Routes = require('./src/router/faculties.routes')
+const headquarters_Routes = require('./src/router/headquarters.routes')
+const other_events_Routes = require('./src/router/other_events.routes')
+const programs_Routes = require('./src/router/programs.routes')
+const project_type_Routes = require('./src/router/project_type.routes')
+const project_role_Routes = require('./src/router/project_role.routes')
+const projects_Routes = require('./src/router/projects.routes')
+const user_type_Routes = require('./src/router/user_type.routes')
+>>>>>>> main
 
+// Utilizamos las rutas importadas en la aplicación
+app.use('/api',auth_Routes)
+app.use(conferences_Routes)
+app.use(document_type_Routes)
+app.use(event_type_Routes)
+app.use(faculties_Routes)
+app.use(headquarters_Routes)
+app.use(other_events_Routes)
+app.use(programs_Routes)
+app.use(project_type_Routes)
+app.use(project_role_Routes)
+app.use(projects_Routes)
+app.use(user_type_Routes)
 
 
 app.listen(3000, () => {

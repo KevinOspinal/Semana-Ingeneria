@@ -18,7 +18,7 @@ return (
             {List
             ? List.map((tipo_rol_proyecto) => (
                 <tr key={tipo_rol_proyecto.id_rol_proyecto}>
-                <td>{tipo_rol_proyecto.descripcion}</td>
+                <td>{tipo_rol_proyecto.descripcion_rol_proyecto}</td>
                 <td>
                     <button
                     className="btn btn-danger btn-sm mr-2"

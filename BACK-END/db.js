@@ -4,8 +4,9 @@ const mysql = require('mysql')
 const conexion = mysql.createConnection({
     host:'localhost',
     user:'root',
-    database:'Seming_db2',
+    database:'seming_db2',
     password:''
+
 })
 
 module.exports = conexion;

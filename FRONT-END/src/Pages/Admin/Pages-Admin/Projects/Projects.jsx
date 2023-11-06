@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Axios from 'axios'
+import Axios from "axios";
+import Swal from 'sweetalert2';
 import InputField from "../../../../components/InputField";
 import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
 import DropListField_Projects from "./DropListField_Projects";
-import Grid_Projects from './Grid_Projects'
+import Grid_Projects from "./Grid_Projects";
 import Modal from "react-modal";
 
 export default function Proyects() {
-
   //ESTE ESTADO ES EL GLOBAL PARA CONSULTAR TODAS LOS PROYECTOS
-  const [projectsList, setProjectsList] = useState([])
+  const [projectsList, setProjectsList] = useState([]);
 
   useEffect(() => {
     // Coloca aquí la llamada a getProject_Type
@@ -32,73 +32,149 @@ export default function Proyects() {
     Axios.post("http://localhost:3000/createProjects", {
       nombre: nombre,
       descripcion: descripcion,
-      tipoProyecto: selectedTipoProyecto
-    }).then((responde) => {
-      alert('Proyecto registrado.')
-      getProjects()
+      tipoProyecto: selectedTipoProyecto,
     })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
-
-  //FUNCION PARA CONSULTAR TODAS LOS PROYECTOS CREADOS Y TAMBIEN PARA UNO SOLO
-  const getProjects = () => {
-    Axios.get("http://localhost:3000/getProjects").then((respond) => {
-      setProjectsList(respond.data);
-    });
-  };
-
-  const getOnlyProjects = (nombre) => {
-    Axios.get(`http://localhost:3000/getOnlyProjects/${nombre}`).then((respond) => {
-      setProjectsList(respond.data);
-      console.log("ProyectsList actualizado:");
-    }
-    );
-  };
-
-  //FUNCION PARA ACTUALIZAR PROYECTOS
-  const updateProjects = () => {
-    console.log('id:', editingProjects.id_proyecto);
-    console.log('Nombre:', editingProjects.nombre);
-    console.log('Descripcion:', editingProjects.descripcion_proyecto);
-    console.log('Tipo Proyecto:', editingProjects.id_tipo_proyecto);
-
-    Axios.put(`http://localhost:3000/updateProjects/${editingProjects.id_proyecto}`, {
-      nombre: editingProjects.nombre,
-      descripcion: editingProjects.descripcion_proyecto,
-      tipoProyecto: editingProjects.id_tipo_proyecto
-    }).then(() => {
-      alert('Proyecto Actualizados')
-      getProjects()
-    })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-  //FUNCION PARA ELIMINAR UN PROYECTO
-  const handleDelete = (id) => {
-    Axios.delete(`http://localhost:3000/deleteProjects/${id}`)
       .then((response) => {
-        alert("Proyecto eliminado satisfactoriamente!!");
         getProjects();
-        console.log(response.data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Proyecto registrado exitosamente.',
+        });
       })
       .catch((error) => {
         console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al registrar el proyecto. Por favor, inténtelo de nuevo más tarde.',
+        });
       });
   };
-
+  
+  //FUNCION PARA CONSULTAR TODAS LOS PROYECTOS CREADOS Y TAMBIEN PARA UNO SOLO
+  const getProjects = () => {
+    Axios.get("http://localhost:3000/getProjects")
+      .then((response) => {
+        setProjectsList(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al obtener los proyectos. Por favor, inténtelo de nuevo más tarde.',
+        });
+      });
+  };
+  
+  const getOnlyProjects = (nombre) => {
+    Axios.get(`http://localhost:3000/getOnlyProjects/${nombre}`)
+      .then((response) => {
+        setProjectsList(response.data);
+        console.log('Proyectos actualizados');
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al obtener los proyectos. Por favor, inténtelo de nuevo más tarde.',
+        });
+      });
+  };
+  
+  //FUNCION PARA ACTUALIZAR PROYECTOS
+  const updateProjects = () => {
+    Axios.put(
+      `http://localhost:3000/updateProjects/${editingProjects.id_proyecto}`,
+      {
+        nombre: editingProjects.nombre_proyecto,
+        descripcion: editingProjects.descripcion_proyecto,
+        tipoProyecto: editingProjects.id_tipo_proyecto,
+      }
+    )
+      .then(() => {
+        closeModal();
+        getProjects();
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Proyecto actualizado exitosamente.',
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al actualizar el proyecto. Por favor, inténtelo de nuevo más tarde.',
+        });
+      });
+  };
+  
+  //FUNCION PARA ELIMINAR UN PROYECTO
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará el proyecto permanentemente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminarlo',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Axios.delete(`http://localhost:3000/deleteProjects/${id}`)
+          .then(() => {
+            getProjects();
+            Swal.fire({
+              icon: 'success',
+              title: 'Éxito',
+              text: 'Proyecto eliminado exitosamente.',
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Hubo un error al eliminar el proyecto. Por favor, inténtelo de nuevo más tarde.',
+            });
+          });
+      }
+    });
+  };
+  
   //ESTA FUNCION ES PARA CONSULTAR TODOS LOS TIPOS DE PROYECTOS CREADOS
-  const [optionsDrop, setOptionsDrop] = useState([]); // Estado para almacenar la SEDE seleccionado
-
+  const [optionsDrop, setOptionsDrop] = useState([]); // Estado para almacenar los tipos de proyecto
+  
   const getProject_Type = () => {
-    Axios.get('http://localhost:3000/getProject_Type').then((respond) => {
-      setOptionsDrop(respond.data)
-    })
-  }
-
+    Axios.get("http://localhost:3000/getProject_Type")
+      .then((response) => {
+        // Verifica si la respuesta contiene datos antes de actualizar el estado
+        if (response.data && response.data.length > 0) {
+          setOptionsDrop(response.data);
+        } else {
+          // Puedes mostrar una notificación si no se encontraron datos
+          Swal.fire({
+            icon: 'info',
+            title: 'Información',
+            text: 'No se encontraron tipos de proyectos.',
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error al obtener tipos de proyectos:", error);
+        // Muestra una notificación de error en caso de problemas
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al obtener tipos de proyectos. Por favor, inténtelo de nuevo más tarde.',
+        });
+      });
+  };
+  
   //Estas funciones onChame es para capturar los datos del MODAL EDITAR
 
   const [editingProjects, setEditingProjects] = useState({});
@@ -106,7 +182,7 @@ export default function Proyects() {
   const handleNombreChange = (e) => {
     const updatedEditingProjecto = {
       ...editingProjects,
-      nombre: e.target.value,
+      nombre_proyecto: e.target.value,
     };
     setEditingProjects(updatedEditingProjecto);
   };
@@ -135,7 +211,6 @@ export default function Proyects() {
     setIsModalOpen(true);
   };
 
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -158,7 +233,14 @@ export default function Proyects() {
             />
           </div>
           <div className="col-2">
-            <Buttons title="Consultar" color="white" onClick={() => (nombre.length === 0 ? getProjects() : getOnlyProjects(nombre))} />
+            <Buttons
+              title="Consultar"
+              colorbutton="black"
+              color="white"
+              onClick={() =>
+                nombre.length === 0 ? getProjects() : getOnlyProjects(nombre)
+              }
+            />
           </div>
           <div className="col-10">
             <InputField
@@ -170,11 +252,19 @@ export default function Proyects() {
             />
           </div>
           <div className="col-10">
-            <DropListField_Projects selectTipoProyecto={selectedTipoProyecto} handleChange={handleTipoProyectoChangeInput} options={optionsDrop} />
+            <DropListField_Projects
+              selectTipoProyecto={selectedTipoProyecto}
+              handleChange={handleTipoProyectoChangeInput}
+              options={optionsDrop}
+            />
           </div>
           <div className="row">
             <div className="col-12">
-              <Grid_Projects List={projectsList} handleDelete={handleDelete} handleEdit={openModal} />
+              <Grid_Projects
+                List={projectsList}
+                handleDelete={handleDelete}
+                handleEdit={openModal}
+              />
             </div>
           </div>
           <Modal
@@ -189,7 +279,7 @@ export default function Proyects() {
                 type="text"
                 id="Tipo-Nombre-Proyecto"
                 placeholder="Nombre del proyecto"
-                value={editingProjects.nombre || ""}
+                value={editingProjects.nombre_proyecto || ""}
                 onChange={handleNombreChange}
               />
             </div>
@@ -203,7 +293,11 @@ export default function Proyects() {
               />
             </div>
             <div className="col-10">
-              <DropListField_Projects handleChange={handleTipoProyectoChange} options={optionsDrop} selectSedes={editingProjects.id_tipo_proyecto} />
+              <DropListField_Projects
+                handleChange={handleTipoProyectoChange}
+                options={optionsDrop}
+                selectTipoProyecto={editingProjects.id_tipo_proyecto}
+              />
             </div>
             <div className="container-fluid mt-4 d-flex justify-content-center">
               <div className="col-4 d-flex justify-content-center">
@@ -211,6 +305,7 @@ export default function Proyects() {
                   title="Guardar Cambios"
                   color="white"
                   onClick={updateProjects}
+                  colorbutton="black"
                 />
               </div>
             </div>
@@ -218,7 +313,12 @@ export default function Proyects() {
           </Modal>
           <div className="container-fluid mt-4 d-flex justify-content-center">
             <div className="col-4 d-flex justify-content-center">
-              <Buttons title="Guardar" color="white" onClick={createProjects} />
+              <Buttons
+                title="Guardar"
+                colorbutton="black"
+                color="white"
+                onClick={createProjects}
+              />
             </div>
           </div>
         </div>

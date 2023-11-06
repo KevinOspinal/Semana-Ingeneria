@@ -1,0 +1,59 @@
+section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-otrosEventos{
+  min-height:260px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.line {
+  border-bottom: 0.5px solid #c1b9b9; /* Establece un borde inferior de 1 píxel sólido en negro */
+  height: 1em; /* Ajusta la altura de la línea para que coincida con la altura del texto */
+  margin: 0; /* Elimina cualquier margen */
+}
+.info-i{
+  border-right: 0.5px solid #c1b9b9 !important;
+}
+.info-d{
+  border-left: 0.5px solid #c1b9b9 !important;
+}
+
+.iconos-redes-sociales a{
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  margin: 10px;
+  border: 1px solid #032840;
+  border-radius: 50%;
+  background-color: #f4f4f4  ;
+  transition: all 0.2s ease-in;
+}
+
+.iconos-redes-sociales i {
+  color: #002f59  ;
+  font-size: 1.5rem;
+  transition: all 0.2s ease-in;
+}
+.iconos-redes-sociales a:hover{
+  background-color: #032840;
+  border: 2px solid #4b415f;
+
+}
+.iconos-redes-sociales a:hover i{
+  color: white;
+}
+
+
+.footer-logo{
+    height: 80px;
+    width: 80px;
+    margin: 10px;
+}
