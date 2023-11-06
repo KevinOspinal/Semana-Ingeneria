@@ -16,11 +16,15 @@ import User_Events from './Pages-Admin/User_Events/User_Events'
 import User_Type from './Pages-Admin/User_Type/User_Type'
 import Proyects from './Pages-Admin/Projects/Projects';
 import User_Conferences from './Pages-Admin/User_Conferences/User_Conferences';
+import { useAuth } from '../../Context/AuthContext';
+import { Link } from 'react-router-dom'
 
 
 
 
 export default function Admin() {
+
+    const {logout} = useAuth()
 
     const [currentView, setCurrentView] = useState("");
 
@@ -130,6 +134,11 @@ export default function Admin() {
                   <span>Otros Eventos</span>
                 </a>
               </li>
+              <li className="nav-item lista-items">
+                <a className="nav-link nl text-black" style={{ backgroundColor: 'red' }} onClick={() => logout()} >
+                  <span>Logout</span>
+                </a>
+              </li> 
             </ul>
           </div>
         </nav>

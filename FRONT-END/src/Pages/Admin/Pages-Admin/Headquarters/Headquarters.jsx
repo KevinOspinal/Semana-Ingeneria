@@ -246,7 +246,7 @@ const getOnlyHeadquerters = (nombre) => {
         </Modal>
         <div className='container-fluid mt-4 d-flex justify-content-center'>
           <div className='col-4 d-flex justify-content-center'>
-            <Buttons title='Guardar' colorbutton='black' color='white' onClick={createHeadquarters} />
+            <Buttons title='Crear' colorbutton='black' color='white' onClick={createHeadquarters} />
           </div>
         </div>
       </div>

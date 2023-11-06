@@ -28,7 +28,7 @@ export default function Grid_Conferences({ List, handleDelete, handleEdit }) {
     <div className="container mt-5">
       <div
         className="scrollable-table"
-        style={{ maxHeight: "18rem", overflowY: "auto" }}
+        style={{ maxHeight: "15rem", overflowY: "auto" }}
       >
         <table className="table">
           <thead className="thead-dark">
@@ -39,6 +39,7 @@ export default function Grid_Conferences({ List, handleDelete, handleEdit }) {
               <th>Cupo</th>
               <th>Fecha</th>
               <th>Hora</th>
+              <th>Conferencista</th>
               <th>Estado</th>
               <th>Acciones</th>
             </tr>
@@ -53,6 +54,7 @@ export default function Grid_Conferences({ List, handleDelete, handleEdit }) {
                     <td>{conferencias.cupo}</td>
                     <td>{formatDate(conferencias.fecha_conferencia)}</td>
                     <td>{formatTime(conferencias.hora_conferencia)}</td>
+                    <td>{conferencias.conferencista}</td>
                     <td>{conferencias.estado_conferencia}</td>
                     <td>
                       <button
