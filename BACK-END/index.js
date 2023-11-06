@@ -28,6 +28,7 @@ const user_type_Routes = require('./src/router/user_type.routes')
 const User_Conferences_Routes = require('./src/router/user_conferences.routes')
 
 
+
 // Utilizamos las rutas importadas en la aplicación
 app.use('/api',auth_Routes)
 app.use(conferences_Routes)
