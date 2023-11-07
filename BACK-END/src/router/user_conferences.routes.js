@@ -1,6 +1,6 @@
 const Router = require('express')
 const router = Router();
-const { createUserConferences, getUserConferences, getOnlyUserConferences, deleteUserConferences, updateUserConferences, getOnlyUserConferencesAsis, updateUserConferencesAsis } = require('../Controllers/User_Conferences/User_Conferences.controllers.js')
+const { createUserConferences, getUserConferences, getOnlyUserConferences, deleteUserConferences, updateUserConferences, getOnlyUserConferencesAsis, updateUserConferencesAsis, getOnlyUserConferencesId } = require('../Controllers/User_Conferences/User_Conferences.controllers.js')
 
 
 //METODO PARA CREAR PROYECTOS
@@ -9,6 +9,8 @@ router.post('/createUserConferences', createUserConferences)
 router.get('/getUserConferences', getUserConferences);
 //METODO PARA MOSTRAR UN SOLO USUAIRO POR CONFERENCIA 
 router.get('/getOnlyUserConferences/:documento', getOnlyUserConferences)
+//METODO PARA MOSTRAR UN SOLO USUAIRO POR CONFERENCIA 
+router.get('/getOnlyUserConferencesId/:id', getOnlyUserConferencesId)
 //METODO PARA ELIMINAR USUARIO POR CONFERENCIA
 router.delete('/deleteUserConferences/:id', deleteUserConferences);
 //METODO PARA EDITAR EL ESTADO DE USUARIO POR CONFERENCIA
