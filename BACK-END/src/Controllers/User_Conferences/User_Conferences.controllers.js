@@ -77,7 +77,30 @@ const getOnlyUserConferences = async (req, res) => {
     }
 }
 
-
+const getOnlyUserConferencesId = async (req, res) => {
+    const usuarioId = req.params.id;
+    console.log(usuarioId)
+    try {
+        const result = await new Promise((resolve, reject) => {
+            conexion.query(
+                'SELECT * FROM tb_usuarios_conferencias ucf, tb_usuarios us, tb_conferencias c WHERE ucf.id_usuario = us.id_usuario AND ucf.id_conferencia = c.id_conferencia AND ucf.id_usuario = ?', [usuarioId],
+                (err, result) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result);
+                    }
+                }
+            );
+        })
+        console.log('Conferencia consultada con éxito');
+        res.json(result);
+    }
+    catch (error) {
+        console.log(error, 'hi')
+        res.status(500).json({ message: 'Error al imprimir el tipo de usuario por conferencia' });
+    }
+}
 
 
 const deleteUserConferences = async (req, res) => {
@@ -135,14 +158,6 @@ const updateUserConferences = async (req, res) => {
     }
 };
 
-
-
-
-
-
-
-
-
 const updateUserConferencesAsis = async (req, res) => {
     console.log('paso por aqui')
     const idUserConferences = req.params.id;
@@ -196,4 +211,4 @@ const getOnlyUserConferencesAsis = async (req, res) => {
         res.status(500).json({ message: 'Error al imprimir el tipo de usuario por conferencia' });
     }
 }
-module.exports = { createUserConferences, getUserConferences, getOnlyUserConferences, deleteUserConferences, updateUserConferences, getOnlyUserConferencesAsis, updateUserConferencesAsis }
+module.exports = { createUserConferences, getUserConferences, getOnlyUserConferences, deleteUserConferences, updateUserConferences, getOnlyUserConferencesAsis, updateUserConferencesAsis, getOnlyUserConferencesId }

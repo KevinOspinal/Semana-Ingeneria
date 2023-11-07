@@ -1,30 +1,27 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import Axios from 'axios'
-import NavbarUser from '../HomeUsers/NavbarUser'
-import './HomeUser.css'
-import Hero_Img from '../../../assets/img/section-footer.png'
-import logo from '../../../assets/img/logo-unicatolica-vertical.png'
-import Cards from '../../../components/Cards'
-import Cards2 from '../../../components/Cards2'
-import TitleUsers from '../../../components/TitleUsers'
-
-import { useAuth } from '../../../Context/AuthContext'
+import Axios from 'axios';
+import NavbarUser from '../HomeUsers/NavbarUser';
+import './HomeUser.css';
+import Hero_Img from '../../../assets/img/section-footer.png';
+import logo from '../../../assets/img/logo-unicatolica-vertical.png';
+import Cards from '../../../components/Cards';
+import Cards2 from '../../../components/Cards2';
+import TitleUsers from '../../../components/TitleUsers';
+import { useAuth } from '../../../Context/AuthContext';
 
 export default function Home() {
-
-  const { user } = useAuth()
-
-
+  const { user } = useAuth();
   const [conferencesList, setConferencesList] = useState([]);
+  const [userConferencesList, setUserConferencesList] = useState([]);
   const [id_conferencia, setId_conferencia] = useState(null);
-  const [registrado, setRegistrado] = useState(false)
+  const [conferenciasRegistradas, setConferenciasRegistradas] = useState([]);
 
-  console.log(id_conferencia)
-  console.log(registrado)
+  console.log(id_conferencia);
+  console.log(conferenciasRegistradas);
 
   const getConferences = () => {
-    Axios.get("http://localhost:3000/getConferences")
+    Axios.get('http://localhost:3000/getConferences')
       .then((response) => {
         setConferencesList(response.data);
       })
@@ -32,28 +29,49 @@ export default function Home() {
         console.error(error);
       });
   };
-  //FUNCION PARA ACTUALIZAR UNA CONFERENCIA
+
+  const getUserConferences = (id) => {
+    Axios.get(`http://localhost:3000/getOnlyUserConferencesId/${id}`)
+      .then((response) => {
+        setUserConferencesList(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   const UpdateConferences = (id) => {
     setId_conferencia(id);
+
     Axios.put(`http://localhost:3000/updateRegistroCupo/${id}`)
       .then((response) => {
-        console.log(response)
+        console.log(response);
         // Después de la actualización, vuelva a cargar la lista de conferencias
       })
       .catch((error) => {
         console.error(error);
       });
+
     Axios.post(`http://localhost:3000/createUserConferences`, {
-      Conferencia : id,
-      id_usuario : user.id
-    }).then((response) => {
-      setRegistrado(true)
-      Swal.fire({
-        icon: 'success',
-        title: 'Éxito',
-        text: 'Conferencia registrada exitosamente.',
-      });
+      Conferencia: id,
+      id_usuario: user.id,
     })
+      .then((response) => {
+        const inscritoConferencias = localStorage.getItem(`inscritoConferencias_${user.id}`);
+        const inscritoConferenciasArray = inscritoConferencias ? JSON.parse(inscritoConferencias) : [];
+
+        inscritoConferenciasArray.push(id);
+
+        localStorage.setItem(`inscritoConferencias_${user.id}`, JSON.stringify(inscritoConferenciasArray));
+
+        setConferenciasRegistradas([...conferenciasRegistradas, id]);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Conferencia registrada exitosamente.',
+        });
+      })
       .catch((error) => {
         Swal.fire({
           icon: 'error',
@@ -64,10 +82,14 @@ export default function Home() {
   };
 
   useEffect(() => {
+    const inscritoConferencias = localStorage.getItem(`inscritoConferencias_${user.id}`);
+    const inscritoConferenciasArray = inscritoConferencias ? JSON.parse(inscritoConferencias) : [];
 
-    getConferences()
+    setConferenciasRegistradas(inscritoConferenciasArray);
 
-  }, [id_conferencia])
+    getConferences();
+    getUserConferences(user.id);
+  }, [user]);
 
 
   return (
@@ -95,7 +117,7 @@ export default function Home() {
         </div>
       </div>
       <section className='container-fluid'>
-        <Cards List={conferencesList} Obtener_ID={UpdateConferences} registrado={registrado} id={id_conferencia}/>
+        <Cards List={conferencesList} Obtener_ID={UpdateConferences} conferenciasRegistradas={conferenciasRegistradas}/>
       </section>
       <div id='eventos' className='container  mb-4 p-0'>
         <div className='row '>

@@ -2,7 +2,7 @@ import React from 'react';
 import './Cards.css';
 import img from '../assets/img/img-prueba.jpg';
 import Buttons from './Buttons';
-export default function Cards({ List, Obtener_ID, registrado }) {
+export default function Cards({ List, Obtener_ID, conferenciasRegistradas }) {
 
   const formatDate = (dateString) => {
     const options = {
@@ -60,7 +60,15 @@ export default function Cards({ List, Obtener_ID, registrado }) {
                     <div className="container-fluid card-footer bg-transparent d-flex justify-content-center align-items-center w-100" >
                       <div className="row">
                         <div className="col-sm-3 col-md-4 col-lg-3 d-flex align-items-center">
-                          <Buttons title='Participar' color='#002f59' fontSize='10px' colorbutton='#ffffff' onClick={() => Obtener_ID(conferencias.id_conferencia)} />
+                          <Buttons
+                            title={conferenciasRegistradas.includes(conferencias.id_conferencia) ? 'Inscrito' : 'Participar'}
+                            color={conferenciasRegistradas.includes(conferencias.id_conferencia) ? '#5e6d8d' : '#002f59'}
+                            fontSize="10px"
+                            colorbutton={conferenciasRegistradas.includes(conferencias.id_conferencia) ? '#ffffff' : '#ffffff'}
+                            onClick={() => Obtener_ID(conferencias.id_conferencia)}
+                            disabled={conferenciasRegistradas.includes(conferencias.id_conferencia)}
+                            id={conferencias.id_conferencia}
+                          />
                         </div>
                       </div>
                     </div>
