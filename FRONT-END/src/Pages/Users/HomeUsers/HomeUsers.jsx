@@ -30,19 +30,16 @@ export default function Home() {
       });
   };
 
-  const getUserConferences = (id) => {
-    Axios.get(`http://localhost:3000/getOnlyUserConferencesId/${id}`)
-      .then((response) => {
-        setUserConferencesList(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
   const UpdateConferences = (id) => {
-    setId_conferencia(id);
+     setId_conferencia(id);
 
+      Axios.get(`http://localhost:3000/getOnlyUserConferencesId/${id}`)
+        .then((response) => {
+          setUserConferencesList(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     Axios.put(`http://localhost:3000/updateRegistroCupo/${id}`)
       .then((response) => {
         console.log(response);
