@@ -55,7 +55,6 @@ const getConferences = async (req, res) => {
 
 const getOnlyConferences = async (req, res) => {
   const nombre = req.params.nombre;
-
   try {
     const result = await new Promise((resolve, reject) => {
       conexion.query(

@@ -33,7 +33,6 @@ return (
         <table className="table">
         <thead className="thead-dark">
             <tr>
-            <th>Nombre</th>
             <th>Tipo Evento</th>
             <th>Sede</th>
             <th>Cupo</th>
@@ -48,7 +47,6 @@ return (
             {List
             ? List.map((Otros_Eventos) => (
                 <tr key={Otros_Eventos.id_otro_evento}>
-                    <td>{Otros_Eventos.nombre_evento}</td>
                     <td>{Otros_Eventos.descripcion_otro_evento}</td>
                     <td>{Otros_Eventos.nombre_sede}</td>         
                     <td>{Otros_Eventos.cupo}</td>

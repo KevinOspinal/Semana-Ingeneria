@@ -221,12 +221,10 @@ export default function Other_Events() {
         </div>
         <div className="row">
           <div className="col-10">
-            <InputField
-              label="Nombre"
-              type="text"
-              id="Nombre-evento"
-              placeholder="Nombre Evento"
-              onChange={(e) => setNombre(e.target.value)}
+            <DropListField_Other_Events2
+              selectTipoEvento={selectTipoEvento}
+              handleChange={handleTipoEventoChangeInput}
+              options={optionsDrop2}
             />
           </div>
           <div className="col-2">
@@ -239,13 +237,6 @@ export default function Other_Events() {
                   ? getOther_Events()
                   : getOnlyOther_Events(nombre_evento)
               }
-            />
-          </div>
-          <div className="col-10">
-            <DropListField_Other_Events2
-              selectTipoEvento={selectTipoEvento}
-              handleChange={handleTipoEventoChangeInput}
-              options={optionsDrop2}
             />
           </div>
           <div className="col-10">
@@ -315,16 +306,6 @@ export default function Other_Events() {
             contentLabel="Editar Otros Eventos"
           >
             <h2>Editar Conferencia</h2>
-            <div className="col-10">
-              <InputField
-                label="Nombre"
-                type="text"
-                id="Nombre-Evento"
-                placeholder="Nombre de Otros Eventos"
-                value={editingotros_Eventos.nombre_evento || ""}
-                onChange={handleNombreChange}
-              />
-            </div>
             <div className="col-10">
               <DropListField_Other_Events2
                 handleChange={handleTipoEventoChange}

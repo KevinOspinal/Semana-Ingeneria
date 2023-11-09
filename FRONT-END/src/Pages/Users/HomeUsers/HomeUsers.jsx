@@ -17,8 +17,8 @@ export default function Home() {
   const [id_conferencia, setId_conferencia] = useState(null);
   const [conferenciasRegistradas, setConferenciasRegistradas] = useState([]);
 
-  console.log(id_conferencia);
-  console.log(conferenciasRegistradas);
+  console.log(conferenciasRegistradas)
+
 
   const getConferences = () => {
     Axios.get('http://localhost:3000/getConferences')
@@ -30,63 +30,72 @@ export default function Home() {
       });
   };
 
-  const UpdateConferences = (id) => {
-     setId_conferencia(id);
 
-      Axios.get(`http://localhost:3000/getOnlyUserConferencesId/${id}`)
-        .then((response) => {
-          setUserConferencesList(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    Axios.put(`http://localhost:3000/updateRegistroCupo/${id}`)
+    const getUserConferences = () => {
+    Axios.get(`http://localhost:3000/getUserConferencesId/${user.id}`)
       .then((response) => {
-        console.log(response);
-        // Después de la actualización, vuelva a cargar la lista de conferencias
+        setConferenciasRegistradas(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
-
-    Axios.post(`http://localhost:3000/createUserConferences`, {
-      Conferencia: id,
-      id_usuario: user.id,
-    })
-      .then((response) => {
-        const inscritoConferencias = localStorage.getItem(`inscritoConferencias_${user.id}`);
-        const inscritoConferenciasArray = inscritoConferencias ? JSON.parse(inscritoConferencias) : [];
-
-        inscritoConferenciasArray.push(id);
-
-        localStorage.setItem(`inscritoConferencias_${user.id}`, JSON.stringify(inscritoConferenciasArray));
-
-        setConferenciasRegistradas([...conferenciasRegistradas, id]);
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Conferencia registrada exitosamente.',
-        });
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Hubo un error al registrarte al registrarte a la conferencia. Por favor, inténtelo de nuevo más tarde.',
-        });
-      });
   };
 
-  useEffect(() => {
-    const inscritoConferencias = localStorage.getItem(`inscritoConferencias_${user.id}`);
-    const inscritoConferenciasArray = inscritoConferencias ? JSON.parse(inscritoConferencias) : [];
 
-    setConferenciasRegistradas(inscritoConferenciasArray);
-
+  const refreshConferences = () => {
     getConferences();
-    getUserConferences(user.id);
-  }, [user]);
+    getUserConferences();
+  };
+
+
+  const UpdateConferences = (id) => {
+    setId_conferencia(id);
+    Axios.get(`http://localhost:3000/getOnlyUserConferencesId/${id}?id_usuario=${user.id}`)
+      .then((response) => {
+        if (!response.data.length) {
+          Axios.put(`http://localhost:3000/updateRegistroCupo/${id}`)
+            .then((response) => {
+              console.log(response)
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+          Axios.post(`http://localhost:3000/createUserConferences`, {
+            Conferencia: id,
+            id_usuario: user.id,
+          })
+            .then((response) => {
+              Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: 'Conferencia registrada exitosamente.',
+              });
+              refreshConferences();
+            })
+            .catch((error) => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hubo un error al registrarte al registrarte a la conferencia. Por favor, inténtelo de nuevo más tarde.',
+              });
+            });
+        } else {
+          // La respuesta está vacía, puedes manejarla o mostrar un mensaje de error.
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Ya te registrarte a esta conferencia.',
+          });        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  
+  useEffect(() => {
+    getConferences();
+    getUserConferences();
+  }, [id_conferencia]);
 
 
   return (
