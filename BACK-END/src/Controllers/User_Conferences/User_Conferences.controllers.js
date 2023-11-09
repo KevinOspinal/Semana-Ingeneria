@@ -31,7 +31,7 @@ const createUserConferences = async (req, res) => {
     }
 };
 
-// Función asincrónica para obtener todos los roles de proyecto
+//SOLICITUD PARA VER LAS CONFERENCIAS 
 const getUserConferences = async (req, res) => {
     try {
         // Realiza una consulta para recuperar todos los roles de proyecto
@@ -77,13 +77,18 @@ const getOnlyUserConferences = async (req, res) => {
     }
 }
 
+//SOLICITUD PARA VER SI EL USUARIO ESTA EN LA CONFERENCIA
 const getOnlyUserConferencesId = async (req, res) => {
-    const usuarioId = req.params.id;
-    console.log(usuarioId)
+    const idConferencia = req.params.id;
+    const id_usuario = req.query.id_usuario;
+
+    console.log(idConferencia)
+    console.log(id_usuario)
+
     try {
         const result = await new Promise((resolve, reject) => {
             conexion.query(
-                'SELECT * FROM tb_usuarios_conferencias ucf, tb_usuarios us, tb_conferencias c WHERE ucf.id_usuario = us.id_usuario AND ucf.id_conferencia = c.id_conferencia AND ucf.id_usuario = ?', [usuarioId],
+                'SELECT * FROM tb_usuarios_conferencias ucf, tb_usuarios us, tb_conferencias c WHERE ucf.id_usuario = us.id_usuario AND ucf.id_conferencia = c.id_conferencia AND ucf.id_usuario = ? AND c.id_conferencia = ?', [id_usuario, idConferencia],
                 (err, result) => {
                     if (err) {
                         reject(err);
@@ -133,7 +138,7 @@ const deleteUserConferences = async (req, res) => {
 const updateUserConferences = async (req, res) => {
     const UserConferences = req.params.id;
     const estado = 'A'
-    
+
     console.log('userCO', UserConferences)
     try {
         const result = await new Promise((resolve, reject) => {
@@ -158,11 +163,47 @@ const updateUserConferences = async (req, res) => {
     }
 };
 
+
+
+
+const getUserConferencesId = async (req, res) => {
+    const usuarioId = req.params.id;
+    console.log(usuarioId)
+    try {
+        const result = await new Promise((resolve, reject) => {
+            conexion.query(
+                'SELECT ucf.id_conferencia FROM tb_usuarios_conferencias ucf, tb_usuarios us, tb_conferencias c WHERE ucf.id_usuario = us.id_usuario AND ucf.id_conferencia = c.id_conferencia AND ucf.id_usuario = ?', [usuarioId],
+                (err, result) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result);
+                    }
+                }
+            );
+        })
+        console.log('Conferencia consultada con éxito');
+        res.json(result);
+    }
+    catch (error) {
+        console.log(error, 'hi')
+        res.status(500).json({ message: 'Error al imprimir el tipo de usuario por conferencia' });
+    }
+}
+
+
+
+
+
+
+
+
+
 const updateUserConferencesAsis = async (req, res) => {
     console.log('paso por aqui')
     const idUserConferences = req.params.id;
     const estado = 'A'
-    console.log('id:',idUserConferences)
+    console.log('id:', idUserConferences)
     try {
         const result = await new Promise((resolve, reject) => {
             conexion.query(
@@ -211,4 +252,4 @@ const getOnlyUserConferencesAsis = async (req, res) => {
         res.status(500).json({ message: 'Error al imprimir el tipo de usuario por conferencia' });
     }
 }
-module.exports = { createUserConferences, getUserConferences, getOnlyUserConferences, deleteUserConferences, updateUserConferences, getOnlyUserConferencesAsis, updateUserConferencesAsis, getOnlyUserConferencesId }
+module.exports = { createUserConferences, getUserConferences, getOnlyUserConferences, deleteUserConferences, updateUserConferences, getOnlyUserConferencesAsis, updateUserConferencesAsis, getOnlyUserConferencesId,getUserConferencesId }

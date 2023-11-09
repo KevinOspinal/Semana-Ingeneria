@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import Title from "../../../../components/Title";
 import Buttons from "../../../../components/Buttons";
 import DropListField from "../../../../components/DropListField";
+import InputField from '../../../../components/InputField'
 
 export default function Project_User() {
   return (
@@ -14,11 +15,7 @@ export default function Project_User() {
         </div>
           <div className="row">
             <div className="col-10">
-              <DropListField
-                label="Usuario"
-                id=""
-                selectOption="Seleciona usuario"
-              />
+              <InputField label='Documento usuario' type='text' placeholder='Numero de identificacion' />
             </div>
             <div className="col-10">
               <DropListField
