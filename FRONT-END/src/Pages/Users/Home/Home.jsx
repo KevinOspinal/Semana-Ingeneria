@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Axios from 'axios';
 import NavbarUser from '../NavbarUser/NavbarUser'
 import './Home.css'
 import Hero_Img from '../../../assets/img/section-footer.png'
 import logo from '../../../assets/img/logo-unicatolica-vertical.png'
-import Cards from '../../../components/Cards'
 import Cards2 from '../../../components/Cards2'
+import CardsHome from './CardsHome'
+import Cards3 from '../../../components/Cards3';
 import TitleUsers from '../../../components/TitleUsers'
 
 export default function Home() {
@@ -12,6 +14,42 @@ export default function Home() {
 
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+
+
+  const [conferencesList, setConferencesList] = useState([]);
+  const [proyect, setProyect] = useState([])
+  const [events, setEvents] = useState([])
+
+
+  const getConferences = () => {
+    Axios.get('http://localhost:3000/getConferences')
+      .then((response) => {
+        setConferencesList(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  const getProyects = () => {
+    Axios.get('http://localhost:3000/getProjects')
+      .then((response) => {
+        setProyect(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  
+  const getEvents = () => {
+    Axios.get('http://localhost:3000/getOther_Events')
+      .then((response) => {
+        setEvents(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
 
   const openLoginModal = () => {
     setShowLoginModal(true);
@@ -25,6 +63,15 @@ export default function Home() {
     setShowLoginModal(false);
     setShowRegisterModal(false);
   };
+
+  useEffect(() => {
+    getConferences();
+    getProyects();
+    getEvents()
+  }, []);
+
+
+
   return (
     <div>
       <NavbarUser showLoginModal={showLoginModal} showRegisterModal={showRegisterModal} openLoginModal={openLoginModal} openRegisterModal={openRegisterModal} closeModal={closeModal} />
@@ -50,7 +97,7 @@ export default function Home() {
         </div>
       </div>
       <section className='container-fluid'>
-        <Cards openRegisterModal={openRegisterModal} closeModal={closeModal}/>
+        <CardsHome List={conferencesList} openRegisterModal={openRegisterModal}/>
       </section>
       <div id='eventos' className='container  mb-4 p-0'>
         <div className='row '>
@@ -60,7 +107,7 @@ export default function Home() {
       <section className='container'>
         <div className='row g-4 d-flex justify-content-center'>
           <div className='col-sm-7 col-md-9 col-lg-7'>
-            <Cards2 />
+            <Cards2 List={events}/>
           </div>
           <div className='info-d col-sm-5 col-md-3 col-lg-5 d-flex justify-content-center align-items-center'>
             <p>
@@ -85,7 +132,7 @@ export default function Home() {
             </p>
           </div>
           <div className='col-sm-7 col-md-8 col-lg-7'>
-            <Cards2 />
+            <Cards3 List={proyect} />
           </div>
         </div>
       </section>

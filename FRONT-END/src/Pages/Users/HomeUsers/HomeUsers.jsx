@@ -7,23 +7,51 @@ import Hero_Img from '../../../assets/img/section-footer.png';
 import logo from '../../../assets/img/logo-unicatolica-vertical.png';
 import Cards from '../../../components/Cards';
 import Cards2 from '../../../components/Cards2';
+import Cards3 from '../../../components/Cards3';
 import TitleUsers from '../../../components/TitleUsers';
 import { useAuth } from '../../../Context/AuthContext';
 
 export default function Home() {
   const { user } = useAuth();
+
   const [conferencesList, setConferencesList] = useState([]);
+  const [proyect, setProyect] = useState([])
+  const [events, setEvents] = useState([])
+
+
   const [userConferencesList, setUserConferencesList] = useState([]);
   const [id_conferencia, setId_conferencia] = useState(null);
   const [conferenciasRegistradas, setConferenciasRegistradas] = useState([]);
 
-  console.log(conferenciasRegistradas)
+  console.log(events)
+  console.log(proyect)
+
 
 
   const getConferences = () => {
     Axios.get('http://localhost:3000/getConferences')
       .then((response) => {
         setConferencesList(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const getProyects = () => {
+    Axios.get('http://localhost:3000/getProjects')
+      .then((response) => {
+        setProyect(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  
+  const getEvents = () => {
+    Axios.get('http://localhost:3000/getOther_Events')
+      .then((response) => {
+        setEvents(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -94,6 +122,8 @@ export default function Home() {
   
   useEffect(() => {
     getConferences();
+    getEvents()
+    getProyects()
     getUserConferences();
   }, [id_conferencia]);
 
@@ -133,7 +163,7 @@ export default function Home() {
       <section className='container'>
         <div className='row g-4 d-flex justify-content-center'>
           <div className='col-sm-7 col-md-9 col-lg-7'>
-            <Cards2 />
+            <Cards2 List={events} />
           </div>
           <div className='info-d col-sm-5 col-md-3 col-lg-5 d-flex justify-content-center align-items-center'>
             <p>
@@ -158,7 +188,7 @@ export default function Home() {
             </p>
           </div>
           <div className='col-sm-7 col-md-8 col-lg-7'>
-            <Cards2 />
+            <Cards3 List={proyect}/>
           </div>
         </div>
       </section>
