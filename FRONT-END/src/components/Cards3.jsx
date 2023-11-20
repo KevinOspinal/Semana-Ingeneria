@@ -15,9 +15,9 @@ export default function Cards2({List}) {
                         </div>
                         <div className="col-md-8 ">
                             <div className="card-body">
-                                <h5 className="card-title">{eventos.descripcion_otro_evento}</h5>
-                                <p className="card-text">{eventos.descripcion_otros_eventos}</p>
-                                <p className="card-text"><small className="text-body-secondary">{eventos.nombre_sede}</small></p>
+                                <h5 className="card-title">{eventos.nombre_proyecto}</h5>
+                                <p className="card-text">{eventos.descripcion_proyecto}</p>
+                                <p className="card-text"><small className="text-body-secondary">{eventos.descripcion_tipo_proyecto}</small></p>
                             </div>
                         </div>
                     </div>
